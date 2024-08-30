@@ -1,8 +1,8 @@
-function Viewer() {
+function Viewer({ count }) {
   return (
     <>
       <div>현재 카운트:</div>
-      <h1>0</h1>
+      <h1>{count}</h1>
     </>
   );
 }
