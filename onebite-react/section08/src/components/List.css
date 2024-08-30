@@ -1,0 +1,26 @@
+.List {
+  width: 100%;
+  /* display: flex;
+  flex-flow: column nowrap;
+  gap: 16px; */
+  h4 {
+    margin: 16px 0 8px;
+  }
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 16px 0;
+    border: none;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid rgb(37, 147, 225);
+    }
+  }
+
+  .todos_wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
