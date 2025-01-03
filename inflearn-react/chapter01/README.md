@@ -1,15 +1,15 @@
-### chapter 01. React 소개
+## chapter 01. React 소개
 
 <br>
 
-#### 목차
+#### 🌱 목차
 
 - [x] 1.  React란?
 - [x] 2.  React의 특징
 
 ---
 
-#### 🌱 React의 정의
+### 1. React의 정의
 
 사용자 인터페이스를 만들기 위한 JavaScript 라이브러리 (SPA 라이브러리)
 
@@ -40,7 +40,7 @@
 
 ---
 
-#### 🌱 React의 특징
+### 2. React의 특징
 
 - **1️⃣ 컴포넌트 기반 설계**
 

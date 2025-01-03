@@ -1,18 +1,20 @@
-### ✨ 실무 중심! FE 입문자를 위한 React
+# ✨ 실무 중심! FE 입문자를 위한 React
 
-> Inflearn 강의
+2025.01.03 - 진행 중
+
+> Inflearn 강의  
 > [강의 정보 보기](https://www.inflearn.com/course/%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%8B%A4%EB%AC%B4%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%A0%9C%EC%9E%91%ED%95%98%EA%B8%B0)
 
 <br>
 
-### Chapter
+### 🌱 Chapter
 
 - [x] chapter 01. React 소개
-- [ ] chapter 02. JSX
+- [x] chapter 02. JSX
 - [ ] chapter 03. 컴포넌트
 - [ ] chapter 04. LifeCycle과 Hooks
 - [ ] chapter 05. 이벤트 핸들링
-- [ ] chapter 06. React 환경 설정
+- [x] chapter 06. React 환경 설정
 - [ ] chapter 07. React 메모장 만들기
 - [ ] chapter 08. React 심화 프로젝트 소개
 - [ ] chapter 09. SurveyPie 설계

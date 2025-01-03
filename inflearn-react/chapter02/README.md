@@ -1,8 +1,8 @@
-### chapter 02. JSX
+## chapter 02. JSX
 
 <br>
 
-#### 목차
+#### 🌱 목차
 
 - [x] 1.  JSX란?
 - [x] 2.  JSX에서 JavaScript 사용하기
@@ -13,7 +13,7 @@
 
 ---
 
-#### 🌱 1. JSX란?
+### 1. JSX란?
 
 **JSX = HTML + JavaScript**
 
@@ -49,7 +49,7 @@
 
 ---
 
-#### 🌱 2. JSX에서 JavaScript 사용하기
+### 2. JSX에서 JavaScript 사용하기
 
 - src
   - lecture
@@ -57,7 +57,7 @@
 
 ---
 
-#### 🌱 3. JSX에서의 조건문
+### 3. JSX에서의 조건문
 
 - src
   - lecture
@@ -65,7 +65,7 @@
 
 ---
 
-#### 🌱 4. JSX에서의 반복문
+### 4. JSX에서의 반복문
 
 - src
   - lecture
@@ -73,7 +73,7 @@
 
 ---
 
-#### 🌱 5. JSX 스타일링
+### 5. JSX 스타일링
 
 - src
   - lecture
@@ -88,7 +88,7 @@
 
 ---
 
-#### 🌱 6. JSX로 구구단 출력하기
+### 6. JSX로 구구단 출력하기
 
 - src
   - lecture
