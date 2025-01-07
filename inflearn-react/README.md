@@ -11,7 +11,7 @@
 
 - [x] chapter 01. React 소개
 - [x] chapter 02. JSX
-- [ ] chapter 03. 컴포넌트
+- [x] chapter 03. 컴포넌트
 - [ ] chapter 04. LifeCycle과 Hooks
 - [ ] chapter 05. 이벤트 핸들링
 - [x] chapter 06. React 환경 설정

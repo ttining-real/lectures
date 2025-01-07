@@ -1,0 +1,164 @@
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+}
+
+.course-card {
+  padding-bottom: 30px;
+  position: relative;
+}
+
+.course-card > .content {
+  flex-direction: column;
+  text-decoration: none;
+  color: #444;
+  border: none;
+  transition: all 0.1s ease-in;
+  top: 0;
+  display: flex;
+  flex: 1 1 auto;
+  height: 100%;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.course-card .cover {
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.course-card .cover img {
+  display: block;
+  border-radius: 4px;
+  background: #e6e7eb;
+  -webkit-animation: blink-bg 0.3s ease-out 0s infinite alternate;
+  animation: blink-bg 0.3s ease-out 0s infinite alternate;
+  transition: opacity 0.25s, transform 0.25s;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.course-card .cover img.loaded {
+  -webkit-animation: none;
+  animation: none;
+  opacity: 1;
+  visibility: visible;
+}
+
+.course-card .cover img.loaded:hover {
+  transform: scale(1.08) rotate(1.5deg);
+}
+
+.course-card .info .tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding-top: 8px;
+  padding-bottom: 4px;
+  padding-left: 0;
+}
+
+.course-card .info .tags .tag {
+  position: relative;
+  list-style: none;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: -0.5px;
+  font-weight: 500;
+  color: #474f59;
+}
+
+.course-card .info .tags .tag:not(:last-child):after {
+  content: "·";
+  top: 4px;
+  right: 0;
+  margin: 0 2px;
+}
+
+.course-card .info .name {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  padding-bottom: 12px;
+  color: #111824;
+}
+
+.course-card .info .prices {
+  display: flex;
+  align-items: flex-end;
+  grid-column-gap: 4px;
+  -moz-column-gap: 4px;
+  column-gap: 4px;
+}
+
+.course-card .info .prices span {
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
+
+.course-card .info .prices span.sale-percent {
+  color: #ff3358;
+}
+
+.course-card .info .prices span.monthly-price {
+  color: #111824;
+}
+
+.course-card .info .prices span.installment-month {
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: -0.5px;
+  color: #878e99;
+  font-weight: 400;
+}
+
+.course-card .info .start-price {
+  margin: 0;
+  padding-bottom: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #252a33;
+}
+
+.course-card .info .types {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.course-card .info .types .type {
+  margin-right: 5px;
+  margin-bottom: 4px;
+  padding-right: 6.5px;
+  padding-left: 6.5px;
+  height: 24px;
+  border-radius: 2px;
+  box-sizing: border-box;
+  list-style: none;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  text-align: center;
+  background-color: #f7f8fa;
+}
+
+.course-card .info .types .type.studyklass {
+  color: #3a4459;
+}
+
+.course-card .info .types .type.vodklass {
+  color: #5a25fa;
+}
+
+.course-card .info .types .type.coaching {
+  color: #ff526c;
+}
