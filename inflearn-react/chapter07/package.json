@@ -1,0 +1,31 @@
+{
+	"type": "module",
+	"private": true,
+	"name": "vite-custom-template-react",
+	"version": "0.0.1",
+	"description": "Vite 커스텀 템플릿을 사용해 React 프로젝트 오토 스캐폴딩",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"lint": "eslint \"./src/**\" --report-unused-disable-directives --ignore-pattern .gitignore"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.17.0",
+		"@types/node": "^22.10.5",
+		"@types/react": "^19.0.3",
+		"@types/react-dom": "^19.0.2",
+		"@vitejs/plugin-react": "^4.3.4",
+		"eslint": "^9.17.0",
+		"eslint-plugin-react": "^7.37.3",
+		"eslint-plugin-react-hooks": "^5.1.0",
+		"eslint-plugin-react-refresh": "^0.4.16",
+		"globals": "^15.14.0",
+		"prop-types": "^15.8.1",
+		"vite": "^6.0.7"
+	},
+	"dependencies": {
+		"react": "18.3.1",
+		"react-dom": "18.3.1"
+	}
+}
