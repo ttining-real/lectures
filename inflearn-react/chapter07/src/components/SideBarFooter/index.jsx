@@ -1,3 +1,4 @@
+import "./index.css";
 import { func } from "prop-types";
 
 function SideBarFooter({ onClick }) {

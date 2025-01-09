@@ -1,0 +1,19 @@
+.SideBarFooter {
+  box-sizing: border-box;
+  padding: 16px 16px;
+  button {
+    width: 100%;
+    padding: 8px 0px;
+    font-size: 1rem;
+    color: #666;
+    border-radius: 40px;
+    border: 1px solid rgb(225, 224, 231);
+    background-color: rgb(225, 224, 231);
+    cursor: pointer;
+    &:hover {
+      color: rgb(92, 56, 255);
+      border: 1px solid rgb(92, 56, 255);
+      background-color: #ffffff;
+    }
+  }
+}

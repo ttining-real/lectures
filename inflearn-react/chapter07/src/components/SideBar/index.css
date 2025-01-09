@@ -1,0 +1,7 @@
+/* SideBar */
+.SideBar {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 240px;
+  background-color: #fff;
+}

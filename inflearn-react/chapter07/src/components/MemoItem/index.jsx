@@ -1,3 +1,4 @@
+import "./index.css";
 import { func, node, bool } from "prop-types";
 
 function MemoItem({ children, onClickItem, onClickDelete, isSelected }) {

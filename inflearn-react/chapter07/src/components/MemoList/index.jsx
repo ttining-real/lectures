@@ -1,4 +1,5 @@
-import MemoItem from "./MemoItem";
+import "./index.css";
+import MemoItem from "../MemoItem";
 import { arrayOf, func, number, shape, string } from "prop-types";
 
 function MemoList({

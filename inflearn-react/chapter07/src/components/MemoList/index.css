@@ -1,0 +1,7 @@
+.MemoList {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 8px;
+  padding: 8px 8px;
+}

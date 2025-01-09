@@ -1,7 +1,8 @@
+import "./index.css";
 import { arrayOf, shape, string, number, func } from "prop-types";
-import MemoList from "./MemoList";
-import SideBarHeader from "./SideBarHeader";
-import SideBarFooter from "./SideBarFooter";
+import MemoList from "../MemoList";
+import SideBarHeader from "../SideBarHeader";
+import SideBarFooter from "../SideBarFooter";
 
 function SideBar({
   memos,

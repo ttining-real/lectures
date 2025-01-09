@@ -1,17 +1,20 @@
+import "./index.css";
 import { shape, string, number, func } from "prop-types";
 
 function MemoContainer({ memo, setMemo }) {
+  // 모든 메모가 삭제됐을 경우
   if (memo === undefined) {
     return (
       <div className='MemoContainer'>
-        <h1>메모가 없습니다.</h1>
-        <p>새로운 메모를 추가해주세요.</p>
+        <h2 className='MemoContainer_title'>메모가 없습니다.</h2>
+        <p className='MemoContainer_content'>새로운 메모를 추가해주세요.</p>
       </div>
     );
   }
+
   return (
     <div className='MemoContainer'>
-      <div>
+      <div className='layout'>
         <input
           type='text'
           className='MemoContainer_title'
@@ -24,8 +27,6 @@ function MemoContainer({ memo, setMemo }) {
             });
           }}
         />
-      </div>
-      <div style={{ height: "100%" }}>
         <textarea
           name=''
           id=''
