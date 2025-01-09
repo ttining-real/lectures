@@ -16,7 +16,7 @@
 - [x] chapter 05. 이벤트 핸들링
 - [x] chapter 06. React 환경 설정
 - [x] chapter 07. React 메모장 만들기
-- [ ] chapter 08. React 심화 프로젝트 소개
+- [x] chapter 08. React 심화 프로젝트 소개
 - [ ] chapter 09. SurveyPie 설계
 - [ ] chapter 10. SurveyPie 라우터 적용
 - [ ] chapter 11. SurveyPie 컴포넌트 스타일링
