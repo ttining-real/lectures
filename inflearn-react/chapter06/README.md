@@ -1,4 +1,4 @@
-## chapter 06. React 환경 설정
+# chapter 06. React 환경 설정
 
 <br>
 
@@ -11,9 +11,9 @@
 
 ---
 
-### 1. Node.js, VS code 설치
+## 1. Node.js, VS code 설치
 
-#### 1️⃣ Node.js
+### 1-1. Node.js
 
 Node.js는 브라우저 밖에서도 (서버를 구축하는 등의) JavaScript를 실행할 수 있게 해주는 런타임 환경
 
@@ -24,7 +24,7 @@ Node.js는 브라우저 밖에서도 (서버를 구축하는 등의) JavaScript�
 
 <br>
 
-#### 2️⃣ NPM(Node Package Manager)
+### 1-2. NPM(Node Package Manager)
 
 - JavaScript를 위한 패키지 관리자
 - 공개된 JavaScript 라이브러리들을 쉽게 설치해 사용할 수 있음
@@ -32,7 +32,7 @@ Node.js는 브라우저 밖에서도 (서버를 구축하는 등의) JavaScript�
 
 <br>
 
-#### 3️⃣ 설치 확인하기
+### 1-3. 설치 확인하기
 
 - `node --version` : node 버전 확인
 - `npm --version` : npm 버전 확인
@@ -41,9 +41,9 @@ Node.js는 브라우저 밖에서도 (서버를 구축하는 등의) JavaScript�
 
 ---
 
-### 2. create-react-app 프로젝트 생성
+## 2. create-react-app 프로젝트 생성
 
-#### 1️⃣ Create React App (CRA)
+### 2-1. Create React App (CRA)
 
 React 기반의 프로젝트 개발 환경을 구성해주는 툴
 
@@ -61,7 +61,7 @@ React 기반의 프로젝트 개발 환경을 구성해주는 툴
 
 <br>
 
-#### 2️⃣ 메모장 프로젝트 `memo-project`
+### 2-2. 메모장 프로젝트 `memo-project`
 
 1. 생성
    ```
@@ -78,9 +78,9 @@ React 기반의 프로젝트 개발 환경을 구성해주는 툴
 
 ---
 
-### 3. create-react-app 구조 소개
+## 3. create-react-app 구조 소개
 
-#### 1️⃣ `package.json`
+### 3-1. `package.json`
 
 - `package.json`은 현재 Node.js 프로젝트에 대한 메타데이터와 의존성을 관리하는 파일이다.
 - 프로젝트 이름, 버전, 스크립트, 의존성 정보 등을 포함하고 있으며,  
@@ -97,20 +97,20 @@ React 기반의 프로젝트 개발 환경을 구성해주는 툴
 
 <br>
 
-#### 2️⃣ `index.js`
+### 3-2. `index.js`
 
 - 프로젝트의 시작점
 - `index.js`를 실행하면 `React DOM`에 의해 이 안에 있는 코드들이 렌더링 된다.
 
 <br>
 
-#### 3️⃣ `App.js`
+### 3-3. `App.js`
 
 - App 컴포넌트
 
 <br>
 
-#### 4️⃣ `index.css`와 `App.css`
+### 3-4. `index.css`와 `App.css`
 
 - `index.css` : 전역 스타일을 명시하는 css 파일
 - `App.css` : App 컴포넌트 스타일 정의
@@ -118,9 +118,9 @@ React 기반의 프로젝트 개발 환경을 구성해주는 툴
 
 ---
 
-### 4. eslint, prettier 설정
+## 4. eslint, prettier 설정
 
-#### 🛠️ `eslint`
+### 4-1. `eslint` 🛠️
 
 문법 및 코드 스타일을 검사해주는 도구
 
@@ -130,7 +130,7 @@ React 기반의 프로젝트 개발 환경을 구성해주는 툴
 
 <br>
 
-##### `eslintConfig`를 별도의 파일로 분리하는 방법 💫초간단💫
+#### `eslintConfig`를 별도의 파일로 분리하는 방법 💫초간단💫
 
 - `.eslintrc.json` 파일 생성
 - `package.json`의 `eslintConfig` 부분 잘라내기
@@ -154,7 +154,7 @@ React 기반의 프로젝트 개발 환경을 구성해주는 툴
 
 <br>
 
-#### 🛠️ `prettier`
+### 4-2. `prettier` 🛠️
 
 정해진 규칙에 맞게 자동으로 코드를 고쳐주는 툴  
 `prettierrc.json`에서 규칙 정의
@@ -167,7 +167,9 @@ React 기반의 프로젝트 개발 환경을 구성해주는 툴
   - Editor: Format On Save 메뉴 ✅ 체크 표시하기
     - 저장 시, Prettier Formatter에 의해 자동 정렬
 
-##### 🎨 `prettier` 커스텀이 하고 싶을 때,
+<br>
+
+#### `prettier` 커스텀이 하고 싶을 때, 🎨
 
 - `.prettierrc.json` 파일 생성
 - 생성한 파일 (`.prettierrc.json`)에서 규칙 정의

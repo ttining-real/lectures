@@ -1,4 +1,4 @@
-## chapter 07. React 메모장 만들기
+# chapter 07. React 메모장 만들기
 
 <br>
 
@@ -13,11 +13,11 @@
 
 ---
 
-### 1. 메모장 프로젝트 소개 및 설계
+## 1. 메모장 프로젝트 소개 및 설계
 
-#### 📌 요구사항
+### 1-1. 요구사항
 
-**1️⃣ 설계 및 기본 컴포넌트 구현**
+#### 1️⃣ 설계 및 기본 컴포넌트 구현
 
 - `좌측 사이드바`
   - 현재 등록된 메모 목록
@@ -26,7 +26,7 @@
 
 <br>
 
-**2️⃣ 메모 수정 및 선택 기능 구현**
+#### 2️⃣ 메모 수정 및 선택 기능 구현
 
 - `좌측 사이드바`
   - 선택한 메모를 우측 편집 영역에서 확인하고 수정할 수 있다.
@@ -34,7 +34,7 @@
 
 <br>
 
-**3️⃣ 메모 추가 기능 구현**
+#### 3️⃣ 메모 추가 기능 구현
 
 - `좌측 사이드바` → 새로운 메모 추가 시,
   - 초기 제목은 "Untitled"로 설정되며, 내용은 비어있어야 한다.
@@ -42,7 +42,7 @@
 
 <br>
 
-**4️⃣ 메모 삭제 기능 구현**
+#### 4️⃣ 메모 삭제 기능 구현
 
 - `좌측 사이드바`
   - 각 메모의 우측에는 해당 메모를 삭제할 수 있는 ❎ 버튼이 있다.
@@ -54,13 +54,13 @@
 
 <br>
 
-**5️⃣ 메모 저장 기능 구현**
+#### 5️⃣ 메모 저장 기능 구현
 
 - 브라우저를 닫아도 편집한 메모가 유지된다 (`localStorage`)
 
 ---
 
-### 2. 기본 컴포넌트 구현하기
+## 2. 기본 컴포넌트 구현하기
 
 ```markdown
 Project/
@@ -79,11 +79,11 @@ Project/
 
 ---
 
-### 3. 메모 수정 기능 및 메모 선택 기능 구현
+## 3. 메모 수정 기능 및 메모 선택 기능 구현
 
-#### 🕹️ 메모 수정 기능 구현하기
+### 3-1. 메모 수정 기능 구현하기 🕹️
 
-**1️⃣ `input`, `textarea`와 controlled components**
+#### 1️⃣ `input`, `textarea`와 controlled components
 
 - 입력 폼을 읽기 전용이 되지 않도록 하려면 `onChange` 핸들러를 활용하여 `state` 값을 업데이트해야 한다.
 
@@ -96,7 +96,7 @@ Project/
 
 <br>
 
-**2️⃣ `setMemos`와 배열 참조(reference)**
+#### 2️⃣ `setMemos`와 배열 참조(reference)
 
 ```jsx
 const setMemo = (newMemo) => {
@@ -117,11 +117,11 @@ const setMemo = (newMemo) => {
 
 <br>
 
-> **⚠️ React에서의 불변성이란,**
->
-> - 객체나 배열 같은 데이터를 직접 수정하지 않고, 항상 새로운 값을 생성해서 상태를 업데이트 하는 방식을 의미한다.
-> - 즉, 기존 데이터를 건드리지 않고 복사본을 만들어 변경하는 것을 말한다.
->
+#### ⚠️ React에서의 불변성이란, ⚠️
+
+- 객체나 배열 같은 데이터를 직접 수정하지 않고, 항상 새로운 값을 생성해서 상태를 업데이트 하는 방식을 의미한다.
+- 즉, 기존 데이터를 건드리지 않고 복사본을 만들어 변경하는 것을 말한다.
+
 > **🤔 왜 불변성이 중요할까?**
 >
 > 1. **효율적인 렌더링**
@@ -134,7 +134,7 @@ const setMemo = (newMemo) => {
 
 <br>
 
-**3️⃣ 해결책**
+#### 3️⃣ 해결책
 
 ```jsx
 const setMemo = (newMemo) => {
@@ -158,6 +158,8 @@ const setMemo = (newMemo) => {
    - 사용자가 입력한 값이 변경될 때, `handleInputChange`를 호출하여 `memo` 상태를 업데이트한다.
    - 이 과정에서 `setMemo`를 통해 변경된 메모를 업데이트 하고, 화면에 즉시 반영된다.
 
+<br>
+
 > **📌 React에서는 모든 입력 필드를 Controlled Component로 만들 것을 권장한다.**
 >
 > - value 속성을 사용해 state와 동기화하면 입력 필드의 값은 항상 React의 상태에 따라 결정된다.
@@ -165,9 +167,9 @@ const setMemo = (newMemo) => {
 
 <br>
 
-#### 🕹️ 메모 선택 기능 구현하기
+### 3-2. 메모 선택 기능 구현하기 🕹️
 
-**코드 설명**
+#### 📌 코드 설명
 
 **1️⃣ `MemoList` 컴포넌트**
 
@@ -181,6 +183,8 @@ const setMemo = (newMemo) => {
 - **핵심**
   부모 컴포넌트가 선택 상태를 관리하고, 자식 컴포넌트(`MemoItem`)에 상태를 전달하여 UI를 업데이트 한다.
 
+<br>
+
 **2️⃣ `MemoItem` 컴포넌트**
 
 - **역할**
@@ -188,44 +192,45 @@ const setMemo = (newMemo) => {
   - `onClick` : 부모 컴포넌트에서 전달받은 클릭 이벤트 핸들러를 실행한다.
   - `isSelected` : 선택 여부에 따라 CSS 클래스 `selected`를 추가하여 스타일링을 적용한다.
 - **핵심**
+
   - 상태와 로직을 부모에서 관리하고, UI와 이벤트 처리에만 집중한다.
 
-```jsx
-// 메모 리스트 컴포넌트
-function MemoList({ memos, setSelectedMemoIndex, selectedMemoIndex }) {
-  return (
-    <div className='MemoList'>
-      {memos.map((memo, index) => (
-        <MemoItem
-          key={index}
-          onClick={() => {
-            setSelectedMemoIndex(index);
-          }}
-          isSelected={index === selectedMemoIndex}
-        >
-          {memo.title}
-        </MemoItem>
-      ))}
-    </div>
-  );
-}
+  ```jsx
+  // 메모 리스트 컴포넌트
+  function MemoList({ memos, setSelectedMemoIndex, selectedMemoIndex }) {
+    return (
+      <div className='MemoList'>
+        {memos.map((memo, index) => (
+          <MemoItem
+            key={index}
+            onClick={() => {
+              setSelectedMemoIndex(index);
+            }}
+            isSelected={index === selectedMemoIndex}
+          >
+            {memo.title}
+          </MemoItem>
+        ))}
+      </div>
+    );
+  }
 
-// 메모 아이템 컴포넌트
-function MemoItem({ children, onClick, isSelected }) {
-  return (
-    <div
-      className={"MemoItem" + (isSelected ? " selected" : "")}
-      onClick={onClick}
-    >
-      {children}
-    </div>
-  );
-}
-```
+  // 메모 아이템 컴포넌트
+  function MemoItem({ children, onClick, isSelected }) {
+    return (
+      <div
+        className={"MemoItem" + (isSelected ? " selected" : "")}
+        onClick={onClick}
+      >
+        {children}
+      </div>
+    );
+  }
+  ```
 
 <br>
 
-**📌 관심사의 분리 / Props Drilling**
+#### 📌 관심사의 분리 / Props Drilling
 
 - **`MemoList`**
   - 메모 목록과 선택 상태를 관리하는 상태 관리 중심의 컴포넌트
@@ -238,27 +243,31 @@ function MemoItem({ children, onClick, isSelected }) {
 
 ---
 
-### 4. 메모 추가 기능 구현
+## 4. 메모 추가 기능 구현
 
-**1️⃣ `SideBarFooter` 컴포넌트**
+#### 4-1. `SideBarFooter` 컴포넌트
 
 - 컴포넌트 내 `button` 추가
 - `onClick` 이벤트 연결
 
-**2️⃣ `SideBar` 컴포넌트**
+<br>
+
+#### 4-2. `SideBar` 컴포넌트
 
 - `sideBarFooter` 컴포넌트에 `addMemo` 함수 연결
 
-**3️⃣ `App` 컴포넌트**
+<br>
+
+#### 4-3. `App` 컴포넌트
 
 - `addMemo` 함수 작성
 - `SideBar` 컴포넌트에 `addMemo` 전달
 
 ---
 
-### 5. 메모 삭제 기능 구현
+## 5. 메모 삭제 기능 구현
 
-**1️⃣ `deleteMemo` 추가하기**
+### 5-1. `deleteMemo` 추가하기
 
 - ❌ 원본 배열을 훼손한다.
 
@@ -284,7 +293,7 @@ function MemoItem({ children, onClick, isSelected }) {
 
 <br>
 
-**2️⃣ 조건문을 사용하여 분기 처리하기**
+### 5-2. 조건문을 사용하여 분기 처리하기
 
 - 모든 메모가 삭제됐을 경우, `MemoContainer`에 `undefined`를 넘겨주게 된다.
 - 이때, `undefined`로 인해 생기는 에러를 `if` 문을 사용하여 해결해주자.
@@ -301,41 +310,42 @@ function MemoItem({ children, onClick, isSelected }) {
 
 <br>
 
-**3️⃣ 컴포넌트를 단위로 관리하기**
+### 5-3. 컴포넌트를 단위로 관리하기
 
-- 💫 컴포넌트별로 폴더를 구성해 관리하면, 관심사를 분리할 수 있어 유지보수가 더욱 용이하다.
-  ```markdown
-  Project/
-  ├── src/
-  │ ├── components/
-  │ │ ├── MemoContainer/
-  │ │ │ ├── index.jsx
-  │ │ │ └── index.css
-  │ │ ├── MemoLoist/
-  │ │ │ ├── index.jsx
-  │ │ │ └── index.css
-  │ │ ├── SideBar/
-  │ │ │ ├── index.jsx
-  │ │ │ └── index.css
-  │ │ ├── SideBarHeader/
-  │ │ │ ├── index.jsx
-  │ │ │ └── index.css
-  │ │ ├── SideBarFooter/
-  │ │ │ ├── index.jsx
-  │ │ │ └── index.css
-  │ ├── App.css
-  │ ├── App.jsx
-  │ ├── main.css
-  │ └── main.jsx
-  ├── public/
-  └── package.json
-  ```
+💫 컴포넌트별로 폴더를 구성해 관리하면, 관심사를 분리할 수 있어 유지보수가 더욱 용이하다.
+
+```markdown
+Project/
+├── src/
+│ ├── components/
+│ │ ├── MemoContainer/
+│ │ │ ├── index.jsx
+│ │ │ └── index.css
+│ │ ├── MemoLoist/
+│ │ │ ├── index.jsx
+│ │ │ └── index.css
+│ │ ├── SideBar/
+│ │ │ ├── index.jsx
+│ │ │ └── index.css
+│ │ ├── SideBarHeader/
+│ │ │ ├── index.jsx
+│ │ │ └── index.css
+│ │ ├── SideBarFooter/
+│ │ │ ├── index.jsx
+│ │ │ └── index.css
+│ ├── App.css
+│ ├── App.jsx
+│ ├── main.css
+│ └── main.jsx
+├── public/
+└── package.json
+```
 
 ---
 
-### 6. localStorage로 데이터 보관하기
+## 6. localStorage로 데이터 보관하기
 
-#### 💡 Web Storage와 Cookie
+### 6-1. Web Storage와 Cookie
 
 브라우저는 클라이언트 측 데이터를 저장하고 관리하기 위해 **Web Storage**와 **Cookie**를 제공한다.  
 Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효율적이며, 크게 두 가지 종류가 있다.
@@ -345,7 +355,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-##### 🍪 Cookie : 서버와의 통신을 위한 데이터 저장소
+#### 🍪 Cookie : 서버와의 통신을 위한 데이터 저장소
 
 - **정의** : 서버와의 통신을 위해 네트워크 요청 시 포함되는 문자열 기반 데이터 저장소
 - **주요 역할** : 사용자의 활동 정보를 브라우저에 기록한 후 서버로 전달
@@ -358,7 +368,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-##### 📌 Local Storage : 지속 가능한 클라이언트 측 저장소
+#### 📌 Local Storage : 지속 가능한 클라이언트 측 저장소
 
 - **정의** : `key`-`value` 쌍으로 데이터를 저장하고 조회할 수 있는 클라이언트 측 데이터 저장소
 - **특징**
@@ -371,7 +381,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-##### 📌 Session Storage : 세션 한정 클라이언트 저장소
+#### 📌 Session Storage : 세션 한정 클라이언트 저장소
 
 - **정의** : `key`-`value` 쌍으로 데이터를 저장하고 조회할 수 있는 클라이언트 측 데이터 저장소
 - **특징**
@@ -384,7 +394,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-#### Cookie 🆚 Local Storage 🆚 Session Storage 비교
+### 6-2. Cookie 🆚 Local Storage 🆚 Session Storage 비교
 
 | 특성               | Cookie                 | Local Storage          | Session Storage     |
 | ------------------ | ---------------------- | ---------------------- | ------------------- |
@@ -396,20 +406,28 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-#### ⚠️ 보안 관련 주의사항
+### 6-3. ⚠️ 보안 관련 주의사항 ⚠️
 
-- **쿠키**: `HttpOnly`와 `Secure` 속성을 설정해 민감한 정보를 보호.
-- **Web Storage(Local & Session)**:
-  - XSS 공격에 민감하므로 중요한 데이터(예: 비밀번호, 토큰)를 저장하지 않도록 주의.
-  - 민감한 정보는 암호화 또는 별도 보안 메커니즘 사용.
+#### 🍪 쿠키
 
-#### 💡 Local Storage 사용하기
+`HttpOnly`와 `Secure` 속성을 설정해 민감한 정보를 보호.
+
+<br>
+
+#### 📌 Web Storage(Local & Session)
+
+- XSS 공격에 민감하므로 중요한 데이터(예: 비밀번호, 토큰)를 저장하지 않도록 주의.
+- 민감한 정보는 암호화 또는 별도 보안 메커니즘 사용.
+
+<br>
+
+### 6-4. Local Storage 사용하기
 
 로컬 스토리지는 `key`-`value` 쌍으로 **문자열 데이터**를 저장하는 브라우저의 클라이언트 측 데이터 저장소이다.
 
-##### 📌 사용 방법
+#### 📌 사용 방법
 
-**1️⃣ 데이터 저장 : `localStorage.setItem()`**
+##### 1️⃣ 데이터 저장 : `localStorage.setItem()`
 
 로컬 스토리지에 데이터를 저장하려면 `setItem()` 메서드를 사용한다.
 
@@ -429,7 +447,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-**2️⃣ 데이터 읽기 : `localStorage.getItem()`**
+##### 2️⃣ 데이터 읽기 : `localStorage.getItem()`
 
 저장된 데이터를 읽으려면 `getItem()` 메서드를 사용한다.
 
@@ -446,7 +464,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-**3️⃣ 데이터 삭제 : `localStorage.removeItem()`**
+##### 3️⃣ 데이터 삭제 : `localStorage.removeItem()`
 
 특정 데이터를 삭제하려면 `removeItem()` 메서드를 사용한다.
 
@@ -458,7 +476,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-**4️⃣ 데이터 초기화 : `localStorage.clear()`**
+##### 4️⃣ 데이터 초기화 : `localStorage.clear()`
 
 로컬 스토리지의 모든 데이터를 삭제하려면 `clear()` 메서드를 사용한다.
 
@@ -471,7 +489,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-**5️⃣ 데이터 수정**
+##### 5️⃣ 데이터 수정
 
 로컬 스토리지의 데이터를 수정하려면 기존 데이터를 삭제하거나 덮어쓴다.
 
@@ -496,7 +514,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-##### 📌 로컬 스토리지 확인하기
+#### 📌 로컬 스토리지 확인하기
 
 로컬 스토리지에 저장된 데이터를 브라우저에서 직접 확인하는 방법
 
@@ -508,9 +526,9 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-#### 👀 성능 관점에서 둘러보기
+### 6-5. 👀 성능 관점에서 둘러보기
 
-##### ⚠️ 로컬 스토리지는 편리하지만, 성능에 영향을 줄 수 있는 작업이다.
+#### ⚠️ 로컬 스토리지는 편리하지만, 성능에 영향을 줄 수 있는 작업이다.
 
 - `localStorage.setItem()`은 브라우저에서 로컬 스토리지에 데이터를 저장하는 작업으로, 비교적 무거운 작업에 속한다.
 - 이유
@@ -521,9 +539,9 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-##### 💫 성능 최적화 : `setItem` 호출 최소화하기
+#### 💫 성능 최적화 : `setItem` 호출 최소화하기
 
-**1️⃣ 디바운스 (Debounce)를 통해 불필요한 호출 줄이기**
+##### 1️⃣ 디바운스 (Debounce)를 통해 불필요한 호출 줄이기
 
 디바운스는 여러 번의 로직 실행 중 마지막 호출만 처리하도록 만드는 기법이다.
 이렇게 하면 빠르게 반복되는 `setItem` 호출을 줄일 수 있다.
@@ -542,7 +560,7 @@ Web Storage는 네트워크 요청에 데이터를 포함하지 않아 더 효�
 
 <br>
 
-**2️⃣ `useCallback`으로 불필요한 함수 생성 방지**
+##### 2️⃣ `useCallback`으로 불필요한 함수 생성 방지
 
 - React에서 컴포넌트가 리렌더링되면, 기존 함수가 다시 생성된다.
 - 이로 인해 같은 로직을 반복 생성하거나 실행하면 비효율이 발생할 수 있다.

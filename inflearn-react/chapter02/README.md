@@ -1,4 +1,4 @@
-## chapter 02. JSX
+# chapter 02. JSX
 
 <br>
 
@@ -13,9 +13,9 @@
 
 ---
 
-### 1. JSX란?
+## 1. JSX란?
 
-**JSX = HTML + JavaScript**
+### JSX = HTML + JavaScript
 
 > JavaScript를 확장한 문법(JavaScript XML)
 
@@ -23,7 +23,9 @@
 - 내부적으로 JavaScript를 사용할 수 있음
 - React는 이 JSX를 이용하여 화면을 그림(컴포넌트)
 
-**JSX의 특징**
+<br>
+
+### JSX의 특징
 
 - JSX에서 사용되는 태그의 속성 이름이 HTML과 약간 다름
   - `class` → `className`
@@ -32,7 +34,7 @@
 - 태그를 명시적으로 닫아줘야 함
 - 하나의 태그로 감싸져 있어야 함
 
-**예시.** HTML 🆚 JSX
+**예시. HTML 🆚 JSX.**
 
 - HTML
   ```
@@ -49,7 +51,7 @@
 
 ---
 
-### 2. JSX에서 JavaScript 사용하기
+## 2. JSX에서 JavaScript 사용하기
 
 - src
   - lecture
@@ -57,7 +59,7 @@
 
 ---
 
-### 3. JSX에서의 조건문
+## 3. JSX에서의 조건문
 
 - src
   - lecture
@@ -65,7 +67,7 @@
 
 ---
 
-### 4. JSX에서의 반복문
+## 4. JSX에서의 반복문
 
 - src
   - lecture
@@ -73,13 +75,13 @@
 
 ---
 
-### 5. JSX 스타일링
+## 5. JSX 스타일링
 
 - src
   - lecture
     - 04.jsx-style.jsx
 
-**CSS-in-JS**
+### CSS-in-JS
 
 > 자바스크립트에 의해서 스타일링 되는 것을 CSS-in-JS라고 부른다.
 
@@ -88,7 +90,7 @@
 
 ---
 
-### 6. JSX로 구구단 출력하기
+## 6. JSX로 구구단 출력하기
 
 - src
   - lecture
