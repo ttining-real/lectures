@@ -91,3 +91,11 @@ pnpm dlx create-react-app survey-pie
 ---
 
 ## 5. 기본 컴포넌트 구현
+
+- App
+  - ProgressIndicator
+  - QuestionBox
+    - Title
+    - Desc
+    - Body
+    - ActionButtons
