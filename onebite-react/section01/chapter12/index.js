@@ -5,22 +5,40 @@ function funcA() {
 
 let varA = funcA;
 
-// console.log(varA);
+console.log(varA);
+//funcA() {
+//   console.log("funcA");
+// }
 
-// 함수 표현식 (호이스팅 X)
-let varB = function () {
-  // console.log("funcB");
+let varB = funcA();
+console.log(varB); // funcA
+
+// * 함수 표현식 (호이스팅 X)
+let varC = function () {
+  console.log("익명 함수");
 };
 
-varB();
-// funcB();
+varC(); // 익명 함수
 
-// 화살표 함수
-// let varC = (value) => value + 1;
-let varC = (value) => {
-  console.log("value: ", value);
+console.clear();
 
+// * 화살표 함수
+
+// let varD = () => {
+//   return 1;
+// };
+
+let varD = () => 1;
+
+console.log(varD()); // 1
+
+let varE = (value) => value + 1;
+
+console.log(varE(10)); // 11
+
+let varF = (value) => {
+  console.log(value);
   return value + 1;
 };
 
-console.log(varC(10));
+console.log(varF(10)); // 10 11
