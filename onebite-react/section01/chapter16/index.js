@@ -1,20 +1,21 @@
-// 1. 상수 객체
+// * 1. 상수 객체
 const animal = {
   type: "고슴도치",
-  name: "두더지",
+  name: "슴슴이",
   color: "black",
 };
 
-// animal = { a: 1 };
+// animal = { a: 1 }; // Uncaught TypeError: Assignment to constant variable
+
 animal.age = 2; // 추가
 animal.name = "꽝꽝이"; // 수정
 delete animal.color; // 삭제
 
-// console.log(animal);
+console.log(animal);
 
-// 2. 메서드
-// ㄴ 값이 함수인 프로퍼티를 말함
-// ㄴ 객체의 동작을 정의할 때 사용
+console.clear();
+
+// * 2. 메서드
 const person = {
   name: "띠닝",
   // 메서드
