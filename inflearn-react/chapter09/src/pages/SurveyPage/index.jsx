@@ -6,7 +6,7 @@ import QuestionBox from "@/components/QuestionBox";
 
 function SurveyPage() {
   const params = useParams();
-  console.log(params); // {surveyId: 'asdf', step: 'asdf'}
+  // console.log(params); // {surveyId: 'asdf', step: 'asdf'}
 
   // 질문 데이터
   const questions = [
@@ -15,21 +15,27 @@ function SurveyPage() {
       desc: "첫 번째 설명입니다.",
       type: "text",
       required: false,
-      options: {},
+      options: {
+        placeholder: "placeholder 입니다.",
+      },
     },
     {
       title: "두 번째 질문입니다.",
       desc: "두 번째 설명입니다.",
-      type: "text",
+      type: "textarea",
       required: true,
-      options: {},
+      options: {
+        placeholder: "placeholder 입니다.",
+      },
     },
     {
       title: "세 번째 질문입니다.",
       desc: "세 번째 설명입니다.",
-      type: "text",
+      type: "select",
       required: false,
-      options: {},
+      options: {
+        items: ["답변 1", "답변 2", "답변 3", "답변 4", "답변 5"],
+      },
     },
   ];
 
@@ -39,6 +45,8 @@ function SurveyPage() {
 
   const [answers, setAnswers] = useState([]);
 
+  // console.log(answers);
+
   return (
     <div>
       <ProgressIndicator />
@@ -46,11 +54,14 @@ function SurveyPage() {
         question={questions[step]}
         questionsLength={questions.length}
         step={step}
-        answers={answers[step]}
+        answer={answers[step]}
         setAnswer={(newAnswer) => {
+          // console.log(newAnswer);
+
           setAnswers((answers) => {
             const newAnswers = [...answers];
             newAnswers[step] = newAnswer;
+            // console.log(newAnswers);
 
             return newAnswers;
           });

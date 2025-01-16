@@ -1,4 +1,7 @@
+import { any } from "prop-types";
 import { useNavigate } from "react-router-dom";
+
+import Button from "../Button";
 
 function ActionButtons({ questionsLength, step }) {
   const isLast = questionsLength - 1 === step;
@@ -7,33 +10,41 @@ function ActionButtons({ questionsLength, step }) {
   return (
     <div>
       {step === 0 || (
-        <button
+        <Button
+          type='TERTIARY'
           onClick={() => {
             navigate(`${step - 1}`);
           }}
         >
           이전
-        </button>
+        </Button>
       )}
       {isLast ? (
-        <button
+        <Button
+          type='PRIMARY'
           onClick={() => {
             navigate("/done"); // 완료 페이지로 이동
           }}
         >
           제출
-        </button>
+        </Button>
       ) : (
-        <button
+        <Button
+          type='PRIMARY'
           onClick={() => {
             navigate(`${step + 1}`); // 완료 페이지로 이동
           }}
         >
           다음
-        </button>
+        </Button>
       )}
     </div>
   );
 }
+
+ActionButtons.propTypes = {
+  questionsLength: any,
+  step: any,
+};
 
 export default ActionButtons;
