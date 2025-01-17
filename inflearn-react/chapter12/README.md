@@ -5,7 +5,7 @@
 - [x] 1. 전역 상태 관리란?
 - [x] 2. Recoil이란?
 - [x] 3. Recoil로 데이터 관리하기
-- [ ] 4. Custom hook 만들기
+- [x] 4. Custom hook 만들기
 
 ---
 
@@ -257,8 +257,161 @@
 
 ### 4-1. Custom Hook이란?
 
-하나 이상의 Hooks를 조합해서 만든 새로운 Hook
+- Custom Hook은 하나 이상의 React Hook을 조합하여 특정 기능을 캡슐화한 재사용 가능한 Hook이다.
+- 컴포넌트에서 공통적으로 사용되는 로직을 분리하고 재사용성을 높이는 데 유용하다.
 
 <br>
+
+### 4-2. Custom Hook의 특징
+
+#### 1️⃣ React Hook 규칙 준수
+
+- `use`로 시작하는 네이밍 규칙을 따라야 한다.
+- React Hook의 규칙 (Top-Level, React Function 내 사용)을 그대로 따른다.
+
+#### 2️⃣ 재사용 가능
+
+- Custom Hook은 프로젝트의 여러 컴포넌트에서 동일한 로직을 쉽게 재사용할 수 있도록 한다.
+
+#### 3️⃣ 로직 분리
+
+- Custom Hook을 사용하면 UI와 로직을 분리하여 코드를 더 간결하고 읽기 쉽게 만든다.
+
+<br>
+
+### 4-3. Custom Hook의 구조
+
+- 필요에 따라 하나 이상의 Hook(`useState`, `useEffect`, `useRecoilState` 등)을 사용
+- 데이터를 반환하거나 동작 함수를 제공
+
+<br>
+
+### 4-3. Custom Hook 예시
+
+#### 1️⃣ 상태 관리 로직 추출
+
+```jsx
+import { useState } from "react";
+
+// Custom Hook 정의
+function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+
+  const increment = () => setCount((prev) => prev + 1);
+  const decrement = () => setCount((prev) => prev - 1);
+
+  return { count, increment, decrement };
+}
+
+// Custom Hook 사용
+function Counter() {
+  const { count, increment, decrement } = useCounter(5);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+<br>
+
+#### 2️⃣ 데이터 Fetching 로직 추출
+
+```jsx
+import { useState, useEffect } from "react";
+
+// Custom Hook 정의
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [url]);
+
+  return { data, loading, error };
+}
+
+// Custom Hook 사용
+function PostList() {
+  const { data, loading, error } = useFetch(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <ul>
+      {data.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+
+export default PostList;
+```
+
+<br>
+
+#### 3️⃣ Recoil 상태 관리와 연동
+
+```jsx
+import { useRecoilState } from "recoil";
+import { userState } from "./recoil/atoms";
+
+function useUser() {
+  const [user, setUser] = useRecoilState(userState);
+
+  const login = (userInfo) => setUser({ ...userInfo, isLoggedIn: true });
+  const logout = () => setUser({ isLoggedIn: false, email: "", name: "" });
+
+  return { user, login, logout };
+}
+
+// Custom Hook 사용
+function UserProfile() {
+  const { user, login, logout } = useUser();
+
+  return (
+    <div>
+      {user.isLoggedIn ? (
+        <>
+          <p>Welcome, {user.name}!</p>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <button
+          onClick={() => login({ email: "test@example.com", name: "Tester" })}
+        >
+          Login
+        </button>
+      )}
+    </div>
+  );
+}
+
+export default UserProfile;
+```
 
 ---
