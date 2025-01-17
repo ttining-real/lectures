@@ -1,4 +1,5 @@
 import { any } from "prop-types";
+import styled from "styled-components";
 
 import ActionButtons from "../ActionButtons";
 import Body from "../Body";
@@ -7,7 +8,7 @@ import Title from "../Title";
 
 function QuestionBox({ question, questionsLength, step, answer, setAnswer }) {
   return (
-    <div>
+    <QuestionBoxWrapper>
       <Title>{question.title}</Title>
       <Desc>{question.desc}</Desc>
       <Body
@@ -17,9 +18,15 @@ function QuestionBox({ question, questionsLength, step, answer, setAnswer }) {
         options={question.options}
       />
       <ActionButtons questionsLength={questionsLength} step={step} />
-    </div>
+    </QuestionBoxWrapper>
   );
 }
+
+const QuestionBoxWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+`;
 
 QuestionBox.propTypes = {
   question: any,

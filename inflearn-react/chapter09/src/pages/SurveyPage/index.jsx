@@ -48,7 +48,7 @@ function SurveyPage() {
   // console.log(answers);
 
   return (
-    <div>
+    <>
       <ProgressIndicator />
       <QuestionBox
         question={questions[step]}
@@ -67,7 +67,7 @@ function SurveyPage() {
           });
         }}
       />
-    </div>
+    </>
   );
 }
 

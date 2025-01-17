@@ -1,21 +1,44 @@
+import "./index.css";
+
 import { Route, Routes } from "react-router-dom";
+import styled from "styled-components";
 
 import CompletionPage from "./pages/CompletionPage";
 import SurveyPage from "./pages/SurveyPage";
 
 function App() {
   return (
-    <div className='App'>
-      <h1>Survey Pie</h1>
-      <Routes>
-        <Route path='/done' element={<CompletionPage />} />
-        <Route path='/survey/:surveyId' element={<SurveyPage />}>
-          <Route path=':step' />
-        </Route>
-      </Routes>
-    </div>
+    <AppWrapper>
+      <Box>
+        <Routes>
+          <Route path='/done' element={<CompletionPage />} />
+          <Route path='/survey/:surveyId' element={<SurveyPage />}>
+            <Route path=':step' />
+          </Route>
+        </Routes>
+      </Box>
+    </AppWrapper>
   );
 }
+
+const AppWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e5e5e5;
+`;
+
+const Box = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  width: 700px;
+  min-height: 500px;
+  padding: 60px 60px;
+  border-radius: 16px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.07);
+  background-color: #ffffff;
+`;
 
 /*
 

@@ -1,5 +1,6 @@
 import { any } from "prop-types";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 import Button from "../Button";
 
@@ -8,7 +9,7 @@ function ActionButtons({ questionsLength, step }) {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <ActionButtonsWrapper>
       {step === 0 || (
         <Button
           type='TERTIARY'
@@ -38,9 +39,16 @@ function ActionButtons({ questionsLength, step }) {
           다음
         </Button>
       )}
-    </div>
+    </ActionButtonsWrapper>
   );
 }
+
+const ActionButtonsWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 72px 0 0 0;
+`;
 
 ActionButtons.propTypes = {
   questionsLength: any,

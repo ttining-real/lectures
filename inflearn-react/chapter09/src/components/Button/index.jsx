@@ -33,6 +33,7 @@ const colorMap = {
 const Button = styled.button`
   padding: 16px 24px;
   width: 200px;
+  cursor: pointer;
   border-radius: 4px;
   border: ${({ type }) =>
     type === "TERTIARY"

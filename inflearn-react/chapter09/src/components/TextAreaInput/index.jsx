@@ -15,14 +15,15 @@ function TextAreaInput({ answer, setAnswer, options }) {
 }
 
 const Input = styled.textarea`
-  border: 1px solid #e0e0e0;
+  width: 100%;
+  height: 196px;
   box-sizing: border-box;
-  border-radius: 5px;
+  padding: 12px 18px;
   font-size: 18px;
   line-height: 21px;
-  padding: 12px 18px;
-  height: 196px;
   resize: none;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
 `;
 
 TextAreaInput.propTypes = {

@@ -19,7 +19,7 @@
 - [x] chapter 08. React 심화 프로젝트 소개
 - [x] chapter 09. SurveyPie 설계
 - [x] chapter 10. SurveyPie 라우터 적용
-- [ ] chapter 11. SurveyPie 컴포넌트 스타일링
+- [x] chapter 11. SurveyPie 컴포넌트 스타일링
 - [ ] chapter 12. SurveyPie 전역 상태 관리
 - [ ] chapter 13. SurveyPie API 연동
 - [ ] chapter 14. SurveyPie 그 외 나머지 기능 구현

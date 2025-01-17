@@ -1,4 +1,5 @@
 import { any } from "prop-types";
+import styled from "styled-components";
 
 import SelectInput from "../SelectInput";
 import TextAreaInput from "../TextAreaInput";
@@ -16,11 +17,16 @@ function Body({ type, answer, setAnswer, options }) {
   }
 
   return (
-    <div>
+    <BodyWrapper>
       <InputComponent answer={answer} setAnswer={setAnswer} options={options} />
-    </div>
+    </BodyWrapper>
   );
 }
+
+const BodyWrapper = styled.div`
+  flex: 1;
+  margin: 0px 40px 0px;
+`;
 
 Body.propTypes = {
   type: any,
