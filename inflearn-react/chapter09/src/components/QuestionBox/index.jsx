@@ -10,7 +10,11 @@ import Title from "../Title";
 
 function QuestionBox() {
   const [answer, setAnswer] = useCurrentAnswer();
-  const question = useCurrentQuestion();
+  const question = useCurrentQuestion(); // undefined
+
+  if (!question) {
+    return null;
+  }
 
   return (
     <QuestionBoxWrapper>

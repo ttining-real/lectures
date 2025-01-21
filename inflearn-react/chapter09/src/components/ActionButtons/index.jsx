@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import useStep from "@/hooks/useStep";
-import questionsLengthState from "@/stores/questions/atom";
+import questionsLengthState from "@/stores/survey/atom";
 
 import Button from "../Button";
 
