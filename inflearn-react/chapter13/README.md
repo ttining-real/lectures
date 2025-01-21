@@ -3,8 +3,8 @@
 #### 🌱 목차
 
 - [x] 1. Axios 설치
-- [ ] 2. Recoil의 Selector로 API 연동
-- [ ] 3. 설문 답변 저장하기
+- [x] 2. Recoil의 `Selector`로 API 연동
+- [x] 3. 설문 답변 저장하기
 
 ---
 
@@ -162,7 +162,14 @@ function App() {
 
 ### 전역 Store에 API 연동
 
+- [Asynchronous Example (비동기 예제)](https://recoiljs.org/ko/docs/guides/asynchronous-data-queries#asynchronous-example-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%98%88%EC%A0%9C)
+- [Async Queries Without React Suspense (React Suspense를 사용하지 않은 비동기 쿼리)](https://recoiljs.org/ko/docs/guides/asynchronous-data-queries#async-queries-without-react-suspense-react-suspense%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EC%9D%80-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%BF%BC%EB%A6%AC)
+
 <br>
+
+### Axios Config 기본값 설정하기
+
+- [Config 기본값](https://axios-http.com/kr/docs/config_defaults)
 
 ---
 

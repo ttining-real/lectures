@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path='/done' element={<CompletionPage />} />
           <Route path='/survey/:surveyId' element={<SurveyPage />}>
-            <Route path=':step' />
+            <Route path=':step' element={<SurveyPage />} />
           </Route>
         </Routes>
       </Box>
