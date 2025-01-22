@@ -1,34 +1,29 @@
-// math 모듈
+// * math 모듈
+
+function add(a, b) {
+  return a + b;
+}
+
+function sub(a, b) {
+  return a - b;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                            CJS 방식 (Common JS)                            */
 /* -------------------------------------------------------------------------- */
-// function add(a, b) {
-//   return a + b;
-// }
 
-// function sub(a, b) {
-//   return a - b;
-// }
-
+// key 값과 value 값이 동일할 경우 변수 또는 함수의 이름만 명시해도 된다.
 // module.exports = {
 //   add,
 //   sub,
 // };
 
 /* -------------------------------------------------------------------------- */
-/*                                  ESM 방식                                   */
+/*                                 ESM 방식                                   */
 /* -------------------------------------------------------------------------- */
 
-export function add(a, b) {
-  return a + b;
-}
-
-export function sub(a, b) {
-  return a - b;
-}
+export { add, sub }; // 함수 선언문 앞에 export 키워드를 작성해도 된다.
 
 export default function multiply(a, b) {
   return a * b;
 }
-
-// export { add, sub };
