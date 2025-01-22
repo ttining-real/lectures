@@ -1,0 +1,16 @@
+{
+  "name": "day8",
+  "version": "1.0.0",
+  "description": "- 이번 과제는 `Node.js` 패키지를 직접 생성하고 설정한 다음,\r   `chance` 라는 랜덤 텍스트를 생성하는 라이브러리를 이용해 문제를 해결하는 과제입니다.\r - ES 모듈 시스템과 패키지 스크립트 기능도 함께 활용해야 합니다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "chance": "^1.1.12"
+  }
+}
