@@ -22,7 +22,7 @@
 - [x] chapter 11. SurveyPie 컴포넌트 스타일링
 - [x] chapter 12. SurveyPie 전역 상태 관리
 - [x] chapter 13. SurveyPie API 연동
-- [ ] chapter 14. SurveyPie 그 외 나머지 기능 구현
+- [x] chapter 14. SurveyPie 그 외 나머지 기능 구현
 - [ ] chapter 15. Admin 설계
 - [ ] chapter 16. Admin 리스트 페이지 구현
 - [ ] chapter 17. Admin 빌더 페이지 구현

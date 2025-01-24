@@ -16,7 +16,7 @@ import Button from "../Button";
 function ActionButtons() {
   const step = useStep();
   const surveyId = useSurveyId();
-  const answers = useAnswers();
+  const [answers, setAnswers] = useAnswers();
   const [isPosting, setIsPosting] = useState(false);
   const questionsLength = useRecoilValue(questionsLengthState);
   const isRequired = useRequiredOption();
@@ -45,6 +45,7 @@ function ActionButtons() {
             // postAnswer
             postAnswers(surveyId, answers)
               .then(() => {
+                setAnswers([]);
                 navigate(`/done/${surveyId}`); // 완료 페이지로 이동
               })
               .catch((err) => {
