@@ -32,7 +32,7 @@ const colorMap = {
 
 const Button = styled.button`
   padding: 16px 24px;
-  width: 200px;
+  min-width: 200px;
   cursor: pointer;
   border-radius: 4px;
   border: ${({ type }) =>
@@ -40,6 +40,8 @@ const Button = styled.button`
       ? `1px solid ${TERTIARY.BUTTON.DEFAULT.BORDER}`
       : "none"};
   font-weight: bold;
+  font-family: "Pretendard";
+  font-size: 18px;
   color: ${({ type }) => colorMap[type].BUTTON.DEFAULT.COLOR};
   background-color: ${({ type }) => colorMap[type].BUTTON.DEFAULT.BACKGROUND};
 
@@ -51,6 +53,7 @@ const Button = styled.button`
         ? `1px solid ${TERTIARY.BUTTON.HOVER.BORDER}`
         : "none"};
   }
+
   &:active {
     color: ${({ type }) => colorMap[type].BUTTON.PRESSED.COLOR};
     background-color: ${({ type }) => colorMap[type].BUTTON.PRESSED.BACKGROUND};
@@ -58,6 +61,8 @@ const Button = styled.button`
       type === "TERTIARY"
         ? `1px solid ${TERTIARY.BUTTON.PRESSED.BORDER}`
         : "none"};
+  }
+
   &:disabled {
     color: ${({ type }) => colorMap[type].BUTTON.DISABLED.COLOR};
     background-color: ${({ type }) =>
