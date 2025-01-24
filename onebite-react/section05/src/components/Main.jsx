@@ -1,11 +1,18 @@
-function Main() {
+import "./Main.css";
+
+const Main = () => {
   const user = {
-    name: 'ttining',
-    age: 30,
-    email: 'ttining.real@gmail.com',
+    name: "ttining",
+    isLogin: true,
   };
 
-  return <main></main>;
-}
+  // return <main>{user.isLogin ? <div>로그아웃</div> : <div>로그인</div>}</main>;
+
+  if (user.isLogin) {
+    return <div className='logout'>로그아웃</div>;
+  } else {
+    return <div>로그인</div>;
+  }
+};
 
 export default Main;

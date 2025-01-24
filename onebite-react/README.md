@@ -11,7 +11,7 @@
 - [x] 섹션 1. JavaScript 기본
 - [x] 섹션 2. JavaScript 심화
 - [x] 섹션 3. Node.js 기초
-- [ ] 섹션 4. React.js 개론
+- [x] 섹션 4. React.js 개론
 - [ ] 섹션 5. React.js 입문
 - [ ] 섹션 6. 프로젝트 1 - 카운터 앱
 - [ ] 섹션 7. 라이프사이클

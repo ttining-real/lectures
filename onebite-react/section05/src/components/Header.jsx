@@ -1,10 +1,9 @@
-// 함수 선언식 컴포넌트
-function Header() {
+const Header = () => {
   return (
     <header>
-      <h1>header</h1>
+      <h1>Header</h1>
     </header>
   );
-}
+};
 
 export default Header;
