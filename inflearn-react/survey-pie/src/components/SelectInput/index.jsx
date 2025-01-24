@@ -2,11 +2,11 @@ import { any } from "prop-types";
 import styled from "styled-components";
 
 // Item
-function Item({ children, onChange }) {
+function Item({ children, checked, onChange }) {
   return (
     <ItemWrapper>
       <label>
-        <input type='checkbox' onChange={onChange} />
+        <input type='checkbox' checked={checked} onChange={onChange} />
         <span></span>
         <div>{children}</div>
       </label>
@@ -49,6 +49,7 @@ const ItemWrapper = styled.div`
 
 Item.propTypes = {
   children: any,
+  checked: any,
   onChange: any,
 };
 
@@ -58,6 +59,13 @@ function SelectInput({ answer = [], setAnswer, options }) {
     // console.log("answer", answer, index, isChecked);
 
     if (isChecked) {
+      const max = options?.max ?? 1;
+      // console.log(max, answer);
+
+      if (answer.length >= max) {
+        return;
+      }
+
       // setAnswer (index +)
       setAnswer([...answer, index]);
     } else {
@@ -71,6 +79,7 @@ function SelectInput({ answer = [], setAnswer, options }) {
         return (
           <Item
             key={index}
+            checked={answer.includes(index)}
             onChange={(e) => {
               handleChange(e.target.checked, index);
             }}
