@@ -10,9 +10,9 @@
 - [x] React 컴포넌트
 - [x] JSX로 UI 표현하기
 - [x] Props로 데이터 전달하기
-- [ ] 이벤트 처리하기
-- [ ] State로 상태 관리하기
-- [ ] State와 Props
+- [x] 이벤트 처리하기
+- [x] State로 상태 관리하기
+- [x] State와 Props
 - [ ] State로 사용자 입력 관리하기 1
 - [ ] State로 사용자 입력 관리하기 2
 - [ ] useRef로 컴포넌트의 변수 생성하기
@@ -374,7 +374,7 @@ JSX에서 스타일을 설정하는 방법은 크게 두 가지이다.
 
 <br>
 
-### defaultProps
+### 2️⃣ defaultProps
 
 - `defaultProps`는 `props`가 전달되지 않을 경우 기본값을 설정하는 방법이다.
 - 주로 `props`가 필수가 아닌 경우 사용된다.
@@ -396,7 +396,7 @@ JSX에서 스타일을 설정하는 방법은 크게 두 가지이다.
 
 <br>
 
-### 2️⃣ `props`가 많아지면 변수로 빼고 스프레드 문법 사용하기
+### 3️⃣ `props`가 많아지면 변수로 빼고 스프레드 문법 사용하기
 
 - 전달해야 하는 props가 많아질 경우, 변수로 한 번에 관리하고 스프레드 문법을 사용하면 코드가 간결해진다.
 - 예시
@@ -425,7 +425,7 @@ JSX에서 스타일을 설정하는 방법은 크게 두 가지이다.
 
 <br>
 
-### 3️⃣ `props` 구조분해할당
+### 4️⃣ `props` 구조분해할당
 
 - `Props`를 구조분해 할당하면 코드 가독성이 높아진다.
 - 함수 파라미터에서 바로 구조분해 할당을 할 수 있다.
@@ -445,7 +445,7 @@ JSX에서 스타일을 설정하는 방법은 크게 두 가지이다.
 
 <br>
 
-### 4️⃣ `children`
+### 5️⃣ `children`
 
 - `children`은 부모 컴포넌트에서 자식 컴포넌트로 전달하는 특수한 props이다.
 - 컴포넌트의 태그 내부에 포함된 콘텐츠를 전달할 때 사용된다.
@@ -474,7 +474,7 @@ JSX에서 스타일을 설정하는 방법은 크게 두 가지이다.
 
 <br>
 
-### 5️⃣ `Props` 활용 정리
+### ✨ `Props` 활용 정리
 
 1. 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달한다.
 2. `props`가 없을 경우 `defaultProps`로 기본값을 설정할 수 있다.
@@ -486,26 +486,288 @@ JSX에서 스타일을 설정하는 방법은 크게 두 가지이다.
 
 ## 5. 이벤트 처리하기
 
+### 1️⃣ 이벤트 핸들링이란?
+
+- 이벤트가 발생했을 때 이를 처리하는 것을 말한다.
+- 예시 : 버튼 클릭 시 경고창 노출
+
+<br>
+
+#### 💡 이벤트와 핸들링의 의미
+
+> ##### 이벤트
+>
+> - 웹 내부에서 발생하는 사용자의 행동
+> - 예시 : 버튼 클릭, 메시지 입력, 스크롤 등등
+>
+> ##### 핸들링
+>
+> - 다루다, 취급하다, 처리하다
+
+<br>
+
+### 2️⃣ 이벤트 핸들링 사용 방법
+
+- React에서 이벤트 핸들링은 DOM 이벤트와 유사하지만, React의 합성 이벤트(Synthetic Event) 방식을 사용한다.
+
+<br>
+
+#### 📌 익명 함수 사용하기
+
+- 간단한 이벤트 처리에는 익명 함수를 바로 전달할 수 있다.
+- 예시
+  ```jsx
+  const Button = ({ text, color = "black", children }) => {
+    return (
+      <button
+        onClick={() => {
+          console.log(text); // 클릭 시 콘솔에 text 출력
+        }}
+        style={{ color: color }}
+      >
+        {text} - {color.toUpperCase()}
+        {children}
+      </button>
+    );
+  };
+  ```
+  > 💡 익명 함수는 간단한 작업에 적합하지만, 함수가 실행될 때마다 새로 정의되므로 복잡한 로직에는 적합하지 않다.
+
+<br>
+
+#### 📌 함수를 따로 선언하고 콜백 함수처럼 전달하기
+
+- 반복적으로 사용할 함수는 별도로 선언해 사용하는 것이 효율적이다.
+- 예시
+
+  ```jsx
+  const Button = ({ text, color = "black", children }) => {
+    const onClickButton = () => {
+      console.log(text); // 클릭 시 text 출력
+    };
+
+    return (
+      <button
+        onClick={onClickButton} // 콜백 함수 전달
+        onMouseEnter={onClickButton} // 마우스 올릴 때도 호출
+        style={{ color: color }}
+      >
+        {text} - {color.toUpperCase()}
+        {children}
+      </button>
+    );
+  };
+  ```
+
+  > 💡 여러 이벤트(`onClick`, `onMouseEnter` 등)에 동일한 핸들러를 연결할 수 있다.
+
+<br>
+
+### 3️⃣ 이벤트 객체
+
+- React의 모든 이벤트는 **합성 이벤트(Synthetic Event)** 로 제공된다.
+
+<br>
+
+#### 📌 합성 이벤트란?
+
+- 브라우저 간 호환성을 보장하기 위해, React가 DOM 이벤트를 래핑하여 동일한 인터페이스를 제공하는 이벤트 객체이다.
+- 이벤트 객체는 성능 최적화를 위해 풀링(pooling) 되어 재활용된다.
+  > ⚠️ 비동기 작업에서는 이벤트 객체가 초기화되므로 필요한 값을 미리 저장해야 한다.
+- 예시
+  ```jsx
+  const onClickButton = (e) => {
+    console.log(e); // SyntheticBaseEvent {...}
+    console.log(e.target); // 이벤트가 발생한 DOM 요소
+    console.log(e.type); // 이벤트 타입 (예: "click")
+  };
+  ```
+
+<br>
+
+### 4️⃣ 추가적인 이벤트 처리 방법
+
+#### 📌 기본 동작 방지
+
+- HTML 태그의 기본 동작(예: 폼 제출, 링크 이동 등)을 막기 위해 `e.preventDefault()`를 사용한다.
+- 예시
+
+  ```jsx
+  const onSubmitForm = (e) => {
+    e.preventDefault(); // 기본 동작 방지
+    console.log("폼이 제출되었습니다.");
+  };
+
+  return <form onSubmit={onSubmitForm}>...</form>;
+  ```
+
+  > 💡 사용자가 폼 데이터를 확인하지 않고 잘못 제출하지 않도록 기본 동작을 막고, 검증 로직을 추가할 수 있다.
+
+<br>
+
+#### 📌 이벤트 전파 중단
+
+- 이벤트가 상위 요소로 전파되지 않도록 `e.stopPropagation()`을 사용한다.
+- 예시
+
+  ```jsx
+  const onClickParent = () => {
+    console.log("부모 요소 클릭");
+  };
+
+  const onClickChild = (e) => {
+    e.stopPropagation(); // 부모로 이벤트 전파 중단
+    console.log("자식 요소 클릭");
+  };
+
+  return (
+    <div onClick={onClickParent}>
+      <button onClick={onClickChild}>클릭</button>
+    </div>
+  );
+  ```
+
+  > 💡 특정 자식 요소에서만 이벤트를 처리하고 싶을 때 유용하다.
+
+<br>
+
+### 5️⃣ 코드 스타일
+
+- **함수 분리** : 재사용 가능한 로직은 별도의 함수로 분리하여 가독성을 높인다.
+- **익명 함수 최소화** : 복잡한 로직에는 익명 함수 사용을 지양한다.
+- **클린 코드** : 이벤트 핸들러 함수명은 `onClickButton`, `onSubmitForm`처럼 명확하게 작성한다.
+
 <br>
 <br>
 
-## 6. State로 상태 관리하기
+## 6. `State`로 상태 관리하기
+
+### 1️⃣ `State`란?
+
+- 사물이 현재 가지고 있는 **형태**나 **상태**를 나타내는 값이다.
+- **변화할 수 있는 동적인 값**으로, `State`의 값에 따라 렌더링되는 UI가 결정된다.
+- 컴포넌트 내 `State` 값이 변경되면, 해당 컴포넌트는 **리렌더링**된다.
+- 하나의 컴포넌트에 여러 개의 `State`를 생성할 수 있다.
+- 예시
+  - 전구의 점등 상태 : `"ON"` / `"OFF"`
+  - 전구의 고장 유무 : `true` / `false`
+  - 전구의 더러움 유무 : `true` / `false`
+
+<br>
+
+### 2️⃣ `useState`
+
+- `useState`는 새로운 `State`를 생성하는 리액트 훅(Hook)이다.
+- `State`의 초기값을 인수로 전달받고, 두 개의 요소를 가진 배열을 반환한다.
+  - 반환된 배열의 첫 번째 요소 : 현재 `State`의 값
+  - 반환된 배열의 두 번째 요소 : `State`를 변경하는 **상태 변경 함수**
+- 기본 사용 예시
+
+  ```jsx
+  const state = useState();
+  console.log(state); // [undefined, f]
+  // state의 초기값은 undefined이며, f는 상태 변경 함수이다.
+
+  const state = useState(0);
+  console.log(state); // [0, f]
+  //  초기값이 0으로 설정된 상태 배열
+  ```
+
+- 배열 비구조화 할당 사용 예시
+
+  ```jsx
+  function App() {
+    const [state, setState] = useState(0);
+
+    return (
+      <>
+        <h1>{state}</h1>
+        <button onClick={() => setState(state + 1)}>➕</button>
+      </>
+    );
+  }
+  ```
+
+- 코드 예시 : 전구 상태 관리
+
+  ```jsx
+  function App() {
+    const [light, setLight] = useState("OFF");
+
+    return (
+      <>
+        <h1>{light}</h1>
+        <button onClick={() => setLight(light === "ON" ? "OFF" : "ON")}>
+          {light === "ON" ? "끄기" : "켜기"}
+        </button>
+      </>
+    );
+  }
+  ```
+
+  > 💡 이 코드는 전구의 상태(`"ON"`/`"OFF"`)에 따라 UI와 버튼의 텍스트를 동적으로 변경한다.
 
 <br>
 <br>
 
 ## 7. State와 Props
 
+### 1️⃣ Props와 리렌더링
+
+- `Props`는 부모 컴포넌트가 자식 컴포넌트에 전달하는 값이다.
+- 자식 컴포넌트는 전달받은 `Props` 값이 변경되면 리렌더링된다.
+- 예시 : 전구 상태를 `Props`로 전달
+
+  ```jsx
+  const Bulb = ({ light }) => {
+    console.log(light);
+
+    return (
+      <div>
+        {light === "ON" ? (
+          <h1 style={{ backgroundColor: "orange" }}>ON</h1>
+        ) : (
+          <h1 style={{ backgroundColor: "grey" }}>OFF</h1>
+        )}
+      </div>
+    );
+  };
+
+  function App() {
+    const [light, setLight] = useState("OFF");
+
+    return (
+      <>
+        <Bulb light={light} />
+        <button onClick={() => setLight(light === "ON" ? "OFF" : "ON")}>
+          {light === "ON" ? "끄기" : "켜기"}
+        </button>
+      </>
+    );
+  }
+  ```
+
+  > 💡 부모 컴포넌트의 `State`(`"light"`)를 자식 컴포넌트 `Bulb`로 전달하여 UI를 동기화한다.
+
+<br>
+
+### 2️⃣ 리액트 컴포넌트의 리렌더링 조건
+
+1. `State`가 변경되었을 때
+2. 부모로부터 전달받은 `Props`가 변경되었을 때
+3. 부모 컴포넌트가 리렌더링되었을 때, 해당 부모의 자식 컴포넌트도 함께 리렌더링된다.
+
+<br>
+
+### 3️⃣ 성능 최적화 팁
+
+- 컴포넌트 내부에 관련 없는 여러 `State`가 존재한다면, 이를 개별 컴포넌트로 분리하는 것이 좋다.
+- 컴포넌트를 분리하면 불필요한 리렌더링을 방지하고, 성능을 최적화할 수 있다.
+
 <br>
 <br>
 
 ## 8. State로 사용자 입력 관리하기 1
-
-컴포넌트의 리-렌더링
-
-자신이 관리하는 state의 값이 변경되었을 경우
-자신이 제공받는 props의 값이 변경되었을 경우
-부모 컴포넌트가 리렌더링 되면 자식 컴포넌트도 리렌더링 됨
 
 <br>
 <br>

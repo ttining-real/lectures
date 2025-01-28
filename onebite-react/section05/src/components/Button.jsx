@@ -1,16 +1,25 @@
-const Button = ({ text, color, children }) => {
+const Button = ({ text, color = "black", children }) => {
   // console.log(props);
 
+  // 이벤트 객체
+  const onClickButton = (e) => {
+    console.log(e);
+  };
+
   return (
-    <button style={{ color: color }}>
+    <button
+      onClick={onClickButton}
+      // onMouseEnter={onClickButton}
+      style={{ color: color }}
+    >
       {text} - {color.toUpperCase()}
       {children}
     </button>
   );
 };
 
-Button.defaultProps = {
-  color: "black",
-};
+// Button.defaultProps = {
+//   color: "black",
+// };
 
 export default Button;
