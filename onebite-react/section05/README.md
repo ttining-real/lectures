@@ -13,7 +13,7 @@
 - [x] 이벤트 처리하기
 - [x] State로 상태 관리하기
 - [x] State와 Props
-- [ ] State로 사용자 입력 관리하기 1
+- [x] State로 사용자 입력 관리하기 1
 - [ ] State로 사용자 입력 관리하기 2
 - [ ] useRef로 컴포넌트의 변수 생성하기
 - [ ] React Hooks
@@ -768,6 +768,59 @@ JSX에서 스타일을 설정하는 방법은 크게 두 가지이다.
 <br>
 
 ## 8. State로 사용자 입력 관리하기 1
+
+> 컴포넌트에서 다양한 사용자의 입력을 받고 처리하는 방법에 대해 알아보자
+
+<br>
+
+```jsx
+const Register = () => {
+  const [name, setName] = useState("이름");
+  const [birth, setBirth] = useState("");
+  const [country, setCountry] = useState("");
+  const [bio, setBio] = useState("");
+
+  const onChangeName = (e) => {
+    // console.log(e);
+    // e.target.value;
+    setName(e.target.value);
+  };
+  const onChangeBirth = (e) => {
+    setBirth(e.target.value);
+  };
+  const onChangeCountry = (e) => {
+    setCountry(e.target.value);
+  };
+  const onChangeBio = (e) => {
+    setBio(e.target.value);
+  };
+
+  return (
+    <div
+      style={{ display: "flex", flexFlow: "column", alignItems: "flex-start" }}
+    >
+      <input
+        type='text'
+        placeholder='이름'
+        value={name}
+        onChange={onChangeName}
+      />
+      {name}
+      <input type='date' value={birth} onChange={onChangeBirth} />
+      {birth}
+      <select name='' id='' value={country} onChange={onChangeCountry}>
+        <option value=''></option>
+        <option value='kr'>한국</option>
+        <option value='us'>미국</option>
+        <option value='uk'>영국</option>
+      </select>
+      {country}
+      <textarea name='' id='' value={bio} onChange={onChangeBio}></textarea>
+      {bio}
+    </div>
+  );
+};
+```
 
 <br>
 <br>
