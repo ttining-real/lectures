@@ -115,6 +115,32 @@ export default App;
 
 ## 5. 라우터 적용
 
+### 1️⃣ `react-router-dom` 설치
+
+```bash
+# npm 명령어로 설치
+npm install react-router-dom --save
+
+# pnpm 명령어로 설치
+pnpm add react-router-dom
+```
+
+<br>
+
+### 2️⃣ `BrowserRouter`로 App 컴포넌트 감싸기
+
+```jsx
+import { BrowserRouter } from "react-router-dom";
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);
+```
+
 <br>
 
 ---

@@ -1,9 +1,10 @@
 import { Layout, Menu } from 'antd';
 import { any } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const { Header, Content, Sider } = Layout;
 
-function MainLayout({ children }) {
+function MainLayout({ selectedKeys, children }) {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider>
@@ -18,8 +19,13 @@ function MainLayout({ children }) {
         >
           logo
         </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item key="1">설문 조사 관리</Menu.Item>
+        <Menu theme="dark" selectedKeys={selectedKeys} mode="inline">
+          <Menu.Item key="list">
+            <Link to="/list">설문 조사 관리</Link>
+          </Menu.Item>
+          <Menu.Item key="builder">
+            <Link to="/builder">빌더</Link>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
@@ -31,6 +37,7 @@ function MainLayout({ children }) {
 }
 
 MainLayout.propTypes = {
+  selectedKeys: any,
   children: any,
 };
 
