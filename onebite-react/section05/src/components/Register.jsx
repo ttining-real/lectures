@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 // 간단한 회원 가입 폼
 // 1. 이름
@@ -7,24 +7,20 @@ import { useState } from "react";
 // 4. 자기소개
 
 const Register = () => {
-  const [name, setName] = useState("이름");
-  const [birth, setBirth] = useState("");
-  const [country, setCountry] = useState("");
-  const [bio, setBio] = useState("");
+  const [input, setInput] = useState({
+    name: "",
+    birth: "",
+    country: "",
+    bio: "",
+  });
 
-  const onChangeName = (e) => {
-    // console.log(e);
-    // e.target.value;
-    setName(e.target.value);
-  };
-  const onChangeBirth = (e) => {
-    setBirth(e.target.value);
-  };
-  const onChangeCountry = (e) => {
-    setCountry(e.target.value);
-  };
-  const onChangeBio = (e) => {
-    setBio(e.target.value);
+  const onChange = (e) => {
+    // console.log(e.target.name, e.target.value);
+
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -34,21 +30,27 @@ const Register = () => {
       <input
         type='text'
         placeholder='이름'
-        value={name}
-        onChange={onChangeName}
+        name='name'
+        value={input.name}
+        onChange={onChange}
       />
-      {name}
-      <input type='date' value={birth} onChange={onChangeBirth} />
-      {birth}
-      <select name='' id='' value={country} onChange={onChangeCountry}>
+      {input.name}
+      <input type='date' name='birth' value={input.birth} onChange={onChange} />
+      {input.birth}
+      <select id='' name='country' value={input.country} onChange={onChange}>
         <option value=''></option>
         <option value='kr'>한국</option>
         <option value='us'>미국</option>
         <option value='uk'>영국</option>
       </select>
-      {country}
-      <textarea name='' id='' value={bio} onChange={onChangeBio}></textarea>
-      {bio}
+      {input.country}
+      <textarea
+        id=''
+        name='bio'
+        value={input.bio}
+        onChange={onChange}
+      ></textarea>
+      {input.bio}
     </div>
   );
 };

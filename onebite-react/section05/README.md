@@ -771,6 +771,9 @@ JSX에서 스타일을 설정하는 방법은 크게 두 가지이다.
 
 > 컴포넌트에서 다양한 사용자의 입력을 받고 처리하는 방법에 대해 알아보자
 
+- `input`에 초기값 설정하기
+  - `state` 생성 후, 초기값을 `input`의 `value` 속성으로 설정해준다.
+
 <br>
 
 ```jsx
@@ -780,17 +783,24 @@ const Register = () => {
   const [country, setCountry] = useState("");
   const [bio, setBio] = useState("");
 
+  // 이름
   const onChangeName = (e) => {
     // console.log(e);
     // e.target.value;
     setName(e.target.value);
   };
+
+  // 생년월일
   const onChangeBirth = (e) => {
     setBirth(e.target.value);
   };
+
+  // 국적
   const onChangeCountry = (e) => {
     setCountry(e.target.value);
   };
+
+  // 자기소개
   const onChangeBio = (e) => {
     setBio(e.target.value);
   };
@@ -826,6 +836,63 @@ const Register = () => {
 <br>
 
 ## 9. State로 사용자 입력 관리하기 2
+
+- `State`로 사용자 입력 관리하기 1에서 중복되는 코드 개선하기
+- `[e.target.name]` : 프로퍼티의 `key`로 설정
+  - 이벤트가 발생한 태그의 name 속성에 설정된 값이 들어있다.
+
+```jsx
+const Register = () => {
+  const [input, setInput] = useState({
+    name: "",
+    birth: "",
+    country: "",
+    bio: "",
+  });
+
+  const onChange = (e) => {
+    // 여러 개의 비슷한 동작을 하는 이벤트 핸들러를
+    // 하나의 통합된 이벤트 핸들러로 사용할 수 있다.
+    console.log(e.target.name, e.target.value);
+
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  return (
+    <div
+      style={{ display: "flex", flexFlow: "column", alignItems: "flex-start" }}
+    >
+      <input
+        type='text'
+        placeholder='이름'
+        name='name'
+        value={input.name}
+        onChange={onChange}
+      />
+      {input.name}
+      <input type='date' name='birth' value={input.birth} onChange={onChange} />
+      {input.birth}
+      <select id='' name='country' value={input.country} onChange={onChange}>
+        <option value=''></option>
+        <option value='kr'>한국</option>
+        <option value='us'>미국</option>
+        <option value='uk'>영국</option>
+      </select>
+      {input.country}
+      <textarea
+        id=''
+        name='bio'
+        value={input.bio}
+        onChange={onChange}
+      ></textarea>
+      {input.bio}
+    </div>
+  );
+};
+```
 
 <br>
 <br>
