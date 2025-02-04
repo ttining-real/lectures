@@ -7,8 +7,8 @@
 ### 🌱 목차
 
 - [x] React.js 소개
-- [ ] 첫 React App 생성하기
-- [ ] React App 구동원리 살펴보기
+- [x] 첫 React App 생성하기
+- [x] React App 구동원리 살펴보기
 
 <br>
 
