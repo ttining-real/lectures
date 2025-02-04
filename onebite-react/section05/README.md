@@ -1073,17 +1073,109 @@ const Register = () => {
 
 ## 11. React Hooks
 
-React Hooks
+### React Hooks란?
 
-클래스 컴포넌트의 기능을 함수 컴포넌트에서도 이용할 수 있도록 도와주는 메서드
-함수 컴포넌트 내부에서만 호출할 수 있다.
-조건부로 호출되어서는 안 된다. (조건문, 반복문 내에서 사용 ❌)
-useState
-컴포넌트 내부의 변수로 활용 가능
-값이 변경되면 컴포넌트 리렌더링
-useRef
-컴포넌트 내부의 변수로 활용 가능
-어떤 경우에도 리렌더링을 유발하지 않음
+- 클래스 컴포넌트의 기능을 함수 컴포넌트에서도 이용할 수 있도록 도와주는 메서드
+- 2017년도 이전의 React.js
+  | `class` 컴포넌트 | `function` 컴포넌트 |
+  | --------------- | ------------------- |
+  | 모든 기능을 이용할 수 있음 | UI 렌더링만 할 수 있음 |
+  | ex. State, Ref, etc... | - |
+  | 문법이 복잡함 | - |
+- 이름 앞에 `use`라는 접두사가 붙는다.
+- 함수 컴포넌트 내부에서만 호출할 수 있다.
+- 조건문, 반복문 내에서는 호출 불가
+- Custom Hook 제작 가능
+
+<br>
+
+### Hook 관련 팁
+
+#### 1️⃣ 함수 컴포넌트, 커스텀 훅 내부에서만 호출 가능
+
+```jsx
+import { useState } from "react";
+
+const state = useState();
+// Error: Invalid hook call. Hooks can only be called inside of the body of a function component.
+
+const HookExam = () => {
+  return <div>hook exam</div>;
+};
+
+export default HookExam;
+```
+
+<br>
+
+#### 2️⃣ 2. 조건부로 호출될 수 없다.
+
+```jsx
+import { useState } from "react";
+
+const HookExam = () => {
+  if (true) {
+    // Unexpected constant condition
+    const state = useState(); // React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render.
+  }
+
+  return <div>hook exam</div>;
+};
+
+export default HookExam;
+```
+
+<br>
+
+#### 3️⃣ 나만의 훅(Custom Hook)을 직접 만들 수 있다.
+
+- 일반적으로, `src` 디렉토리 하위에 `hooks` 폴더를 만들어서 관리한다.
+
+```jsx
+import { useState } from "react";
+
+const HookExam = () => {
+  const [input, setInput] = useState("");
+
+  const onChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  return (
+    <div>
+      <input type='text' value={input} onChange={onChange} />
+    </div>
+  );
+};
+
+export default HookExam;
+```
+
+```jsx
+import { useState } from "react";
+
+function useInput() {
+  const [input, setInput] = useState("");
+
+  const onChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  return [input, onChange];
+}
+
+const HookExam = () => {
+  const [input, onChange] = useInput();
+
+  return (
+    <div>
+      <input type='text' value={input} onChange={onChange} />
+    </div>
+  );
+};
+
+export default HookExam;
+```
 
 <br>
 <br>
