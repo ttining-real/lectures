@@ -14,8 +14,8 @@
 - [x] State로 상태 관리하기
 - [x] State와 Props
 - [x] State로 사용자 입력 관리하기 1
-- [ ] State로 사용자 입력 관리하기 2
-- [ ] useRef로 컴포넌트의 변수 생성하기
+- [x] State로 사용자 입력 관리하기 2
+- [x] useRef로 컴포넌트의 변수 생성하기
 - [ ] React Hooks
 
 <br>
@@ -898,6 +898,175 @@ const Register = () => {
 <br>
 
 ## 10. useRef로 컴포넌트의 변수 생성하기
+
+### `useRef`란?
+
+- 새로운 Reference 객체를 생성하는 기능
+
+  ```jsx
+  const refObject = useRef(); // refObject : 컴포넌트 내부의 변수
+  ```
+
+- 컴포넌트 내부에서 렌더링에 영향을 미치지 않아야 되는 변수를 생성할 때 사용
+- 컴포넌트가 렌더링하는 특정 DOM 요소에 접근할 수 있음
+
+  ```jsx
+  const refObject = useRef();
+
+  function App() {
+    return (
+      <div>
+        <textarea
+          ref={refObject} // 특정 DOM 요소에 접근 → 요소 조작
+          name='bio'
+          value={input.bio}
+          onChange={onChange}
+        />
+      </div>
+    );
+  }
+  ```
+
+<br>
+
+### `useRef` 🆚 `useState`
+
+| `useRef`                               | `useState`                       |
+| -------------------------------------- | -------------------------------- |
+| Reference 객체를 생성                  | `State`를 생성                   |
+| 컴포넌트 내부의 변수로 활용 가능       | 컴포넌트 내부의 변수로 활용 가능 |
+| 어떤 경우에도 리렌더링을 유발하지 않음 | 값이 변경되면 컴포넌트 리렌더링  |
+
+<br>
+
+### 사용 예시
+
+```jsx
+// useRef로 새로운 레퍼런스 객체 생성
+// 레퍼런스 객체 : current 프로퍼티에 현재 보관할 값을 담아둔다.
+const refObj = useRef();
+console.log(refObj); // {current: undefined}
+```
+
+```jsx
+// 초기값 설정
+const refObj = useRef(0);
+console.log(refObj); // {current: 0}
+
+// 레퍼런스 객체의 값 사용하기
+console.log(refObj.current); // 0
+```
+
+```jsx
+// console.log가 한 번만 실행되고,
+// 이후 버튼을 클릭하면 이벤트 핸들러만 실행된다. (console.log 재출력 X)
+const Register = () => {
+  const refObj = useRef(0);
+  console.log("Register 렌더링");
+
+  return (
+    <button
+      onClick={() => {
+        refObj.current++;
+        console.log(refObj.current);
+      }}
+    >
+      ref +1
+    </button>
+  );
+};
+```
+
+<br>
+
+### 활용
+
+- 레퍼런스 객체를 이용해, 현재 `Register` 컴포넌트가 렌더링하고 있는 4개의 입력 폼에
+  사용자가 얼마나 많은 횟수의 변경을 일으켰는지 수정 횟수를 카운트하는 기능을 만들어보자.
+
+  ```jsx
+  const countRef = useRef(0);
+
+  const onChange = (e) => {
+    countRef.current++;
+    console.log(countRef.current);
+
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+  ```
+
+- 새로운 레퍼런스 객체를 생성하고 `Register` 컴포넌트가 렌더링하고 있는 DOM 요소 조작하기
+
+  ```jsx
+  const Register = () => {
+    const [input, setInput] = useState({
+      name: "",
+      birth: "",
+      country: "",
+      bio: "",
+    });
+
+    const countRef = useRef(0);
+    const inputRef = useRef();
+
+    const onChange = (e) => {
+      countRef.current++;
+      console.log(countRef.current);
+
+      setInput({
+        ...input,
+        [e.target.name]: e.target.value,
+      });
+    };
+
+    const onSubmit = () => {
+      if (input.name === "") {
+        // 이름을 입력하는 DOM 요소 포커스
+        inputRef.current.focus();
+      }
+    };
+
+    return (
+      <div>
+        <input
+          ref={inputRef} // 레퍼런스 객체 전달
+          type='text'
+          placeholder='이름'
+          name='name'
+          value={input.name}
+          onChange={onChange}
+        />
+        {input.name}
+        <input
+          type='date'
+          name='birth'
+          value={input.birth}
+          onChange={onChange}
+        />
+        {input.birth}
+        <select id='' name='country' value={input.country} onChange={onChange}>
+          <option value=''></option>
+          <option value='kr'>한국</option>
+          <option value='us'>미국</option>
+          <option value='uk'>영국</option>
+        </select>
+        {input.country}
+        <textarea
+          id=''
+          name='bio'
+          value={input.bio}
+          onChange={onChange}
+        ></textarea>
+        {input.bio}
+
+        <button onClick={onSubmit}>제출</button>
+      </div>
+    );
+  };
+  ```
 
 <br>
 <br>

@@ -14,8 +14,17 @@ const Register = () => {
     bio: "",
   });
 
+  const countRef = useRef(0);
+  const inputRef = useRef();
+
+  // let count = 0;
+
   const onChange = (e) => {
-    // console.log(e.target.name, e.target.value);
+    countRef.current++;
+    console.log(countRef.current);
+
+    // count++;
+    // console.log(count);
 
     setInput({
       ...input,
@@ -23,11 +32,20 @@ const Register = () => {
     });
   };
 
+  const onSubmit = () => {
+    if (input.name === "") {
+      // 이름을 입력하는 DOM 요소 포커스
+      // console.log(inputRef.current);
+      inputRef.current.focus();
+    }
+  };
+
   return (
     <div
       style={{ display: "flex", flexFlow: "column", alignItems: "flex-start" }}
     >
       <input
+        ref={inputRef}
         type='text'
         placeholder='이름'
         name='name'
@@ -51,6 +69,8 @@ const Register = () => {
         onChange={onChange}
       ></textarea>
       {input.bio}
+
+      <button onClick={onSubmit}>제출</button>
     </div>
   );
 };
