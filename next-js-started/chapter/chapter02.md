@@ -2,7 +2,7 @@
 
 - [x] Introduction
 - [x] Defining Routes
-- [ ] Not Found Routes
+- [x] Not Found Routes
 - [ ] SSR vs CSR
 - [ ] Hydration
 - [ ] `use client`
@@ -50,3 +50,16 @@
 - `app/components/avatar.tsx` 파일 생성
   - `page` 파일을 가지고 있지 않기 때문에 `url`이 되지 않는다.
   - 따라서, `app/components` 폴더는 컴포넌트들을 갖고 있는 일반적인 폴더가 된다.
+
+<br>
+
+## ✅ Not Found
+
+> 존재하지 않는 url에 접근 시
+
+- `app/not-found.tsx`
+  ```tsx
+  export default function NotFound() {
+    return <h1>Not Found!</h1>;
+  }
+  ```
