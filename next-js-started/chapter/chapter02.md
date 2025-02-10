@@ -8,7 +8,7 @@
 - [x] `use client`
 - [x] Recap
 - [x] Layouts
-- [ ] Metadata
+- [x] Metadata
 - [ ] Dynamic Routes
 - [ ] Conclusions
 
@@ -50,6 +50,9 @@
 - `app/components/avatar.tsx` 파일 생성
   - `page` 파일을 가지고 있지 않기 때문에 `url`이 되지 않는다.
   - 따라서, `app/components` 폴더는 컴포넌트들을 갖고 있는 일반적인 폴더가 된다.
+- `app/(home)` 폴더 생성
+  - route groups은 폴더 이름을 () 괄호로 묶어주어야 한다.
+  - () 괄호 안에 폴더 이름을 지정해주면 url이 바뀌지 않는다.
 
 <br>
 
@@ -619,3 +622,196 @@ export default function RootLayout({
 - `layout.tsx`는 페이지 간 공통 레이아웃을 정의하는 데 사용된다.
 - 폴더별 `layout.tsx`를 추가하면 중첩 레이아웃을 구성할 수 있다.
 - 불필요한 `layout.tsx` 사용을 최소화하여 성능 최적화하기 (✨중요)
+
+<br>
+
+---
+
+<br>
+
+## ✅ Metadata
+
+> Next.js의 **메타데이터(Metadata)**는 `<head>` 태그에 들어가는 SEO 정보(예: 제목, 설명, OG 태그 등)를 페이지별로 선언하고 자동 병합할 수 있도록 해준다.
+>
+> 기본적으로 각 `layout.tsx` 또는 `page.tsx`에서 설정한 메타데이터가 병합된다.
+
+<br>
+
+### 1. 기본 사용법
+
+- 각 페이지 또는 레이아웃에서 `export const metadata` 선언
+
+#### 📍 페이지별 메타데이터
+
+- `app/page.tsx`
+
+  ```tsx
+  export const metadata = {
+    title: "홈페이지",
+    description: "Next.js 14 기반 홈페이지입니다.",
+  };
+
+  export default function HomePage() {
+    return <h1>홈</h1>;
+  }
+  ```
+
+- **결과**
+
+  ```html
+  <title>홈페이지</title>
+  <meta name="description" content="Next.js 14 기반 홈페이지입니다." />
+  ```
+
+<br>
+
+#### 📍 레이아웃에서 메타데이터 설정
+
+- 메타데이터는 `layout.tsx`에서도 설정할 수 있다.
+- 레이아웃에서 설정한 메타데이터는 하위 페이지의 메타데이터와 병합된다.
+- `app/layout.tsx`
+
+  ```tsx
+  export const metadata = {
+    title: "내 사이트",
+    description: "Next.js 14로 만든 웹사이트",
+  };
+  ```
+
+- **결과**
+
+  기본적으로 모든 페이지의 제목이 "내 사이트"로 설정된다.
+
+<br>
+
+### 2. 메타데이터 병합
+
+- `layout.tsx`에서 정의한 전역 메타데이터가 모든 페이지에 적용된다.
+- 개별 `page.tsx`에서 설정하면 **해당 페이지의 메타데이터로 덮어쓰기(또는 병합)** 된다.
+
+<br>
+
+#### 📍 디렉토리 구조
+
+```
+app/
+ ├── layout.tsx       (전역 메타데이터)
+ ├── page.tsx        (홈 페이지 메타데이터)
+ ├── about/
+ │   ├── page.tsx    (개별 메타데이터)
+
+```
+
+#### 📍 각 파일의 메타데이터
+
+- 전역 레이아웃 (`app/layout.tsx`)
+  ```tsx
+  export const metadata = {
+    title: "내 사이트",
+    description: "Next.js 14로 만든 웹사이트",
+  };
+  ```
+  - 모든 페이지의 기본값으로 사용됨
+- 홈페이지 (`app/page.tsx`)
+  ```tsx
+  export const metadata = {
+    title: "홈페이지",
+  };
+  ```
+  **병합 결과**
+  - `<title>홈페이지</title>` (`layout.tsx`의 `"내 사이트"`를 덮어씀)
+  - `<meta name="description" content="Next.js 14로 만든 웹사이트" />` (`description`은 유지됨)
+- 소개 페이지 (`app/about/page.tsx`)
+  ```tsx
+  export const metadata = {
+    title: "소개 | 내 사이트",
+    description: "이 페이지는 소개 페이지입니다.",
+  };
+  ```
+  **병합 결과**
+  - `<title>소개 | 내 사이트</title>`
+  - `<meta name="description" content="이 페이지는 소개 페이지입니다." />` (덮어씀)
+
+<br>
+
+### 3. 동적 메타데이터 (서버에서 데이터 가져오기)
+
+- 페이지가 로딩될 때 동적으로 메타데이터를 생성할 수 있다.
+- 이를 위해 `generateMetadata` 함수를 사용할 수 있다.
+
+#### 📍 예시 코드
+
+```tsx
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const response = await fetch("https://api.example.com/meta");
+  const data = await response.json();
+
+  return {
+    title: data.title,
+    description: data.description,
+  };
+}
+
+export default function DynamicPage() {
+  return <h1>동적 메타데이터 페이지</h1>;
+}
+```
+
+**특징**
+
+- `generateMetadata`는 서버에서 실행됨
+- API 요청 후 메타데이터를 설정할 수 있음
+- SEO 최적화에 유용함
+
+<br>
+
+### 4. 메타데이터에 추가적인 설정 가능
+
+- Next.js의 metadata는 SEO 및 소셜 미디어 최적화를 위해 다양한 설정을 지원한다.
+
+#### 📍 Open Graph (OG) & Twitter 카드
+
+```tsx
+export const metadata = {
+  title: "내 사이트",
+  description: "Next.js 14로 만든 웹사이트",
+  openGraph: {
+    title: "내 사이트",
+    description: "Next.js 14 기반 홈페이지",
+    url: "https://example.com",
+    siteName: "내 사이트",
+    images: [
+      {
+        url: "https://example.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "내 사이트 이미지",
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "내 사이트",
+    description: "Next.js 14 기반 홈페이지",
+    images: ["https://example.com/twitter-image.jpg"],
+  },
+};
+```
+
+**결과**
+
+- OG 태그: `<meta property="og:title" content="내 사이트" />`
+- Twitter 카드: `<meta name="twitter:card" content="summary_large_image" />`
+
+<br>
+
+### 📌 정리
+
+- `metadata`는 각 페이지별로 설정 가능하며 `layout.tsx`와 병합된다.
+- `generateMetadata`를 사용하면 동적으로 메타데이터 생성 가능하다.
+- SEO 및 SNS 공유 최적화를 위해 Open Graph, Twitter 메타데이터를 지원한다.
+- 불필요한 메타데이터 중복을 최소화하여 최적화하는 것이 중요하다.✨
