@@ -7,7 +7,7 @@
 - [x] Hydration
 - [x] `use client`
 - [x] Recap
-- [ ] Layouts
+- [x] Layouts
 - [ ] Metadata
 - [ ] Dynamic Routes
 - [ ] Conclusions
@@ -486,3 +486,136 @@ export default function Component() {
 - `use client`를 선언하면 해당 파일이 클라이언트 컴포넌트가 된다.
 - Next.js 14에서는 서버 컴포넌트(RSC) 가 기본이므로,
   상태 관리, 이벤트 핸들러가 필요한 경우만 `use client`를 추가하는 것이 좋다. 🚀
+
+<br>
+
+---
+
+<br>
+
+## ✅ Layouts
+
+> Next.js에서 `layout.tsx`는 페이지 구조를 정의하는 공통 레이아웃을 제공하며, 중첩(Nested Layouts)이 가능하다.
+>
+> 즉, 상위 레이아웃을 하위 레이아웃이 감싸면서 페이지별로 다른 UI를 구성할 수 있다.
+
+<br>
+
+### 1. 기본 사용법
+
+- `layout.tsx`는 페이지 간 공통 UI(예: 네비게이션, 사이드바, 푸터 등)를 유지할 때 사용한다.
+
+```tsx
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang='ko'>
+      <body>
+        <header>헤더</header>
+        <main>{children}</main>
+        <footer>푸터</footer>
+      </body>
+    </html>
+  );
+}
+```
+
+- 모든 페이지가 `<header>`, `<footer>`를 공통으로 가짐
+- `{children}` 부분에 각 페이지의 내용이 들어감.
+
+<br>
+
+### 2. 중첩 레이아웃 (Nested Layouts)
+
+- `layout.tsx`는 특정 폴더 내부에 추가하면, 해당 폴더의 모든 페이지에서만 적용된다.
+- 이를 활용하면 페이지 그룹별 다른 레이아웃을 구성할 수 있다.
+- 디렉토리 구조
+  ```
+  app/
+  ├── layout.tsx        ← 전체 페이지에 적용되는 전역 레이아웃
+  ├── page.tsx         ← 홈페이지
+  ├── dashboard/
+  │   ├── layout.tsx    ← `dashboard` 내에서만 적용되는 레이아웃
+  │   ├── page.tsx     ← `/dashboard` 페이지
+  │   ├── settings/
+  │   │   ├── page.tsx  ← `/dashboard/settings` 페이지
+  ```
+- 전역 레이아웃 (`app/layout.tsx`)
+
+  ```tsx
+  export default function RootLayout({
+    children,
+  }: {
+    children: React.ReactNode;
+  }) {
+    return (
+      <html lang='ko'>
+        <body>
+          <header>공통 헤더</header>
+          {children}
+          <footer>공통 푸터</footer>
+        </body>
+      </html>
+    );
+  }
+  ```
+
+- 대시보드 전용 레이아웃 (`app/dashboard/layout.tsx`)
+
+  ```tsx
+  export default function DashboardLayout({
+    children,
+  }: {
+    children: React.ReactNode;
+  }) {
+    return (
+      <section>
+        <nav>대시보드 네비게이션</nav>
+        <div>{children}</div>
+      </section>
+    );
+  }
+  ```
+
+  > `dashboard/layout.tsx`는 `/dashboard` 내부 페이지들에만 적용됨.
+
+- 대시보드 페이지 (`app/dashboard/page.tsx`)
+
+  ```tsx
+  export default function DashboardPage() {
+    return <h1>대시보드 메인</h1>;
+  }
+  ```
+
+<br>
+
+### 3. 레이아웃 적용 결과
+
+| 페이지                | 적용된 레이아웃                               |
+| --------------------- | --------------------------------------------- |
+| `/` (홈)              | `app/layout.tsx`                              |
+| `/dashboard`          | `app/layout.tsx` → `app/dashboard/layout.tsx` |
+| `/dashboard/settings` | `app/layout.tsx` → `app/dashboard/layout.tsx` |
+
+- `layout.tsx`는 상위 레이아웃을 감싼 채로 하위 레이아웃이 중첩됨.
+- `/dashboard/settings` 페이지는 전역 레이아웃 + 대시보드 레이아웃을 함께 가짐.
+
+<br>
+
+### 4. 언제 `layout.tsx`를 사용할까?
+
+- 페이지 그룹별 공통 UI 유지
+- 공통 네비게이션, 사이드바, 푸터 적용
+- 페이지별 다른 레이아웃 구조 필요할 때
+- 접근 권한이 필요한 페이지를 그룹화할 때 (예: 로그인 필요 페이지)
+
+<br>
+
+### 📌 정리
+
+- `layout.tsx`는 페이지 간 공통 레이아웃을 정의하는 데 사용된다.
+- 폴더별 `layout.tsx`를 추가하면 중첩 레이아웃을 구성할 수 있다.
+- 불필요한 `layout.tsx` 사용을 최소화하여 성능 최적화하기 (✨중요)
