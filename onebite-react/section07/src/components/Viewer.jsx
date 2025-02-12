@@ -1,10 +1,10 @@
-function Viewer({ count }) {
+const Viewer = ({ count }) => {
   return (
-    <>
-      <div>현재 카운트:</div>
+    <div>
+      <div>현재 카운트</div>
       <h1>{count}</h1>
-    </>
+    </div>
   );
-}
+};
 
 export default Viewer;
