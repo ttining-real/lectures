@@ -15,3 +15,27 @@ body {
   border: 1px solid rgb(240, 240, 240);
   background-color: rgb(245, 245, 245);
 }
+
+.buttons {
+  display: flex;
+  gap: 4px;
+}
+
+button {
+  flex: 1;
+  padding: 4px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  background-color: rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+  outline-color: #646cff;
+}
