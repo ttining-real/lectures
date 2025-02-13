@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import ContactEditor from "./components/ContactEditor";
 import ContactList from "./components/ContactList";
@@ -23,10 +23,11 @@ const mockData = [
 
 function App() {
   const [contactList, setContactList] = useState(mockData);
+  const idRef = useRef(3);
 
   const onCreate = (name, contact) => {
     const newContact = {
-      id: 3,
+      id: idRef.current++,
       name: name,
       contact: contact,
     };
