@@ -1,0 +1,21 @@
+.Editor {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.5rem;
+}
+
+.Editor input {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 0.5rem;
+}
+
+.Editor button {
+  padding: 0 1rem;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgb(37, 147, 255);
+  cursor: pointer;
+}
