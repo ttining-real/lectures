@@ -12,4 +12,4 @@
 - [x] Create - 투두 추가하기
 - [x] Read - 투두리스트 렌더링하기
 - [x] Update - 투두 수정하기
-- [ ] Delete - 투두 삭제하기
+- [x] Delete - 투두 삭제하기
