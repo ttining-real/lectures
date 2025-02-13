@@ -28,15 +28,17 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
 };
 
 // 고차 컴포넌트 (HOC, Higher-Order Component)
-export default memo(TodoItem, (prevProps, nextProps) => {
-  // 반환값에 따라 Props가 바뀌었는지, 안 바뀌었는지 판단
+// export default memo(TodoItem, (prevProps, nextProps) => {
+//   // 반환값에 따라 Props가 바뀌었는지, 안 바뀌었는지 판단
 
-  // F → Props 바뀜 → 리렌더링 ⭕
-  if (prevProps.id !== nextProps.id) return false;
-  if (prevProps.isDone !== nextProps.isDone) return false;
-  if (prevProps.content !== nextProps.content) return false;
-  if (prevProps.date !== nextProps.date) return false;
+//   // F → Props 바뀜 → 리렌더링 ⭕
+//   if (prevProps.id !== nextProps.id) return false;
+//   if (prevProps.isDone !== nextProps.isDone) return false;
+//   if (prevProps.content !== nextProps.content) return false;
+//   if (prevProps.date !== nextProps.date) return false;
 
-  // T → Props 바뀌지 않음 → 리렌더링 ❌
-  return true;
-});
+//   // T → Props 바뀌지 않음 → 리렌더링 ❌
+//   return true;
+// });
+
+export default memo(TodoItem);
