@@ -34,6 +34,10 @@ function App() {
     setContactList([newContact, ...contactList]);
   };
 
+  const onDelete = (targetId) => {
+    setContactList(contactList.filter((item) => item.id !== targetId));
+  };
+
   return (
     <div className='App'>
       <h2>Contact List</h2>
@@ -41,7 +45,7 @@ function App() {
         <ContactEditor onCreate={onCreate} />
       </section>
       <section>
-        <ContactList contactList={contactList} />
+        <ContactList contactList={contactList} onDelete={onDelete} />
       </section>
     </div>
   );
