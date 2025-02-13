@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useReducer, useRef } from "react";
 import "./App.css";
 import ContactEditor from "./components/ContactEditor";
 import ContactList from "./components/ContactList";
@@ -21,22 +21,38 @@ const mockData = [
   },
 ];
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "CREATE":
+      return [action.data, ...state];
+    case "DELETE":
+      return state.filter((item) => item.id !== action.targetId);
+    default:
+      return state;
+  }
+}
+
 function App() {
-  const [contactList, setContactList] = useState(mockData);
+  const [contactList, dispatch] = useReducer(reducer, mockData);
+
   const idRef = useRef(3);
 
   const onCreate = (name, contact) => {
-    const newContact = {
-      id: idRef.current++,
-      name: name,
-      contact: contact,
-    };
-
-    setContactList([newContact, ...contactList]);
+    dispatch({
+      type: "CREATE",
+      data: {
+        id: idRef.current++,
+        name: name,
+        contact: contact,
+      },
+    });
   };
 
   const onDelete = (targetId) => {
-    setContactList(contactList.filter((item) => item.id !== targetId));
+    dispatch({
+      type: "DELETE",
+      targetId: targetId,
+    });
   };
 
   return (
