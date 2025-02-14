@@ -11,7 +11,7 @@
 - [x] 페이지 라우팅 2️⃣ 라우팅 설정하기
 - [x] 페이지 라우팅 3️⃣ 페이지 이동
 - [x] 페이지 라우팅 4️⃣ 동적 경로
-- [ ] 폰트, 이미지, 레이아웃 설정하기
+- [x] 폰트, 이미지, 레이아웃 설정하기
 - [ ] 공통 컴포넌트 구현하기
 - [ ] 일기 관리 기능 구현하기 1️⃣
 - [ ] 일기 관리 기능 구현하기 2️⃣
@@ -227,6 +227,99 @@ export default App;
 <br>
 
 ## 6. 폰트, 이미지, 레이아웃 설정하기
+
+### 📍 폰트 설정하기
+
+- `public/NanumPenScript-Regular.ttf`
+
+```css
+/* index.css */
+
+@font-face {
+  font-family: "NanumPenScript";
+  src: url("/NanumPenScript-Regular.ttf");
+}
+
+body * {
+  font-family: "NanumPenScript";
+}
+```
+
+<br>
+
+### 📍 이미지 설정하기
+
+#### 📂 `src/assets` : Vite 이미지 최적화 ⭕
+
+```jsx
+// App.jsx
+
+import emotion1 from "./assets/emotion1.png";
+import emotion2 from "./assets/emotion2.png";
+import emotion3 from "./assets/emotion3.png";
+import emotion4 from "./assets/emotion4.png";
+import emotion5 from "./assets/emotion5.png";
+
+function App() {
+  return (
+    <>
+      <div>
+        <img src={emotion1} alt='' />
+        <img src={emotion2} alt='' />
+        <img src={emotion3} alt='' />
+        <img src={emotion4} alt='' />
+        <img src={emotion5} alt='' />
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
+
+<br>
+
+#### 📂 `public` : Vite 이미지 최적화 ❌
+
+```jsx
+// App.jsx
+
+function App() {
+  return (
+    <>
+      <div>
+        <img src={"/emotion1.png"} alt='' />
+        <img src={"/emotion2.png"} alt='' />
+        <img src={"/emotion3.png"} alt='' />
+        <img src={"/emotion4.png"} alt='' />
+        <img src={"/emotion5.png"} alt='' />
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
+
+<br>
+
+#### 🪄 Data URI
+
+- 외부 데이터들을 문자열 형태로 브라우저의 메모리에 캐싱하기 위해 사용되는 포맷
+- 새로 고침 시, 브라우저의 메모리에 캐싱(저장)되어 있기 때문에 이미지 등을 다시 불러오지 않는다. (최적화)
+- `npm run build`, `npm run preview` 명령어 실행 후,
+  - 개발자 도구 > Elements 탭
+    - `src/assets` : 암호문 같은 포맷으로 경로 변경됨 (Data URI)
+    - `public` : 일반적인 경로 (새로 고침 시, 매번 새로 불러옴)
+  - 개발자 도구 > Network 탭
+    - `Img` 필터 클릭, `Preserve log` 체크 → `Size`, `Time` 확인
+
+<br>
+
+#### 🪄 무엇을 쓰는 게 좋을까?
+
+- `src` : 소수의 이미지 사용 시
+- `public` : 1만 개, 2만 개처럼 다수의 이미지 사용 시
 
 <br>
 <br>
