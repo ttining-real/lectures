@@ -9,8 +9,8 @@
 - [x] 프로젝트 소개 및 준비
 - [x] 페이지 라우팅 1️⃣ 소개
 - [x] 페이지 라우팅 2️⃣ 라우팅 설정하기
-- [ ] 페이지 라우팅 3️⃣ 페이지 이동
-- [ ] 페이지 라우팅 4️⃣ 동적 경로
+- [x] 페이지 라우팅 3️⃣ 페이지 이동
+- [x] 페이지 라우팅 4️⃣ 동적 경로
 - [ ] 폰트, 이미지, 레이아웃 설정하기
 - [ ] 공통 컴포넌트 구현하기
 - [ ] 일기 관리 기능 구현하기 1️⃣
@@ -138,10 +138,90 @@ export default App;
 
 ## 4. 페이지 라우팅 3️⃣ 페이지 이동
 
+### 📍 사용하기
+
+#### 1️⃣ `Link`
+
+```jsx
+// App.jsx
+import { Link } from "react-router-dom";
+
+function App() {
+  return (
+    <>
+      <div>
+        <Link to={"/"}>Home</Link>
+        <Link to={"/new"}>New</Link>
+        <Link to={"/diary"}>Diary</Link>
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
+
+- `<Link></Link>` 태그 사용 시, CSR ⭕
+- `<a></a>` 태그 사용 시, CSR ❌
+
+<br>
+
+#### 2️⃣ `useNavigate`
+
+```jsx
+// App.jsx
+
+import { useNavigate } from "react-router-dom";
+
+function App() {
+  const nav = useNavigate();
+
+  const onClickButton = () => {
+    nav("/new");
+  };
+
+  return (
+    <>
+      <button onClick={onClickButton}>New 페이지로 이동</button>
+    </>
+  );
+}
+
+export default App;
+```
+
 <br>
 <br>
 
 ## 5. 페이지 라우팅 4️⃣ 동적 경로
+
+### 📍 동적 경로란?
+
+- 동적인 데이터를 포함하고 있는 경로
+- 예시
+  - `~product/1` : 1번 상품 페이지
+  - `~product/2` : 2번 상품 페이지
+  - `~product/3` : 3번 상품 페이지
+
+<br>
+
+#### 🪄 URL Parameter
+
+- `/` 뒤에 아이템의 `id`를 명시
+- 아이템의 id 등 변경되지 않는 값을 주소로 명시하기 위해 사용
+- 예시
+  - `~/product/1`
+  - `~/product/2`
+  - `~/product/3`
+
+<br>
+
+#### 🪄 Query String
+
+- `?` 뒤에 변수명과 값 명시
+- 검색어 등의 자주 변경되는 값을 주소로 명시하기 위해 사용
+- 예시
+  - `~/search?q=검색어`
 
 <br>
 <br>
