@@ -359,6 +359,7 @@ export default App;
 - [x] 새로운 일기 추가
 - [x] 기존 일기 수정
 - [x] 기존 일기 삭제
+- [x] context 데이터 공급
 
 <br>
 <br>

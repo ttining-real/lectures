@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useReducer, useRef } from "react";
+import { createContext, useReducer, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Diary from "./pages/Diary";
@@ -38,6 +38,9 @@ function reducer(state, action) {
       return state;
   }
 }
+
+const DiaryStateContext = createContext();
+const DiaryDispatchContext = createContext();
 
 function App() {
   // 일기를 관리할 새로운 State
@@ -103,13 +106,23 @@ function App() {
       >
         일기 삭제 테스트
       </button>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/new' element={<New />} />
-        <Route path='/diary/:id' element={<Diary />} />
-        <Route path='/edit/:id' element={<Edit />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <DiaryStateContext.Provider value={data}>
+        <DiaryDispatchContext.Provider
+          value={{
+            onCreate,
+            onUpdate,
+            onDelete,
+          }}
+        >
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/new' element={<New />} />
+            <Route path='/diary/:id' element={<Diary />} />
+            <Route path='/edit/:id' element={<Edit />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </DiaryDispatchContext.Provider>
+      </DiaryStateContext.Provider>
     </>
   );
 }
