@@ -58,16 +58,18 @@ function App() {
     });
   }, []);
 
+  const memoizedDispatch = useMemo(() => ({ onCreate, onDelete }), []);
+
   return (
     <div className='App'>
       <ContactStateContext.Provider value={contactList}>
-        <ContactDispatchContext.Provider value={{ onCreate, onDelete }}>
+        <ContactDispatchContext.Provider value={memoizedDispatch}>
           <h2>Contact List</h2>
           <section>
-            <ContactEditor onCreate={onCreate} />
+            <ContactEditor />
           </section>
           <section>
-            <ContactList contactList={contactList} onDelete={onDelete} />
+            <ContactList />
           </section>
         </ContactDispatchContext.Provider>
       </ContactStateContext.Provider>
