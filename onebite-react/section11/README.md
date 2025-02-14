@@ -8,7 +8,7 @@
 
 - [x] Context란
 - [x] Context 사용하기
-- [ ] Context 분리하기
+- [x] Context 분리하기
 
 <br>
 <br>
