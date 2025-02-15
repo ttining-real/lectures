@@ -16,8 +16,8 @@
 - [x] 일기 관리 기능 구현하기 1️⃣
 - [x] 일기 관리 기능 구현하기 2️⃣
 - [x] Home 페이지 구현하기 1️⃣ UI
-- [ ] Home 페이지 구현하기 2️⃣ 기능
-- [ ] Home 페이지 구현하기 3️⃣ 회고
+- [x] Home 페이지 구현하기 2️⃣ 기능
+- [x] Home 페이지 구현하기 3️⃣ 회고
 - [ ] New 페이지 구현하기 1️⃣ UI
 - [ ] New 페이지 구현하기 2️⃣ 기능
 - [ ] Edit 페이지 구현하기
@@ -374,6 +374,13 @@ export default App;
 <br>
 
 ## 11. Home 페이지 구현하기 2️⃣ 기능
+
+- [Sort 메서드 비교 함수 관련 아티클](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+- [x] mockData 수정 및 데이터 렌더링
+- [x] 이전, 다음 버튼
+- [x] 이미지, 내용 클릭 시 `/diary/${id}` 로 이동
+- [x] 수정하기 버튼 클릭 시 `/edit/${id}` 로 이동
+- [x] 최신순, 오래된 순 정렬
 
 <br>
 <br>
