@@ -15,7 +15,7 @@
 - [x] 공통 컴포넌트 구현하기
 - [x] 일기 관리 기능 구현하기 1️⃣
 - [x] 일기 관리 기능 구현하기 2️⃣
-- [ ] Home 페이지 구현하기 1️⃣ UI
+- [x] Home 페이지 구현하기 1️⃣ UI
 - [ ] Home 페이지 구현하기 2️⃣ 기능
 - [ ] Home 페이지 구현하기 3️⃣ 회고
 - [ ] New 페이지 구현하기 1️⃣ UI
@@ -365,6 +365,10 @@ export default App;
 <br>
 
 ## 10. Home 페이지 구현하기 1️⃣ UI
+
+- [x] `Home.jsx`
+- [x] `DiaryList.jsx`
+- [x] `DiaryItem.jsx`
 
 <br>
 <br>
