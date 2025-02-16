@@ -19,7 +19,7 @@
 - [x] Home 페이지 구현하기 2️⃣ 기능
 - [x] Home 페이지 구현하기 3️⃣ 회고
 - [x] New 페이지 구현하기 1️⃣ UI
-- [ ] New 페이지 구현하기 2️⃣ 기능
+- [x] New 페이지 구현하기 2️⃣ 기능
 - [ ] Edit 페이지 구현하기
 - [ ] Diary 페이지 구현하기
 - [ ] 웹 스토리지 이용하기
@@ -400,6 +400,10 @@ export default App;
 <br>
 
 ## 14. New 페이지 구현하기 2️⃣ 기능
+
+- [x] New 페이지 내 날짜, 감정, 일기 작성 (`getStringedDate`, `onChangeInput`)
+- [x] 작성 완료 버튼 클릭 시 `onSubmit`
+- [x] 취소하기 버튼 클릭 시 `useNavigate`
 
 <br>
 <br>
