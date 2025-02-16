@@ -18,7 +18,7 @@
 - [x] Home 페이지 구현하기 1️⃣ UI
 - [x] Home 페이지 구현하기 2️⃣ 기능
 - [x] Home 페이지 구현하기 3️⃣ 회고
-- [ ] New 페이지 구현하기 1️⃣ UI
+- [x] New 페이지 구현하기 1️⃣ UI
 - [ ] New 페이지 구현하기 2️⃣ 기능
 - [ ] Edit 페이지 구현하기
 - [ ] Diary 페이지 구현하기
@@ -366,9 +366,9 @@ export default App;
 
 ## 10. Home 페이지 구현하기 1️⃣ UI
 
-- [x] `Home.jsx`
-- [x] `DiaryList.jsx`
-- [x] `DiaryItem.jsx`
+- [x] `pages/Home.jsx`
+- [x] `components/DiaryList.jsx`
+- [x] `components/DiaryItem.jsx`
 
 <br>
 <br>
@@ -391,6 +391,10 @@ export default App;
 <br>
 
 ## 13. New 페이지 구현하기 1️⃣ UI
+
+- [x] `pages/New.jsx`
+- [x] `components/Editor.jsx` 컴포넌트 추가
+- [x] `components/EditorItem.jsx` 컴포넌트 추가
 
 <br>
 <br>
