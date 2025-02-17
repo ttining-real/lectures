@@ -1,6 +1,6 @@
 import "./Editor.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "./Button";
@@ -45,7 +45,7 @@ const getStringedDate = (targetDate) => {
   return `${year}-${month}-${date}`;
 };
 
-const Editor = ({ onSubmit }) => {
+const Editor = ({ initData, onSubmit }) => {
   const [input, setInput] = useState({
     createdDate: new Date(),
     emotionId: 3,
@@ -53,6 +53,15 @@ const Editor = ({ onSubmit }) => {
   });
 
   const nav = useNavigate();
+
+  useEffect(() => {
+    if (initData) {
+      setInput({
+        ...initData,
+        createdDate: new Date(Number(initData.createdDate)),
+      });
+    }
+  }, [initData]);
 
   const onChangeInput = (e) => {
     console.log(e.target.name);
@@ -81,9 +90,9 @@ const Editor = ({ onSubmit }) => {
         <h4>오늘의 날짜</h4>
         <input
           name='createdDate'
-          type='date'
-          value={getStringedDate(input.createdDate)}
           onChange={onChangeInput}
+          value={getStringedDate(input.createdDate)}
+          type='date'
         />
       </section>
       <section className='emotion_section'>
