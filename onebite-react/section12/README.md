@@ -419,6 +419,9 @@ export default App;
 
 ## 16. Diary 페이지 구현하기
 
+- [x] `components/Viewer.jsx` 컴포넌트 추가
+- [x] 커스텀 훅 (`useDiary`) 생성
+
 <br>
 <br>
 
