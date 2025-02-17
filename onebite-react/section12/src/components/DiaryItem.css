@@ -48,5 +48,8 @@
 }
 
 .DiaryItem .button_section {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   min-width: 70px;
 }
