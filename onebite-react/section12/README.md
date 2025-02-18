@@ -24,7 +24,7 @@
 - [x] Diary 페이지 구현하기
 - [x] 웹 스토리지 이용하기
 - [x] 배포 준비하기
-- [ ] 배포하기
+- [x] 배포하기
 
 <br>
 <br>
@@ -572,3 +572,18 @@ npm run build
 ## 19. 배포하기
 
 > 리액트 앱을 배포하는 방법
+>
+> [배포 완료!](emotion-diary-taupe-five.vercel.app)
+
+<br>
+
+```bash
+# vercel 설치
+npm install -g vercel
+
+# 로그인
+vercel login
+
+# 배포하기
+vercel
+```
