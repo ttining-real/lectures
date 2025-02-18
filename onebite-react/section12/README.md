@@ -22,7 +22,7 @@
 - [x] New 페이지 구현하기 2️⃣ 기능
 - [x] Edit 페이지 구현하기
 - [x] Diary 페이지 구현하기
-- [ ] 웹 스토리지 이용하기
+- [x] 웹 스토리지 이용하기
 - [ ] 배포 준비하기
 - [ ] 배포하기
 
@@ -427,12 +427,116 @@ export default App;
 
 ## 17. 웹 스토리지 이용하기
 
+- [x] 웹 스토리지에 일기 내용 저장, mockData 제거
+- [x] `reducer` 함수 내 `INIT` 추가
+- [x] `idRef` 수정
+- [x] `dispatch`의 `INIT`이 실행되기 전, `loading` 상태 추가
+
+<br>
+
+> **웹 스토리지 (Web Storage)**
+>
+> - 데이터를 브라우저에 보관하는 방법
+> - 웹 브라우저 내장 DB
+
+<br>
+
+### 📍 웹 스토리지란?
+
+- 웹 브라우저에 기본적으로 내장되어 있는 데이터베이스
+- 별도의 프로그램 설치 필요 ❌, 라이브러리 설치 필요 ❌
+- 자바스크립트 내장 함수만으로 접근 가능
+- 예시
+  - 값 저장하기 : `localStorage.setItem(key, value)`
+  - 값 꺼내오기 : `localStorage.getItem(key)`
+- `SessionStorage`와 `LocalStorage`로 나뉜다.
+
+<br>
+
+#### 🗃️ SessionStorage
+
+- **브라우저 탭** 별로 데이터 보관
+- 탭이 종료되기 전에는 데이터 유지 (새로 고침)
+- 탭이 종료되거나 꺼지면 데이터 삭제
+- 예시
+  - 값 저장하기 : `sessionStorage.setItem(key, value)`
+  - 값 꺼내오기 : `sessionStorage.getItem(key)`
+
+<br>
+
+#### 🗃️ LocalStorage
+
+- **사이트 주소** 별로 데이터 보관
+- 사용자가 직접 삭제하기 전까지 데이터 보관
+- 예시
+  - 값 저장하기 : `localStorage.setItem(key, value)`
+  - 값 꺼내오기 : `localStorage.getItem(key)`
+
+<br>
+
+#### ⚠️ 주의
+
+- `key`값은 원시 타입의 값만 넣을 수 있다.
+
+<br>
+
+#### 👀 사용 예시
+
+```jsx
+// localStorage에 값 넣기
+localStorage.setItem("test", "hello");
+localStorage.setItem("person", { name: "ttining" });
+localStorage.setItem("person", JSON.stringify({ name: "ttining" }));
+
+// localStorage에 있는 값 꺼내기
+console.log(localStorage.getItem("test")); // hello
+console.log(localStorage.getItem("person")); // {"name": "ttining"} : 문자열로 출력됨 (객체로 변환해야 함)
+console.log(JSON.parse(localStorage.getItem("person"))); // {name: "ttining"}
+```
+
+##### ✅ 결과
+
+- DevTools ➡️ Application ➡️ Local storage ➡️ 주소
+
+  | `key`  | `value`             |
+  | ------ | ------------------- |
+  | test   | hello               |
+  | person | object Object       |
+  | person | {"name": "ttining"} |
+
+- DevTools ➡️ Console
+  ```
+  hello
+  {"name": "ttining"}
+  {name: 'ttining'}
+  ```
+
+<br>
+
+#### 👀 로컬 스토리지의 값 제거하기
+
+```jsx
+localStorage.removeItem("test");
+```
+
+##### ✅ 결과
+
+- DevTools ➡️ Application ➡️ Local storage ➡️ 주소
+
+  | `key`  | `value`             |
+  | ------ | ------------------- |
+  | person | {"name": "ttining"} |
+
 <br>
 <br>
 
 ## 18. 배포 준비하기
 
+> 프로젝트를 배포하기 전, 타이틀, Favicon, OG 설정 진행
+
 <br>
 <br>
 
 ## 19. 배포하기
+
+> 리액트 앱을 배포하는 방법
