@@ -23,7 +23,7 @@
 - [x] Edit 페이지 구현하기
 - [x] Diary 페이지 구현하기
 - [x] 웹 스토리지 이용하기
-- [ ] 배포 준비하기
+- [x] 배포 준비하기
 - [ ] 배포하기
 
 <br>
@@ -533,6 +533,38 @@ localStorage.removeItem("test");
 ## 18. 배포 준비하기
 
 > 프로젝트를 배포하기 전, 타이틀, Favicon, OG 설정 진행
+
+- [x] 페이지 타이틀 설정하기
+- [x] Favicon 설정하기
+- [x] 오픈 그래프 태그 설정하기
+- [ ] 프로젝트 빌드 (Build)
+
+<br>
+
+> **오픈 그래프(Open Graph)**
+>
+> - 웹 사이트의 링크를 공유할 때 썸네일, 제목 등의 정보를 노출하는 것
+
+<br>
+
+### 📍 오픈 그래프 태그
+
+```html
+<!-- 프로젝트 타이틀 -->
+<meta property="og:title" content="감정 일기장" />
+<!-- 프로젝트 설명 -->
+<meta property="og:description" content="나만의 작은 감정 일기장" />
+<!-- 프로젝트 썸네일 이미지 -->
+<meta property="og:image" content="/thumbnail.png" />
+```
+
+<br>
+
+### 📍 프로젝트 빌드
+
+```bash
+npm run build
+```
 
 <br>
 <br>
