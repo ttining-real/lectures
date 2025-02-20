@@ -8,7 +8,7 @@
 - [x] 원시 타입과 리터럴 타입
 - [x] 배열과 튜플
 - [x] 객체
-- [ ] 타입 별칭과 인덱스 시그니처
+- [x] 타입 별칭과 인덱스 시그니처
 - [ ] `Enum` 타입
 - [ ] `Any`와 `Unknown` 타입
 - [ ] `Void`와 `Never` 타입
@@ -282,6 +282,104 @@ let config: { readonly apiKey: string } = {
 <br>
 
 # 타입 별칭과 인덱스 시그니처
+
+## 타입 별칭 (Type Alias)
+
+- 타입을 마치 변수처럼 정의하도록 도와주는 문법
+
+```typescript
+// 중복 코드가 길어질 경우
+type User = {
+  id: number;
+  name: string;
+  nickname: string;
+  birth: string;
+  bio: string;
+  location: string;
+};
+
+let user: User = {
+  id: 1,
+  name: "띠닝",
+  nickname: "ttining",
+  birth: "1999.99.99",
+  bio: "안녕하세요",
+  location: "서울",
+};
+
+let user2: User = {
+  id: 2,
+  name: "앙걸",
+  nickname: "mygirl",
+  birth: "1999.99.99",
+  bio: "안녕하세요",
+  location: "서울",
+};
+```
+
+<br>
+
+### ⚠️ 주의사항
+
+- 동일한 스코프에 중복된 이름의 타입 별칭을 선언할 경우, 오류가 발생한다.
+
+<br>
+
+## 인덱스 시그니처
+
+- 객체 타입의 정의를 더 유연하게 하도록 도와주는 문법
+
+<br>
+
+```typescript
+// 인덱스 시그니처를 사용하지 않는다면,,
+type CountryCodes = {
+  Korea: string;
+  UnitedState: string;
+  UnitedKingdom: string;
+  // ...
+};
+
+let countryCodes = {
+  Korea: "ko",
+  UnitedState: "us",
+  UnitedKingdom: "uk",
+  // ...
+};
+```
+
+```typescript
+// 인덱스 시그니처 사용
+type CountryCodes = {
+  [key: string]: string;
+};
+
+let countryCodes: CountryCodes = {
+  Korea: "ko",
+  UnitedState: "us",
+  UnitedKingdom: "uk",
+};
+
+type countryNumberCodes = {
+  [key: string]: number;
+};
+
+let countryNumberCodes = {
+  Korea: 410,
+  UnitedState: 840,
+  UnitedKingdom: 826,
+};
+```
+
+```typescript
+// 규칙을 위반하지 않는다면 모든 객체를 허용하는 타입
+type countryNumberCodes = {
+  [key: string]: number;
+};
+
+let countryNumberCodes: countryNumberCodes = {}; // 오류가 발생하지 않는다.
+// 아무런 프로퍼티가 없으므로, 규칙을 위반할 프로퍼티가 없다.
+```
 
 <br>
 <br>
