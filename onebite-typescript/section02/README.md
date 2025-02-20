@@ -6,8 +6,8 @@
 
 - [x] 기본 타입
 - [x] 원시 타입과 리터럴 타입
-- [ ] 배열과 튜플
-- [ ] 객체
+- [x] 배열과 튜플
+- [x] 객체
 - [ ] 타입 별칭과 인덱스 시그니처
 - [ ] `Enum` 타입
 - [ ] `Any`와 `Unknown` 타입
@@ -210,6 +210,73 @@ const users: [string, number][] = [
 <br>
 
 # 객체
+
+```typescript
+// * object
+// 'object의 타입은 객체다.' 라는 정보 밖에 없음
+// => 객체의 프로퍼티나 메서드를 알 수 없음
+// let user: object = {
+//   id: 1,
+//   name: "띠닝",
+// };
+
+// user.id; // 오류 발생 : object 타입에 id라는 프로퍼티가 없다.
+
+// 객체 리터럴 타입
+// {} 중괄호를 사용해 프로퍼티의 타입을 모두 정의해준다.
+let user: { id: number; name: string } = {
+  id: 1,
+  name: "띠닝",
+};
+
+user.id; // 오류 없이 수행됨
+```
+
+<br>
+
+### TypeScript에서 객체의 Type을 정의할 때
+
+- `Object` 같은 단순한 이름으로 Type을 정의하는 것이 아니라,
+  `Property`나 `Method`가 어떻게 생겼는지, 이 객체의 **구조를 기준으로 Type을 정의**한다.
+- TypeScript의 이러한 특징을 **구조적 타입 시스템** 이라고 부른다.
+  - 프로퍼티를 기준으로 타입을 결정하는 시스템으로, **프로퍼티 기반 타입 시스템(Property Based Type System)** 이라고도 부른다.
+
+<br>
+
+> **명목적 타입 시스템**
+>
+> 이름을 기준으로 타입을 정의하는 것
+>
+> 예시: C언어, Java
+
+<br>
+
+### 선택적 프로퍼티
+
+```typescript
+// id가 있어도 되고, 없어도 될 경우
+let user2: { id?: number; name: string } = {
+  id: 1,
+  name: "띠닝",
+};
+
+user2 = {
+  name: "홍길동",
+};
+```
+
+<br>
+
+### 읽기 전용 프로퍼티
+
+```typescript
+// 프로퍼티 값의 변경을 막는 방법
+let config: { readonly apiKey: string } = {
+  apiKey: "MY API KEY",
+};
+
+// config.apiKey = "hacked"; // 값을 변경할 수 없다.
+```
 
 <br>
 <br>
