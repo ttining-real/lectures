@@ -9,7 +9,7 @@
 - [x] 배열과 튜플
 - [x] 객체
 - [x] 타입 별칭과 인덱스 시그니처
-- [ ] `Enum` 타입
+- [x] `Enum` 타입
 - [ ] `Any`와 `Unknown` 타입
 - [ ] `Void`와 `Never` 타입
 
@@ -385,6 +385,44 @@ let countryNumberCodes: countryNumberCodes = {}; // 오류가 발생하지 않�
 <br>
 
 # `Enum` 타입
+
+- 열거형 타입
+- 여러가지 값들에 각각 이름을 부여해 열거해두고 사용하는 타입
+- `Enum`은 컴파일 후에도 사라지지 않는다. (자바스크립트의 객체로 변환된다.)
+
+<br>
+
+### 숫자형 `Enum`
+
+- 각 멤버의 값으로 숫자가 할당되는 것
+
+```typescript
+enum Role {
+  ADMIN = 0, // 자동으로 0부터 할당되기 때문에 생략 가능
+  USER = 1, // 만약 첫 번째 항목을 10으로 설정했다면 자동으로 11번이 할당됨 (중간부터 설정하는 것도 가능)
+  GUEST = 2,
+}
+
+const user1 = {
+  name: "띠닝",
+  role: Role.ADMIN, // 0번 - 관리자
+};
+const user2 = {
+  name: "홍길동",
+  role: Role.USER, // 1번 - 일반 유저
+};
+const user3 = {
+  name: "아무개",
+  role: Role.GUEST, // 2번 - 게스트
+};
+
+console.log(user1, user2, user3);
+// { name: '띠닝', role: 0 } { name: '홍길동', role: 1 } { name: '아무개', role: 2 }
+```
+
+<br>
+
+### 문자형 `Enum`
 
 <br>
 <br>
