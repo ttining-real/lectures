@@ -429,6 +429,57 @@ console.log(user1, user2, user3);
 
 # `Any`와 `Unknown` 타입
 
+### `Any` 타입
+
+- 특정 변수의 타입을 확실히 모를 때 사용하는 타입
+
+```typescript
+let anyVar: any = 10;
+anyVar = "hello";
+anyVar = true;
+anyVar = {};
+anyVar = () => {};
+
+anyVar.toUpperCase();
+anyVar.toFixed;
+
+let num: number = 10;
+num = anyVar;
+```
+
+### `Unknown` 타입
+
+```typescript
+let unknownVar: unknown;
+
+unknownVar = "";
+unknownVar = 1;
+unknownVar = () => {};
+
+num = unknownVar; // any 타입과 다르게 모든 타입의 변수에 할당할 수 없다.
+
+unknownVar.toUpperCase(); // any 타입과 다르게 메서드를 사용할 수 없다.
+```
+
+#### `any` 타입과의 차이점
+
+1. 모든 타입의 변수에 할당할 수 없다.
+2. 메서드를 사용할 수 없다.
+3. 덧셈, 뺄셈, 곱셈, 나눗셈 등의 연산을 사용할 수 없다.
+
+<br>
+
+#### `Unknown` 타입의 값을 활용하는 방법
+
+- 조건문과 `typeof` 연산자를 사용해 현재 변수의 타입을 확실히 밝혀주었을 때, 언노운 타입의 변수를 일정 타입으로 정제해서 사용할 수 있다.
+
+```typescript
+// 타입 정제 또는 타입 좁히기
+if (typeof unknownVar === "number") {
+  num = unknownVar;
+}
+```
+
 <br>
 <br>
 
