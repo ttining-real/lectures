@@ -10,8 +10,8 @@
 - [x] 객체
 - [x] 타입 별칭과 인덱스 시그니처
 - [x] `Enum` 타입
-- [ ] `Any`와 `Unknown` 타입
-- [ ] `Void`와 `Never` 타입
+- [x] `Any`와 `Unknown` 타입
+- [x] `Void`와 `Never` 타입
 
 <br>
 
@@ -484,3 +484,53 @@ if (typeof unknownVar === "number") {
 <br>
 
 # `Void`와 `Never` 타입
+
+## `void`
+
+> 공허 ➡️ 아무것도 없음을 의미하는 타입
+
+<br>
+
+```typescript
+// 문자열을 반환하는 함수
+function func1(): string {
+  return "hello";
+}
+
+// 아무 값도 반환하지 않는 함수
+function func2(): void {
+  console.log("hello");
+}
+
+let a: void;
+
+a = 1; // Type 'number' id not assignable to type 'void'
+a = "hello"; // Type 'string' id not assignable to type 'void'
+a = {}; // Type '{}' id not assignable to type 'void'
+a = undefined;
+a = null; // * Type 'null' id not assignable to type 'void'
+```
+
+- `*` : `tsconfig.json` 파일 내에 `"strictNullChecks": false`를 설정하면 `null`을 할당할 수 있게 된다.
+
+<br>
+
+## `never`
+
+> 존재하지 않는 ➡️ 불가능한 타입
+>
+> 모순을 의미하는 타입
+
+<br>
+
+```typescript
+// 무한 루프 (반환값이 없기 때문에 정상적으로 종료되지 않는다.)
+function func3(): never {
+  while (true) {}
+}
+
+// 실행 시 프로그램이 중지된다.
+function func4(): never {
+  throw new Error();
+}
+```
