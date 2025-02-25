@@ -9,7 +9,7 @@
 - [x] 타입 계층도와 함께 기본 타입 살펴보기
 - [x] 객체 타입의 호환성
 - [x] 대수 타입
-- [ ] 타입 추론
+- [x] 타입 추론
 - [ ] 타입 단언
 - [ ] 타입 좁히기
 - [ ] 서로소 유니온 타입
@@ -284,6 +284,85 @@ let intersection1: Intersection = {
 <br>
 
 # 타입 추론
+
+- 타입스크립트가 타입을 추론하는 기준 : **변수의 초기값**
+  - 추론할 정보가 있을 경우, 추론 ⭕
+    추론할 정보가 없을 경우, 추론 ❌
+
+```typescript
+let a = 10; // number 타입으로 추론
+let b = "hello"; // string 타입으로 추론
+let c = {
+  id: 1,
+  name: "ttining",
+  profile: {
+    nickname: "ttining._.",
+  },
+  urls: ["https://github.com/ttining-real"],
+};
+
+let { id, name, profile } = c;
+
+let [one, two, three] = [1, "hello", true];
+
+function func(message = "hello") {
+  return "hello";
+}
+```
+
+<br>
+
+### `Any` 타입의 진화
+
+- 타입이 변신하듯이 계속 바뀌는 상황
+- 암묵적으로 추론된 `any` 타입은 진화한다. (권장 ❌)
+- 명시적으로 `any` 타입을 정의하는 것과 동작이 다르다.
+
+<br>
+
+### `let` 키워드
+
+```typescript
+// 초기값이 없을 경우 (암묵적 Any 타입)
+let d; // 암묵적 any 타입으로 추론
+d = 10; // any → number 타입으로 진화
+d.toFixed();
+d.toUpperCase(); // Property 'toUpperCase' does not exist on type 'number'.
+
+d = "hello"; // number → string 타입으로 진화
+d.toUpperCase();
+d.toFixed(); // Property 'toFixed' does not exist on type 'string'. Did you mean 'fixed'?
+```
+
+<br>
+
+### `const` 키워드
+
+```typescript
+// 상수의 초기값
+const num = 10; // number literal 타입으로 추론
+const str = "hello"; // string literal 타입으로 추론
+```
+
+<br>
+
+### 배열
+
+- 초기값을 배열처럼 다양한 타입의 값을 담을 수 있는 값으로 할당하면,
+  타입스크립트가 모든 배열 요소들의 타입을 비교해서 최적의 공통 타입으로 타입을 추론한다.
+
+```typescript
+// 초기값이 배열인 경우
+let arr = [1, "string"]; // (string | number)[] Union 타입으로 추론
+```
+
+<br>
+
+### 타입 넓히기
+
+- 프로그래머가 변수를 좀 더 범용적으로 사용할 수 있도록 조금 더 넓은 타입으로 추론해주는 과정
+  - `let d = 10;` 과 `const d = 10;` 의 타입이 다름
+  - `const`로 선언된 상수가 아니라면, 타입 넓히기를 통해 타입을 추론한다.
 
 <br>
 <br>
