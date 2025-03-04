@@ -5,7 +5,7 @@
 ### 🎯 목차
 
 - [x] 함수 타입
-- [ ] 함수 타입 표현식과 호출 시그니처
+- [x] 함수 타입 표현식과 호출 시그니처
 - [ ] 함수 타입의 호환성
 - [ ] 함수 오버로딩
 - [ ] 사용자 정의 타입 가드
@@ -150,6 +150,64 @@ getSum(1, 2, 3, 4, 5); // 15
 <br>
 
 # 함수 타입 표현식과 호출 시그니처
+
+### 함수 타입 표현식
+
+함수 타입 표현식을 쓰지 않는다면?
+
+```typescript
+const add = (a: number, b: number): number => a + b;
+```
+
+<br>
+
+함수 타입 표현식을 사용하면, 타입 별칭을 통해 함수의 타입을 정의할 수 있다.
+
+```typescript
+type Add = (a: number, b: number) => number;
+
+const add: Add = (a, b) => a + b;
+```
+
+<br>
+
+사칙연산 함수와 같이 비슷한 형식의 함수를 여러 개 만들어야 할 때,
+함수 타입 표현식을 사용하면 유용하다.
+
+```typescript
+type Operation = (a: number, b: number) => number;
+
+const add: Operation = (a, b) => a + b;
+const sub: Operation = (a, b) => a - b;
+const multiply: Operation = (a, b) => a * b;
+const divide: Operation = (a, b) => a / b;
+```
+
+<br>
+
+타입 별칭 없이, 표현식만으로도 타입을 정의할 수 있다.
+
+```typescript
+const add: (a: number, b: number) => number = (a, b) => a + b;
+const sub: (a: number, b: number) => number = (a, b) => a - b;
+const multiply: (a: number, b: number) => number = (a, b) => a * b;
+const divide: (a: number, b: number) => number = (a, b) => a / b;
+```
+
+<br>
+
+### 호출 시그니처 (콜 시그니처)
+
+```typescript
+type Operation2 = {
+  (a: number, b: number): number;
+};
+
+const add2: Operation2 = (a, b) => a + b;
+const sub2: Operation2 = (a, b) => a - b;
+const multiply2: Operation2 = (a, b) => a * b;
+const divide2: Operation2 = (a, b) => a / b;
+```
 
 <br>
 <br>
