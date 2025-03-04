@@ -12,7 +12,7 @@
 - [x] 타입 추론
 - [x] 타입 단언
 - [x] 타입 좁히기
-- [ ] 서로소 유니온 타입
+- [x] 서로소 유니온 타입
 
 <br>
 
@@ -488,6 +488,110 @@ function func(value: number | string | Date | null | Person) {
 <br>
 
 # 서로소 유니온 타입
+
+- 교집합이 없는 타입들로만 만든 유니온 타입을 말한다.
+- `tag`를 붙여 객체를 완벽히 구별해내는 기능을 하기 때문에 **태그드 유니온 타입** 이라고 부르기도 한다.
+
+```typescript
+type Admin = {
+  tag: "ADMIN";
+  name: string;
+  kickCount: number;
+};
+
+type Member = {
+  tag: "MEMBER";
+  name: string;
+  point: number;
+};
+
+type Guest = {
+  tag: "GUEST";
+  name: string;
+  visitCount: number;
+};
+
+type User = Admin | Member | Guest; // 서로소 유니온 타입
+```
+
+<br>
+
+조건문에 따라 다른 콘솔을 출력해보자.
+
+- Admin - `{name}`님 현재까지 `{kickCount}`명 강퇴했습니다.
+- Member - `{name}`님 현재까지 `{point}`포인트를 모았습니다.
+- Guest - `{name}`님 현재까지 `{visitCount}`번 방문하셨습니다.
+
+<br>
+
+#### 1️⃣ 직관적이지 않음
+
+- `tag` 프로퍼티가 없을 경우
+
+```typescript
+function login(user: User) {
+  if ("kickCount" in user) {
+    // admin 타입
+    // user;
+    console.log(`${user.name}님, 현재까지 ${user.kickCount}명 강퇴했습니다.`);
+  } else if ("point" in user) {
+    // member 타입
+    // user;
+    console.log(`${user.name}님, 현재까지 ${user.point}포인트를 모았습니다.`);
+  } else {
+    // guest 타입
+    // user;
+    console.log(
+      `${user.name}님, 현재까지 ${user.visitCount}번 방문하셨습니다.`
+    );
+  }
+}
+```
+
+<br>
+
+#### 2️⃣ 직관적
+
+- `tag` 프로퍼티 추가 (서로소 집합의 관계로 바뀐다.)
+
+```typescript
+function login(user: User) {
+  if (user.tag === "ADMIN") {
+    console.log(`${user.name}님, 현재까지 ${user.kickCount}명 강퇴했습니다.`);
+  } else if (user.tag === "MEMBER") {
+    console.log(`${user.name}님, 현재까지 ${user.point}포인트를 모았습니다.`);
+  } else {
+    console.log(
+      `${user.name}님, 현재까지 ${user.visitCount}번 방문하셨습니다.`
+    );
+  }
+}
+```
+
+<br>
+
+#### 3️⃣ 훨씬 더 직관적
+
+```typescript
+function login(user: User) {
+  switch (user.tag) {
+    case "ADMIN": {
+      console.log(`${user.name}님, 현재까지 ${user.kickCount}명 강퇴했습니다.`);
+      break;
+    }
+    case "MEMBER": {
+      console.log(`${user.name}님, 현재까지 ${user.point}포인트를 모았습니다.`);
+      break;
+    }
+    case "GUEST": {
+      console.log(
+        `${user.name}님, 현재까지 ${user.visitCount}번 방문하셨습니다.`
+      );
+      break;
+    }
+  }
+}
+```
 
 <br>
 <br>
