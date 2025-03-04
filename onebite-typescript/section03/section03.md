@@ -10,7 +10,7 @@
 - [x] 객체 타입의 호환성
 - [x] 대수 타입
 - [x] 타입 추론
-- [ ] 타입 단언
+- [x] 타입 단언
 - [ ] 타입 좁히기
 - [ ] 서로소 유니온 타입
 
@@ -368,6 +368,80 @@ let arr = [1, "string"]; // (string | number)[] Union 타입으로 추론
 <br>
 
 # 타입 단언
+
+```typescript
+type Person = {
+  name: string;
+  age: number;
+};
+
+let person = {} as Person;
+
+person.name = "ttining";
+person.age = 100;
+
+type Dog = {
+  name: string;
+  color: string;
+};
+
+let dog = {
+  name: "꽝꽝이",
+  color: "brown",
+  breed: "진도",
+} as Dog;
+```
+
+<br>
+
+### 타입 단언의 규칙
+
+```bash
+값 as 단언 # 단언식
+```
+
+- `A as B`
+- A가 B의 슈퍼 타입이거나,
+- A가 B의 서브 타입이어야 한다.
+
+<br>
+
+### `const` 단언
+
+- `const` 키워드로 선언한 변수와 동일한 효과를 보도록 한다.
+- `const` 단언은 객체 타입과 함께 사용할 때 활용도가 높다.
+
+```typescript
+let num4 = 10 as const; // number literal
+
+let cat = {
+  name: "야옹이",
+  color: "yellow",
+} as const;
+
+// as const를 붙여 초기화한 객체는 프로퍼티의 값을 수정할 수 없는 객체가 된다.
+cat.name = ""; // Cannot assign to 'name' because it is a read-only property.
+```
+
+<br>
+
+### Non Null 단언
+
+```typescript
+type Post = {
+  title: string;
+  author?: string;
+};
+
+let post: Post = {
+  title: "게시글1",
+  author: "ttining",
+};
+
+const leng: number = post.author?.length; // Type 'number | undefined' is not assignable to type 'number'.
+
+const len: number = post.author!.length;
+```
 
 <br>
 <br>
