@@ -6,7 +6,7 @@
 
 - [x] 함수 타입
 - [x] 함수 타입 표현식과 호출 시그니처
-- [ ] 함수 타입의 호환성
+- [x] 함수 타입의 호환성
 - [ ] 함수 오버로딩
 - [ ] 사용자 정의 타입 가드
 
@@ -214,8 +214,123 @@ const divide2: Operation2 = (a, b) => a / b;
 
 # 함수 타입의 호환성
 
+**'특정 함수 타입을 다른 함수 타입으로 취급해도 괜찮은가'** 를 판단하는 것
+
 <br>
+
+### 타입 호환성 기준
+
+두 가지 기준을 만족해야만, 두 함수의 타입이 호환된다고 말할 수 있다.
+
+#### 1️⃣ 반환 값의 타입이 호환되는가
+
+```typescript
+type A = () => number;
+type B = () => 10;
+
+let a: A = () => 10; // number
+let b: B = () => 10; // number literal
+
+a = b; // (업 캐스팅)
+b = a; // 오류 발생 (다운 캐스팅)
+```
+
 <br>
+
+#### 2️⃣ 매개변수의 타입이 호환되는가
+
+##### 2-1. 매개변수의 개수가 같을 때
+
+```typescript
+type C = (value: number) => void;
+type D = (value: number) => void;
+
+let c: C = (value) => {};
+let d: D = (value) => {};
+
+c = d;
+d = c;
+```
+
+<br>
+
+```typescript
+type C = (value: number) => void;
+type D = (value: 10) => void;
+
+let c: C = (value) => {};
+let d: D = (value) => {};
+
+c = d; // 오류 발생 (업 캐스팅)
+d = c; // 다운 캐스팅 허용
+```
+
+- 반환값 타입을 기준으로 호환성을 판단할 때에는,
+  매개변수의 타입을 기준으로 호환성을 판단할 때와는 반대로
+  **업 캐스팅일 때 호환이 안된다고 평가**한다.
+
+<br>
+
+✨ **매개변수가 객체 타입을 사용하는 예시**를 살펴보면 이해가 쉽다.
+
+```typescript
+// Animal 타입은 Dog 타입의 슈퍼 타입이다.
+type Animal = {
+  name: string;
+};
+
+type Dog = {
+  name: string;
+  color: string;
+};
+
+let animalFunc = (animal: Animal) => {
+  console.log(animal.name);
+};
+let dogFunc = (dog: Dog) => {
+  console.log(dog.name);
+  console.log(dog.color);
+};
+
+animalFunc = dogFunc; // 오류 발생 (업 캐스팅)
+dogFunc = animalFunc;
+
+// 예시
+let testFunc = (animal: Animal) => {
+  console.log(animal.name);
+  console.log(animal.color); // Property 'color' does not exist on type 'Animal'.
+};
+
+let testFunc2 = (dog: Dog) => {
+  console.log(dog.name);
+};
+```
+
+- 서브 타입 ➡️ 슈퍼 타입 : 업 캐스팅 허용 ❌
+- 슈퍼 타입 ➡️ 서브 타입 : 다운 캐스팅 허용 ⭕
+
+<br>
+
+##### 2-2. 매개변수의 개수가 다를 때
+
+```typescript
+type Func1 = (a: number, b: number) => void;
+type Func2 = (a: number) => void;
+
+let func1: Func1 = (a, b) => {};
+let func2: Func2 = (a) => {};
+
+func1 = func2;
+func2 = func1; // 오류 발생
+```
+
+- 매개변수의 개수가 다를 때에는,
+  할당하려고 하는 쪽의 매개변수의 개수가 더 적을 때에만 호환이 가능하다.
+- 매개변수의 개수가 다를 때의 기준을 적용하려면,
+  타입이 같은 매개변수가 있어야 한다.
+
+  <br>
+  <br>
 
 # 함수 오버로딩
 
