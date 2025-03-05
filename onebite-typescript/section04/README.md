@@ -7,7 +7,7 @@
 - [x] 함수 타입
 - [x] 함수 타입 표현식과 호출 시그니처
 - [x] 함수 타입의 호환성
-- [ ] 함수 오버로딩
+- [x] 함수 오버로딩
 - [ ] 사용자 정의 타입 가드
 
 <br>
@@ -333,6 +333,94 @@ func2 = func1; // 오류 발생
   <br>
 
 # 함수 오버로딩
+
+### 함수 오버로딩이란?
+
+- 하나의 함수를 매개변수의 개수나 타입에 따라 여러가지 버전으로 정의하는 방법을 말한다.
+- `JavaScript`에서는 지원되지 않고, **오직 `TypeScript`에서만 지원**된다.
+- `C`언어 예시
+
+  ```c
+  // 매개변수 없음
+  void func(){
+    printf('매개변수 없음');
+  }
+
+  // 매개변수가 한 개
+  void func(int a){
+    printf(a + 20);
+  }
+
+  // 매개변수가 두 개
+  void func(int a, int a){
+    printf(i + j);
+  }
+  ```
+
+<br>
+
+### 함수 오버로딩 예시
+
+`TypeScript`에서 함수 오버로딩을 구현하기 위해서는,
+이 함수에 어떤 버전들이 있는지 알려줘야 한다.
+
+- 하나의 함수 : `func`
+- 모든 매개변수의 타입 : `number`
+- ver1. 매개변수가 1개 : 매개변수에 20을 곱한 값 출력
+- ver2. 매개변수가 3개 : 매개변수 전부를 더한 값 출력
+
+```typescript
+// * 오버로드 시그니처 (버전들)
+// 함수의 구현부 없이 선언식만 써놓은 것
+function func(a: number): void;
+function func(a: number, b: number, c: number): void;
+
+// * 구현 시그니처 (실제 구현부)
+function func() {}
+
+func(); // 오류 발생
+func(1);
+func(1, 2); // 오류 발생
+func(1, 2, 3);
+```
+
+<br>
+
+#### 오버로드 시그니처의 존재 의미
+
+- 함수 func에서 a, b, c 매개변수를 필수로 받게 되면,
+  첫 번째 오버로드 시그니처에서 오류가 발생한다. (존재 의미가 사라지기 때문)
+
+  ```typescript
+  function func(a: number): void; // This overload signature is not compatible with its implementation signature.
+  function func(a: number, b: number, c: number): void;
+
+  function func(a: number, b: number, c: number) {
+    if (typeof b === "number" && typeof c === "number") {
+      console.log(a + b + c);
+    } else {
+      console.log(a * 20);
+    }
+  }
+  ```
+
+- 오버로드 시그니처들의 매개변수 개수에 차이가 있다면,
+  최대한 방어적으로 **선택적 프로퍼티로 매개변수를 정의**하여
+  모든 오버로드 시그니처들이 의미가 있도록 만들어주어야 한다.
+
+  ```typescript
+  function func(a: number): void;
+  function func(a: number, b: number, c: number): void;
+
+  // 선택적 프로퍼티로 매개변수를 정의
+  function func(a: number, b?: number, c?: number) {
+    if (typeof b === "number" && typeof c === "number") {
+      console.log(a + b + c);
+    } else {
+      console.log(a * 20);
+    }
+  }
+  ```
 
 <br>
 <br>
