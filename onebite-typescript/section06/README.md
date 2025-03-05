@@ -7,7 +7,7 @@
 - [x] 자바스크립트의 클래스 소개
 - [x] 타입스크립트의 클래스
 - [x] 접근 제어자
-- [ ] 인터페이스와 클래스
+- [x] 인터페이스와 클래스
 
 <br>
 
@@ -250,3 +250,32 @@ class ExecutiveOfficer extends Employee {
 <br>
 
 # 인터페이스와 클래스
+
+- `implements` : 인터페이스로 정의한 타입의 객체를 클래스가 생성하도록 정의한다.
+- `interface`로 정의한 필드들은 `public`이다.
+  - `private` 필드를 만들고 싶다면, `interface`에 정의하지 않고 따로 추가해주어야 한다.
+- `Character` 클래스에서는 생성자에 접근 제어자를 사용했기 때문에, 필드 정의를 생략할 수 있다.
+
+```typescript
+interface CharacterInterface {
+  name: string;
+  moveSpeed: number;
+  move(): void;
+}
+
+// implements : 구현하다
+// 인터페이스가 정의하는 타입의 객체를
+// Character 클래스가 생성하도록 정의한다.
+class Character implements CharacterInterface {
+  // interface로 정의하는 필드들은 무조건 public이다.
+  constructor(
+    public name: string,
+    public moveSpeed: number,
+    private extra: string
+  ) {}
+
+  move(): void {
+    console.log(`${this.moveSpeed} 속도로 이동!`);
+  }
+}
+```
