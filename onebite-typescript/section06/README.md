@@ -5,7 +5,7 @@
 ### 🎯 목차
 
 - [x] 자바스크립트의 클래스 소개
-- [ ] 타입스크립트의 클래스
+- [x] 타입스크립트의 클래스
 - [ ] 접근 제어자
 - [ ] 인터페이스와 클래스
 
@@ -154,6 +154,72 @@ class StudentDeveloper extends Student {
 <br>
 
 # 타입스크립트의 클래스
+
+- 타입스크립트의 `class`는 타입으로 활용할 수 있다. (구조적 타입 시스템)
+
+```typescript
+const employee = {
+  name: "ttining",
+  age: 100,
+  position: "developer",
+  work() {
+    console.log("일함");
+  },
+};
+
+class Employee {
+  // 필드
+  name: string;
+  age: number;
+  position: string;
+
+  // 생성자
+  constructor(name: string, age: number, position: string) {
+    this.name = name;
+    this.age = age;
+    this.position = position;
+  }
+
+  // 메서드
+  work() {
+    console.log("일함");
+  }
+}
+
+const employeeB = new Employee("ttining", 100, "Developer");
+console.log(employeeB);
+
+const employeeC: Employee = {
+  name: "",
+  age: 0,
+  position: "",
+  work() {},
+};
+```
+
+<br>
+
+### 클래스 확장하기
+
+- `Employee` 클래스를 확장한 세분화된 클래스 만들기
+- 파생 클래스의 생성자는 `super` 호출을 포함해야 한다.
+
+```typescript
+class ExecutiveOfficer extends Employee {
+  // 필드
+  officeNumber: number;
+
+  constructor(
+    name: string,
+    age: number,
+    position: string,
+    officeNumber: number
+  ) {
+    super(name, age, position);
+    this.officeNumber = officeNumber;
+  }
+}
+```
 
 <br>
 <br>
