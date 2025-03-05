@@ -8,7 +8,7 @@
 - [x] 함수 타입 표현식과 호출 시그니처
 - [x] 함수 타입의 호환성
 - [x] 함수 오버로딩
-- [ ] 사용자 정의 타입 가드
+- [x] 사용자 정의 타입 가드
 
 <br>
 
@@ -426,6 +426,62 @@ func(1, 2, 3);
 <br>
 
 # 사용자 정의 타입 가드
+
+```typescript
+type Dog = {
+  name: string;
+  isBark: boolean;
+};
+
+type Cat = {
+  name: string;
+  isScratch: boolean;
+};
+
+type Animal = Dog | Cat;
+```
+
+<br>
+
+#### 1. 프로퍼티 이름을 기준으로 타입 좁히기
+
+- 프로퍼티 이름을 기준으로 타입 좁히기를 하는 것은 그다지 좋지 않다.
+- 프로퍼티가 중간에 이름이 바뀔 경우, 타입 추론이 제대로 되지 않기 때문이다.
+
+```typescript
+function warning(animal: Animal) {
+  if ("isBark" in animal) {
+    // 강아지
+  } else if ("isScratch" in animal) {
+    // 고양이
+  }
+}
+```
+
+<br>
+
+#### 2. 사용자 정의 타입 가드 사용하기
+
+```typescript
+//                             사용자 정의 타입 가드
+function isDog(animal: Animal): animal is Dog {
+  //      타입 단언 (타입 좁히기)
+  return (animal as Dog).isBark !== undefined;
+}
+
+function isCat(animal: Animal): animal is Cat {
+  return (animal as Cat).isScratch !== undefined;
+}
+
+function warning(animal: Animal) {
+  if (isDog(animal)) {
+    // 강아지
+    animal;
+  } else if ("isScratch" in animal) {
+    // 고양이
+  }
+}
+```
 
 <br>
 <br>
