@@ -5,7 +5,7 @@
 ### 🎯 목차
 
 - [x] 제네릭 소개
-- [ ] 타입 변수 응용하기
+- [x] 타입 변수 응용하기
 - [ ] `map`, `forEach` 메서드 타입 정의하기
 - [ ] 제네릭 인터페이스 & 제네릭 타입 별칭
 - [ ] 제네릭 클래스
@@ -106,6 +106,61 @@ let arr = func<[number, number, number]>([1, 2, 3]); // let arr: [number, number
 <br>
 
 # 타입 변수 응용하기
+
+### 1️⃣ 타입 변수 선언
+
+- 타입 변수는 여러 개 선언할 수 있다.
+
+```typescript
+function swap<T, U>(a: T, b: U) {
+  return [b, a];
+}
+
+const [a, b] = swap("1", 2);
+```
+
+<br>
+
+### 2️⃣ 튜플과 배열 타입
+
+- 튜플 타입
+- 첫 번째 요소의 타입은 `T`
+- 나머지 요소는 배열로 여러 개 / 배열 요소의 타입을 모를 경우
+  - `rest` 파라미터를 쓰듯이 `...unknown[]`라고 써주기
+
+```typescript
+function returnFirstValue<T>(data: [T, ...unknown[]]) {
+  return data[0];
+}
+
+let num = returnFirstValue([0, 1, 2]); // 0
+let str = returnFirstValue(["hello", "mynameis"]); // 'hello'
+let str2 = returnFirstValue([1, "hello", "mynameis"]); // 1
+```
+
+<br>
+
+### 3️⃣ `extends` 키워드 사용
+
+- 데이터 타입이 `T`이고, `T`에 `unknown` 타입이 들어올 경우
+  - `unknown` 타입에 `length` 프로퍼티가 없으므로 오류 발생
+- `T`의 타입 제한하기
+  - `extends` 키워드를 사용하여, `length` 프로퍼티가 `number` 타입인 타입으로 확장
+    - `<T extends { length: number }>`
+
+```typescript
+function getLength<T extends { length: number }>(data: T) {
+  return data.length;
+}
+
+let var1 = getLength([1, 2, 3]); // 3
+
+let var2 = getLength("12345"); // 5
+
+let var3 = getLength({ length: 10 }); // 10
+
+let var4 = getLength(10); // Argument of type 'number' is not assignable to parameter of type '{ length: number; }'.
+```
 
 <br>
 <br>
