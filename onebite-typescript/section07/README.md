@@ -6,7 +6,7 @@
 
 - [x] 제네릭 소개
 - [x] 타입 변수 응용하기
-- [ ] `map`, `forEach` 메서드 타입 정의하기
+- [x] `map`, `forEach` 메서드 타입 정의하기
 - [ ] 제네릭 인터페이스 & 제네릭 타입 별칭
 - [ ] 제네릭 클래스
 - [ ] 프로미스와 제네릭
@@ -166,6 +166,50 @@ let var4 = getLength(10); // Argument of type 'number' is not assignable to para
 <br>
 
 # `map`, `forEach` 메서드 타입 정의하기
+
+### `map` 메서드
+
+```typescript
+const arr = [1, 2, 3];
+const newArr = arr.map((it) => it * 2); // [2, 4, 6]
+
+function map<T, U>(arr: T[], callback: (item: T) => U) {
+  let result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    result.push(callback(arr[i]));
+  }
+
+  return result;
+}
+
+map(arr, (it) => it * 2);
+// map(["hi", "hello"], (it) => it.toUpperCase());
+map(["hi", "hello"], (it) => parseInt(it));
+```
+
+<br>
+
+### `forEach` 메서드
+
+```typescript
+const arr2 = [1, 2, 3];
+arr2.forEach((it) => console.log(it));
+
+function forEach<T>(arr: T[], callback: (item: T) => void) {
+  for (let i = 0; i < arr.length; i++) {
+    callback(arr[i]);
+  }
+}
+
+forEach(arr2, (it) => {
+  console.log(it.toFixed());
+});
+
+forEach(["123", "456"], (it) => {
+  it;
+});
+```
 
 <br>
 <br>
