@@ -8,7 +8,7 @@
 - [x] 인덱스드 엑세스 타입
 - [x] `keyof` 연산자
 - [x] 맵드 타입
-- [ ] 템플릿 리터럴 타입
+- [x] 템플릿 리터럴 타입
 
 <br>
 
@@ -512,6 +512,36 @@ user.id = 1; // 오류 발생
 <br>
 
 # 템플릿 리터럴 타입
+
+스트링 리터럴 타입들을 기반으로 특정 패턴을 갖는 문자열 타입을 만드는 기능
+
+- 문자열로 여러 상황들을 표현해야 하는 경우에 유용하다.
+
+### 템플릿 리터럴 타입 사용 ❌
+
+```typescript
+type Color = "red" | "black" | "green";
+
+type Animal = "dog" | "cat" | "chicken";
+
+type ColoredAnimal = "red-dog" | "red-cat" | "red-chicken" ...
+```
+
+<br>
+
+### 템플릿 리터럴 타입 사용 ⭕
+
+```typescript
+// Color 타입의 유니온 타입들과 Animal 타입의 유니온 타입들이 조합된 타입으로 만들어진다.
+type Color = "red" | "black" | "green";
+
+type Animal = "dog" | "cat" | "chicken";
+
+type ColoredAnimal = `${Color}-${Animal}`;
+
+// 만들고 싶은 조합들을 굉장히 간단하게 만들 수 있다.
+const coloredAnimal: ColoredAnimal = "black-cat";
+```
 
 <br>
 <br>
