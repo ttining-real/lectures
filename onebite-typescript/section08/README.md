@@ -7,7 +7,7 @@
 - [x] 타입 조작하기
 - [x] 인덱스드 엑세스 타입
 - [x] `keyof` 연산자
-- [ ] 맵드 타입
+- [x] 맵드 타입
 - [ ] 템플릿 리터럴 타입
 
 <br>
@@ -362,6 +362,151 @@ getPropertyKey(person, "name");
 <br>
 
 # 맵드(Mapped) 타입
+
+기존 객체 타입을 기반으로 새로운 객체 타입을 만드는 문법
+
+<br>
+
+## 예시
+
+유저 정보를 관리하는 간단한 프로그램을 만든다고 가정
+
+### 1️⃣ mapped 사용 ❌
+
+```typescript
+// 유저 정보 정의
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+
+interface PartialUser {
+  id?: number;
+  name?: string;
+  age?: number;
+}
+
+// 한명의 유저 정보를 불러오는 기능
+function fetchUser(): User {
+  // ... 기능
+
+  return {
+    id: 1,
+    name: "ttining",
+    age: 100,
+  };
+}
+
+// 한명의 유저 정보를 수정하는 기능
+function updateUser(user: PartialUser) {
+  // 수정하는 기능
+}
+
+updateUser({
+  id: 1,
+  name: "ttining",
+  age: 100,
+});
+```
+
+- 수정 기능을 위해 똑같은 인터페이스를 정의하고, 선택적 프로퍼티로 변경 (중복 코드)
+
+<br>
+
+### 2️⃣ `mapped` 사용 ⭕
+
+- `mapped`는 `interface`로는 만들 수 없다.
+- `mapped` 타입을 사용하면, 특정 객체 타입을 원하는 대로 변환할 수 있다.
+  - 하나의 객체 타입으로 다양한 상황에 대처할 수 있다.
+
+```typescript
+// 유저 정보 정의
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+
+type PartialUser = {
+  [key in "id" | "name" | "age"]?: User[key];
+};
+
+type BooleanUser = {
+  [key in keyof User]: boolean;
+};
+
+// 한명의 유저 정보를 불러오는 기능
+function fetchUser(): User {
+  // ... 기능
+
+  return {
+    id: 1,
+    name: "ttining",
+    age: 100,
+  };
+}
+
+// 한명의 유저 정보를 수정하는 기능
+function updateUser(user: PartialUser) {
+  // 수정하는 기능
+}
+
+updateUser({
+  id: 1,
+  name: "ttining",
+  age: 100,
+});
+```
+
+`type PartialUser`
+
+- `[key in "id" | "name" | "age"]?: User[key]`
+  - `[key in "id" | "name" | "age"]` : key
+    - 인덱스 시그니처와 비슷하지만, `:` 대신 `in` 연산자를 사용한다.
+  - `User[key]` : value
+    - 인덱스드 엑세스 타입
+  - `?:` : mapped 타입이 정의하는 모든 프로퍼티가 선택적 프로퍼티가 된다.
+
+`type BooleanUser`
+
+- `[key in keyof User]: boolean;`
+  - 모든 `key`의 타입이 `boolean` 타입으로 정의된다.
+  - 프로퍼티가 너무 많아질 때, `keyof` 연산자를 사용하면 된다.
+
+<br>
+
+### 3️⃣ `mapped` 사용 ⭕
+
+`fetchUser` 함수가 반환하는 유저 타입의 모든 프로퍼티가 `readonly`로 바뀐 객체를 반환
+
+```typescript
+type ReadonlyUser = {
+  readonly [key in keyof User]: User[key];
+};
+
+function fetchUser(): ReadonlyUser {
+  // ... 기능
+
+  return {
+    id: 1,
+    name: "ttining",
+    age: 100,
+  };
+}
+
+const user = fetchUser();
+user.id = 1; // 오류 발생
+// 읽기 전용 프로퍼티이므로 수정할 수 없다.
+```
+
+- 모든 프로퍼티에 읽기 전용 속성이 붙게 된다.
+
+<br>
+
+### ⚠️ 주의사항
+
+- `mapped`타입은 `interface`로 만들 수 없다. (`type` 별칭으로만 사용 ⭕)
 
 <br>
 <br>
