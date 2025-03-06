@@ -8,7 +8,7 @@
 - [x] 타입 변수 응용하기
 - [x] `map`, `forEach` 메서드 타입 정의하기
 - [x] 제네릭 인터페이스 & 제네릭 타입 별칭
-- [ ] 제네릭 클래스
+- [x] 제네릭 클래스
 - [ ] 프로미스와 제네릭
 
 <br>
@@ -446,8 +446,80 @@ const studentUser: User<Student> = {
 
 # 제네릭 클래스
 
-```typescript
+## 일반 클래스 사용
 
+`NumberList`의 타입을 `number`로 고정했을 때, `StringList`를 추가한다면?
+
+- `NumberList` 클래스를 복사해 `StringList`로 변경하고 타입을 `string`으로 바꿔줘야 한다.
+- 결과적으로 중복된 클래스를 하나 더 선언하는 것으로 비효율적인 코드가 생산된다는 문제점이 있다.
+- 이때, **제네릭 클래스**를 이용해서 문제를 해결할 수 있다.
+
+```typescript
+class NumberList {
+  constructor(private list: number[]) {}
+
+  // 메서드
+  // 리스트 추가
+  push(data: number) {
+    this.list.push(data);
+  }
+
+  // 리스트 제거
+  pop() {
+    return this.list.pop();
+  }
+
+  // 리스트 출력
+  print() {
+    console.log(this.list);
+  }
+}
+
+// 인스턴스 생성
+const numberList = new NumberList([1, 2, 3]);
+numberList.pop();
+numberList.push(4);
+numberList.print();
+```
+
+<br>
+
+## 제네릭 클래스 사용
+
+- `Type` 변수와는 다르게 클래스의 생성자를 호출할 때,
+  생성자의 인수로 전달하는 값을 기준으로 타입 변수의 타입을 추론한다.
+- 제네릭 인터페이스, 제네릭 타입 변수와 다르게
+  `new List<number> ([1, 2, 3])` 이런 식으로 반드시 타입을 명시해주지 않아도 된다.
+
+```typescript
+class List<T> {
+  constructor(private list: T[]) {}
+
+  // 메서드
+  // 리스트 추가
+  push(data: T) {
+    this.list.push(data);
+  }
+
+  // 리스트 제거
+  pop() {
+    return this.list.pop();
+  }
+
+  // 리스트 출력
+  print() {
+    console.log(this.list);
+  }
+}
+
+// 인스턴스 생성
+const numberList = new List([1, 2, 3]); // 타입 변수가 number로 추론된다.
+numberList.pop();
+numberList.push(4);
+numberList.print();
+
+const stringList = new List(["1", "2", "3"]); // 타입 변수가 string으로 추론된다.
+stringList.push("hello");
 ```
 
 <br>
