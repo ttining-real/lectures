@@ -6,7 +6,7 @@
 
 - [x] 타입 조작하기
 - [x] 인덱스드 엑세스 타입
-- [ ] `keyof` 연산자
+- [x] `keyof` 연산자
 - [ ] 맵드 타입
 - [ ] 템플릿 리터럴 타입
 
@@ -268,6 +268,95 @@ type TupNum = Tup[number]; // Tup 타입의 최적의 공통 타입을 추출한
 <br>
 
 # `keyof` 연산자
+
+특정 객체 타입으로부터 프로퍼티 키들을 유니온 스트링 타입으로 추출하는 연산자
+
+### `keyof`를 사용하지 않는다면,
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+}
+
+function getPropertyKey(person: Person, key: "name" | "age") {
+  return person[key];
+}
+
+const person: Person = {
+  name: "ttining",
+  age: 100,
+};
+
+getPropertyKey(person, "name");
+```
+
+- `key: "name" | "age"`
+  `key`의 타입을 유니온 타입으로 사용하게 되면,
+  `Person` 객체에 새로운 프로퍼티가 추가되거나
+  또는 몇가지 프로퍼티의 이름을 수정해야 할 때마다
+  매개변수의 타입을 계속 수정해야 한다. (비효율적)
+- 이때 `keyof` 연산자를 사용할 수 있다.
+
+<br>
+
+### `keyof` 사용 예시
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+}
+
+function getPropertyKey(person: Person, key: keyof Person) {
+  return person[key];
+}
+
+const person: Person = {
+  name: "ttining",
+  age: 100,
+};
+
+getPropertyKey(person, "name");
+```
+
+- `key: keyof Person` 타입은
+  `Person` 객체 타입의 모든 프로퍼티 키를 유니온 타입으로 추출한다.
+  즉, `"name" | "age"` string literal 유니온 타입으로 추출된다.
+- **⚠️ `keyof` 연산자는 무조건 타입에서만 사용할 수 있다.**
+  위의 예시에서는 `Person`이 아닌 `person`에 사용할 경우 오류가 발생한다.
+
+<br>
+
+### `typeof`와 함께 사용할 경우
+
+`keyof` 연산자는 `typeof` 연산자와 함께 사용할 수 있다.
+
+> `typeof`
+>
+> - `typeof person === "object";`
+> - 특정 변수의 type을 string 값으로 반환하는 연산자
+
+```typescript
+type Person = typeof person;
+
+function getPropertyKey(person: Person, key: keyof typeof person) {
+  return person[key];
+}
+
+const person = {
+  name: "ttining",
+  age: 100,
+};
+
+getPropertyKey(person, "name");
+```
+
+- `Person`의 타입이 타입스크립트가 추론하는 변수 `person`의 타입으로 정의된다.
+- `typeof` 연산자는 `type`을 정의할 때, 어떤 변수의 `type`을 추출하는 용도로 활용할 수 있다.
+- `key: keyof typeof person`
+  - `typeof person` : `person` 객체의 프로퍼티 키들을 유니온 타입으로 추출
+  - `key: keyof typeof person`의 결과는 `"name" | "age"`가 된다.
 
 <br>
 <br>
