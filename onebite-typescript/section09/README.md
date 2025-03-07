@@ -6,7 +6,7 @@
 
 - [x] 조건부 타입 소개
 - [x] 분산적인 조건부 타입
-- [ ] `infer` - 조건부 타입 내에서 타입 추론하기
+- [x] `infer` - 조건부 타입 내에서 타입 추론하기
 
 <br>
 
@@ -187,6 +187,72 @@ let d: StringNumberSwitch<boolean | number | string>; // number
 <br>
 
 # `infer` - 조건부 타입 내에서 타입 추론하기
+
+> infer : inference (추론하다)
+
+<br>
+
+조건부 타입 내에서 특정 타입만 추론해올 수 있다.
+
+### 조건부 타입 추론 1️⃣
+
+```typescript
+type Func = () => string;
+
+type ReturnType<T> = T extends () => string ? string : never;
+
+type A = ReturnType<Func>; // string
+```
+
+<br>
+
+### 조건부 타입 추론 2️⃣
+
+```typescript
+type FuncA = () => string;
+
+type FuncB = () => number;
+
+type ReturnType<T> = T extends () => string ? string : never;
+
+type A = ReturnType<FuncA>; // string
+
+type B = ReturnType<FuncB>; // never
+```
+
+<br>
+
+### `infer` 사용 예제 1️⃣
+
+```typescript
+type FuncA = () => string;
+
+type FuncB = () => number;
+
+type ReturnType<T> = T extends () => infer R ? R : never;
+
+type A = ReturnType<FuncA>; // string
+
+type B = ReturnType<FuncB>; // number
+
+type c = ReturnType<number>; // never
+```
+
+<br>
+
+### `infer` 사용 예제 2️⃣
+
+타입 변수에 제공한 Promise 타입에서 결과값의 타입만 가져오는 기능
+
+```typescript
+type PromiseUnpack<T> = T extends Promise<infer R> ? R : never;
+// 1. T는 프로미스 타입이어야 한다.
+// 2. 프로미스 타입의 결과값 타입을 반환해야 한다.
+
+type PromiseA = PromiseUnpack<Promise<number>>; // number
+
+type PromiseB = PromiseUnpack<Promise<string>>; // string
+```
 
 <br>
 <br>
