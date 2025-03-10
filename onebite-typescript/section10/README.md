@@ -7,7 +7,7 @@
 - [x] 유틸리티 타입 소개
 - [x] 맵드 타입 기반의 유틸리티 타입 1️⃣ - `Partial`, `Required`, `Readonly`
 - [x] 맵드 타입 기반의 유틸리티 타입 2️⃣ - `Pick`, `Omit`, `Record`
-- [ ] 조건부 타입 기반의 유틸리티 타입 - `Exclude`, `Extract`, `ReturnType`
+- [x] 조건부 타입 기반의 유틸리티 타입 - `Exclude`, `Extract`, `ReturnType`
 
 <br>
 
@@ -432,11 +432,101 @@ type Record<K extends keyof any, V> = {
 
 > `Exclude`, `Extract`, `ReturnType`
 
+<br>
+
 ## `Exclude`
+
+> 제외하다, 추방하다
+
+- `Exclude<T, U>` 제네릭 타입
+- `T`에서 `U`를 제거하는 타입
+
+<br>
+
+### 예시
+
+```typescript
+type A = Exclude<string | boolean, boolean>; // type A = string
+```
+
+<br>
+
+### `Exclude` 직접 구현해보기
+
+```typescript
+type Exclude<T, U> = T extends U ? never : T;
+```
+
+- 0단계
+  - `Exclude<string, boolean>`
+  - `Exclude<boolean, boolean>`
+- 1단계
+  - `Exclude<string, boolean> | Exclude<boolean, boolean>`
+- 2단계
+  - `string`
+  - `never`
+- 3단계
+  - `string | never`
+  - 합집합에서 `never`는 공집합이기 때문에 제거되어 `string` 타입이 된다. (분산적인 조건부 타입)
+
+<br>
 
 ## `Extract`
 
+- `Extract<T, U>`
+- `T`에서 `U`를 추출하는 타입
+
+<br>
+
+### 예시
+
+```typescript
+type B = Extract<string | boolean, boolean>; // type B = boolean
+```
+
+<br>
+
+### `Extract` 직접 구현해보기
+
+```typescript
+type Extract<T, U> = T extends U ? T : never;
+```
+
+<br>
+
 ## `ReturnType`
+
+- `ReturnType<T>`
+- 함수의 반환값 타입을 추출하는 타입
+
+<br>
+
+### 예시
+
+```typescript
+function funcA() {
+  return "hello";
+}
+
+function funcB() {
+  return 10;
+}
+
+type ReturnA = ReturnType<typeof funcA>; // type ReturnA = string
+
+type ReturnB = ReturnType<typeof funcB>; // type ReturnB = number
+```
+
+<br>
+
+### `ReturnType` 직접 구현해보기
+
+```typescript
+type ReturnType<T extends (...args: any) => any> = T extends (
+  ...args: any
+) => infer R
+  ? R
+```
 
 <br>
 <br>
