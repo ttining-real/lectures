@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "dist",
+    "strict": true,
+    "moduleDetection": "force",
+    "allowJs": true
+    // "noImplicitAny": false // 암시적 Any 허용하지 않을 것인지
+  },
+  "include": ["src"]
+}
