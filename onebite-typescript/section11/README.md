@@ -6,7 +6,7 @@
 
 - [x] 타입스크립트 리액트 시작하기
 - [x] 상태 관리와 `Props` 1️⃣
-- [ ] 상태 관리와 `Props` 2️⃣
+- [x] 상태 관리와 `Props` 2️⃣
 - [ ] Context API
 - [ ] 외부 라이브러리 사용하기
 - [ ] 타입스크립트 템플릿 소개
@@ -283,6 +283,246 @@ export default function Editor(props: Props) {}
 <br>
 
 # 3. 상태 관리와 `Props` 2️⃣
+
+## 3-1. `todos` 리스트 렌더링
+
+```tsx
+<div>
+  {todos.map((todo) => (
+    <div key={todo.id}>{todo.content}</div>
+  ))}
+</div>
+```
+
+<br>
+
+### 1️⃣ `todo` 아이템 컴포넌트
+
+> Todo 아이템을 별도의 컴포넌트로 분리하기
+
+```tsx
+interface Props {
+  id: number;
+  content: string;
+}
+
+export default function TodoItem() {
+  return <div></div>;
+}
+```
+
+- 이때, `Props` 타입 정의는 이미 `App` 컴포넌트에서 정의해두었기 때문에, 중복 코드가 된다.
+  - 수정이 필요한 경우, 문제가 생길 수 있다. (두 군데에서 수정)
+- 여러 컴포넌트에 공통으로 사용되는 타입을 유지해야 되는 경우,
+  별도의 타입스크립트 파일을 만들어서 분리하는 것이 좋다.
+
+<br>
+
+### 2️⃣ 타입 분리
+
+### `src/types.ts`
+
+```tsx
+export interface Todo {
+  id: number;
+  content: string;
+}
+```
+
+- 타입 별칭이나 `interface`로 만든 타입들도 `export` 키워드로 내보낼 수 있다.
+
+<br>
+
+### `TodoItem.tsx`
+
+```tsx
+import { Todo } from "./types";
+
+interface Props extends Todo {
+  extra: string;
+}
+
+export default function TodoItem(props: Props) {
+  return <div></div>;
+}
+```
+
+<br>
+
+## 3-2. 리스트 아이템 개별 삭제 기능
+
+- `onClickDelete` 함수 전달
+
+#### `App.tsx`
+
+```tsx
+const onClickDelete = (id: number) => {
+  setTodos(todos.filter((todo) => todo.id !== id));
+};
+
+return (
+  <div className='App'>
+    <h1>Todo List</h1>
+    <Editor onClickAdd={onClickAdd} />
+    <div>
+      {todos.map((todo) => (
+        // <div key={todo.id}>{todo.content}</div>
+        <TodoItem key={todo.id} {...todo} onClickDelete={onClickDelete} />
+      ))}
+    </div>
+  </div>
+);
+```
+
+<br>
+
+#### `TodoItem.tsx`
+
+```tsx
+interface Props extends Todo {
+  onClickDelete: (id: number) => void;
+}
+
+export default function TodoItem(props: Props) {
+  const onClickButton = () => {
+    props.onClickDelete(props.id);
+  };
+
+  return (
+    <div>
+      {props.id}번 : {props.content}
+      <button onClick={onClickButton}>삭제</button>
+    </div>
+  );
+}
+```
+
+<br>
+
+## 3-3. `useReducer`로 업그레이드
+
+```tsx
+function App() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+}
+```
+
+- `App.tsx`에서 `useState`를 사용한 코드를 `useReducer`로 업그레이드해보자.
+
+<br>
+
+### `useReducer`
+
+```tsx
+useRecuder(첫 번째 인수, 두 번째 인수)
+```
+
+- 첫 번째 인수 : 상태 변화를 직접 처리하는 `reducer` 함수
+- 두 번째 인수 : 초기값
+
+<br>
+
+```tsx
+function reducer() {}
+
+function App() {
+  // - Todo 아이템을 보관할 State
+  const [todos, dispatch] = useReducer(reducer, []);
+}
+```
+
+<br>
+
+### `onClickAdd`
+
+> `setTodos` → `dispatch`로 변경하기
+
+```tsx
+const onClickAdd = (text: string) => {
+  setTodos([
+    ...todos,
+    {
+      id: idRef.current++,
+      content: text,
+    },
+  ]);
+};
+```
+
+```tsx
+const onClickAdd = (text: string) => {
+  dispatch({
+    type: "CREATE",
+    data: {
+      id: idRef.current++,
+      content: text,
+    },
+  });
+};
+```
+
+<br>
+
+### `onClickDelete`
+
+> `setTodos` → `dispatch`로 변경하기
+
+```tsx
+const onClickDelete = (id: number) => {
+  setTodos(todos.filter((todo) => todo.id !== id));
+};
+```
+
+```tsx
+const onClickDelete = (id: number) => {
+  dispatch({
+    type: "DELETE",
+    id: id,
+  });
+};
+```
+
+<br>
+
+### `reducer` 함수
+
+```tsx
+// 타입 별칭으로 Action 타입 정의
+type Action =
+  | {
+      type: "CREATE";
+      data: {
+        id: number;
+        content: string;
+      };
+    }
+  | {
+      type: "DELETE";
+      id: number;
+    };
+
+function reducer(state: Todo[], action: Action) {
+  switch (action.type) {
+    case "CREATE": {
+      return [...state, action.data];
+    }
+    case "DELETE": {
+      return state.filter((it) => it.id !== action.id);
+    }
+  }
+}
+```
+
+- 매개변수로 `state`와 `action` 객체를 받는다.
+- `Action` 타입 : 유니온 타입으로 `CREATE` 객체와 `DELETE` 객체 정의
+
+<br>
+
+> 타입스크립트에서 `useReducer`를 사용할 때,
+>
+> `Action` 객체 타입을 서로소 유니온 타입으로 정의하기 때문에
+>
+> `dispatch`를 호출할 때 일어나는 실수들을 최대한 방지할 수 있다.
 
 <br>
 <br>
