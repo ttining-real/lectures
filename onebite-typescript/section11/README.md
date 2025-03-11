@@ -5,7 +5,7 @@
 ### 🎯 목차
 
 - [x] 타입스크립트 리액트 시작하기
-- [ ] 상태 관리와 `Props` 1️⃣
+- [x] 상태 관리와 `Props` 1️⃣
 - [ ] 상태 관리와 `Props` 2️⃣
 - [ ] Context API
 - [ ] 외부 라이브러리 사용하기
@@ -205,6 +205,79 @@ npm i @types/node @types/react @types/react-dom @types/jest
 <br>
 
 # 2. 상태 관리와 `Props` 1️⃣
+
+## 2-1. 이벤트 핸들러 타입 정의
+
+```tsx
+function App() {
+  const [text, setText] = useState("");
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  return (
+    <div className='App'>
+      <h1>Todo List</h1>
+      <input type='text' value={text} onChange={onChangeInput} />
+    </div>
+  );
+}
+```
+
+### `useState` 타입 정의
+
+- `useState`에 `useState<string>`과 같이 타입을 정의하게 되면,
+  `text: string | undefined`가 되기 때문에,
+  `useState`의 초기값에 값을 전달하는 것이 좋다. `useState('')`
+
+<br>
+
+### 이벤트 핸들러 `e` 객체의 타입 정의
+
+- `any` 타입을 정의하는 것은 좋지 않다.
+- `e: { target: { value: string } }`과 같이 정의하는 것은 위험한 방식이다.
+- 처음 `input`에 전달했던 이벤트 핸들러의 `e` 객체를 보면
+  `(parameter) e: React.ChangeEvent<HTMLInputElement>`라는 타입이 나온다.
+  해당 타입으로 정의하는 것이 좋다.
+  ```tsx
+  onChange={(e) => {
+    setText(e.target.value);
+  }}
+  ```
+
+<br>
+
+## 2-2. `Props`와 `Children`
+
+> `App.tsx`에서 `Editor.tsx`로 `Props`와 `Children`을 전달하는 방법
+
+### `App.tsx`
+
+```tsx
+return (
+  <div className='App'>
+    <h1>Todo List</h1>
+    <Editor onClickAdd={onClickAdd}>
+      <div>children</div>
+    </Editor>
+  </div>
+);
+```
+
+### `Editor.tsx`
+
+```tsx
+interface Props {
+  onClickAdd: (text: string) => void;
+  children: ReactElement;
+}
+
+export default function Editor(props: Props) {}
+```
+
+- `interface Props` : `Props`의 타입을 별도로 정의해주어야 한다.
+- `ReactElement` : React가 기본적으로 제공하는 타입
 
 <br>
 <br>
