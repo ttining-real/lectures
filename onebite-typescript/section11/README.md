@@ -9,7 +9,7 @@
 - [x] 상태 관리와 `Props` 2️⃣
 - [x] Context API
 - [x] 외부 라이브러리 사용하기
-- [ ] 타입스크립트 템플릿 소개
+- [x] 타입스크립트 템플릿 소개
 
 <br>
 
@@ -850,6 +850,28 @@ npm i @types/lodash
 <br>
 
 # 6. 타입스크립트 템플릿 소개
+
+> 타입스크립트로 React 프로젝트를 시작할 때, 빠르게 시작할 수 있는 도구
+
+<br>
+
+## `create-react-app`
+
+[CRA Docs - Adding TypeScript](https://create-react-app.dev/docs/adding-typescript/)
+
+- Create React App (CRA) 공식 문서
+- 타입스크립트 템플릿으로 시작하도록 만들 수 있다.
+
+<br>
+
+## 설치 명령어
+
+```bash
+npx create-react-app my-app --template typescript # my-app 폴더에 생성
+npx create-react-app . --template typescript # 현재 폴더에 생성
+```
+
+- `--template typescript` : 타입스크립트로 만들어진 템플릿 설치
 
 <br>
 <br>
