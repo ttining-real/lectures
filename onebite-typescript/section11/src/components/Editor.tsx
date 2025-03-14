@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { useTodoDispatch } from "../App";
 
 interface Props {
-  onClickAdd: (text: string) => void;
+  // onClickAdd: (text: string) => void;
   // children: ReactElement;
 }
 
 export default function Editor(props: Props) {
+  // const dispatch = useContext(TodoDispatchContext);
+  const dispatch = useTodoDispatch();
+
   // - 사용자로부터 입력 받는 Todo를 저장할 State
   const [text, setText] = useState("");
 
@@ -14,7 +18,7 @@ export default function Editor(props: Props) {
   };
 
   const onClickButton = () => {
-    props.onClickAdd(text);
+    dispatch.onClickAdd(text);
     setText("");
   };
 

@@ -7,7 +7,7 @@
 - [x] 타입스크립트 리액트 시작하기
 - [x] 상태 관리와 `Props` 1️⃣
 - [x] 상태 관리와 `Props` 2️⃣
-- [ ] Context API
+- [x] Context API
 - [ ] 외부 라이브러리 사용하기
 - [ ] 타입스크립트 템플릿 소개
 
@@ -528,6 +528,252 @@ function reducer(state: Todo[], action: Action) {
 <br>
 
 # 4. Context API
+
+> React의 Context API를 타입스크립트 환경에서 사용하는 방법
+
+<br>
+
+현재, App 컴포넌트에서 투두 아이템의 모든 상태관리를 담당하고 있다.
+
+- `todos` State : 투두 아이템 보관
+- `onClickAdd` : 새로운 투두 아이템 생성
+- `onClickDelete` : 특정 투두 아이템 삭제
+
+<br>
+
+두 개의 Context를 생성해보자.
+
+- `todos` State 공급
+- `onClickAdd`, `onClickDelete` 상태 변화 함수 공급
+
+<br>
+
+## 4-1. `todos` State 공급 Context 만들기
+
+### `React.createContext()`
+
+```tsx
+export const TodoStateContext = React.createContext();
+```
+
+- `React.createContext` : 1개의 인수가 필수로 필요하다.
+- `const TodoStateContext: React.Context<null>`
+  - `React.Context`가 `null`로 추론되고 있다.
+  - `todos` State 배열을 컴포넌트 트리에 공급할 목적으로 사용할 것이기 때문에, null 타입을 공급하면 안된다.
+  - `type` 변수 설정 → `React.Context<Todo[] | null>`
+- `const TodoStateContext: React.Context<Todo[] | null>`로 변경되었다.
+
+<br>
+
+### `Provider` 컴포넌트 설정 및 공급
+
+```tsx
+<TodoStateContext.Provider value={todos}>
+  <Editor onClickAdd={onClickAdd} />
+  <div>
+    {todos.map((todo) => (
+      <TodoItem key={todo.id} {...todo} onClickDelete={onClickDelete} />
+    ))}
+  </div>
+</TodoStateContext.Provider>
+```
+
+- `return` 문의 내부에서 `<Editor>`와 리스트를 감싸도록 설정
+- `value` props로 `todos` 전달
+
+<br>
+
+## 4-2. `todos`의 상태 변화 함수 공급 Context 만들기
+
+### `React.createContext()`
+
+```tsx
+export const TodoDispatchContext = React.createContext<{
+  onClickAdd: (text: string) => void;
+  onClickDelete: (id: number) => void;
+} | null>(null);
+```
+
+- `onClickAdd`와 `onClickDelete` 함수를 가지고 있는 객체를 공급하기 위해 `{} | null` 타입 설정
+- `{}` 객체 타입의 프로퍼티에는 `onClickAdd`와 `onClickDelete`가 있다.
+- `onClickAdd` `text`의 타입은 `string`, 반환값의 타입은 `void`
+- `onClickDelete` `id`의 타입은 `number`, 반환값의 타입은 `void`
+
+<br>
+
+### `Provider` 컴포넌트 설정 및 공급
+
+```tsx
+<TodoStateContext.Provider value={todos}>
+  <TodoDispatchContext.Provider
+    value={{
+      onClickAdd,
+      onClickDelete,
+    }}
+  >
+    <Editor onClickAdd={onClickAdd} />
+    <div>
+      {todos.map((todo) => (
+        <TodoItem key={todo.id} {...todo} onClickDelete={onClickDelete} />
+      ))}
+    </div>
+  </TodoDispatchContext.Provider>
+</TodoStateContext.Provider>
+```
+
+- `return` 문의 내부에서 `<Editor>`와 리스트를 감싸도록 설정
+- `value` props로 `{onClickAdd, onClickDelete}` 전달
+
+<br>
+
+## 4-3. `Props` 정리
+
+- `Provider` 설정을 해주었기 때문에,
+  `Editor` 컴포넌트와 `TodoItem` 컴포넌트는 `onClickAdd`와 `onClickDelete` 함수를
+  더이상 `Props`로 받을 필요가 없다.
+
+```tsx
+<TodoStateContext.Provider value={todos}>
+  <TodoDispatchContext.Provider
+    value={{
+      onClickAdd,
+      onClickDelete,
+    }}
+  >
+    {/* onClickAdd={onClickAdd} 제거 */}
+    <Editor />
+    <div>
+      {todos.map((todo) => (
+        {/* onClickDelete={onClickDelete} 제거 */}
+        <TodoItem key={todo.id} {...todo} />
+      ))}
+    </div>
+  </TodoDispatchContext.Provider>
+</TodoStateContext.Provider>
+```
+
+<br>
+
+## 4-4. `useContext` 사용하기
+
+- useContext를 사용해, TodoDispatchContext로부터 각각의 함수를 불러와 사용하도록 수정하기
+
+### `Editor.tsx`
+
+```tsx
+interface Props {
+  // onClickAdd: (text: string) => void;
+  // children: ReactElement;
+}
+
+export default function Editor(props: Props) {
+  const dispatch = useContext(TodoDispatchContext);
+
+  // - 사용자로부터 입력 받는 Todo를 저장할 State
+  const [text, setText] = useState("");
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  const onClickButton = () => {
+    dispatch?.onClickAdd(text);
+    setText("");
+  };
+
+  return (
+    <div>
+      <input type='text' value={text} onChange={onChangeInput} />
+      <button onClick={onClickButton}>추가</button>
+    </div>
+  );
+}
+```
+
+- `const dispatch = useContext(TodoDispatchContext);`
+  - `TodoDispatchContext`로부터 값을 불러옴
+  - `dispatch` → `Provider`에 공급한 두 개의 함수를 담고 있는 객체일 수도 있지만, `null`일 수도 있다.
+  - 그렇기 때문에 `dispatch.onClickAdd`로 사용할 수 없고, 옵셔널 체이닝을 사용해야 한다.
+  - `dispatch?.onClickAdd(text);`
+- 지금은 `dispatch` 객체를 한 번만 사용하기 때문에
+  옵셔널 체이닝으로 사용해도 문제가 되지 않지만,
+  복잡한 프로젝트에서는 `dispatch` 객체를 많이 사용해야 할 수도 있다.
+  이 때, **커스텀 훅**을 만들어서 처리해줄 수 있다.
+
+<br>
+
+### `useTodoDispatch` 커스텀 훅 만들기
+
+- `App.tsx`에서 `useTodoDispatch` 훅 정의
+
+  ```tsx
+  export function useTodoDispatch() {
+    const dispatch = useContext(TodoDispatchContext);
+
+    // 타입 좁히기
+    if (!dispatch) throw new Error("TodoDispatchContext에 문제가 있습니다.");
+    return dispatch;
+  }
+  ```
+
+  - `useContext`는 `TodoDispatchContext`의 값을 불러온다.
+  - `dispatch`의 타입이 객체 타입이거니 `null` 타입일 수도 있기 때문에 타입을 좁혀준다.
+    `null`일 경우 오류 발생, 아닐 경우 `dispatch` 반환
+
+<br>
+
+### `Editor` 컴포넌트에서 `useTodoDispatch` 커스텀 훅 사용하기
+
+```tsx
+export default function Editor(props: Props) {
+  // const dispatch = useContext(TodoDispatchContext);
+  const dispatch = useTodoDispatch(); // 커스텀 훅 사용
+
+  const [text, setText] = useState("");
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  const onClickButton = () => {
+    dispatch.onClickAdd(text); // 옵셔널 체이닝 사용 X
+    setText("");
+  };
+
+  return (
+    <div>
+      <input type='text' value={text} onChange={onChangeInput} />
+      <button onClick={onClickButton}>추가</button>
+    </div>
+  );
+}
+```
+
+- 커스텀 훅을 사용했기 때문에 옵셔널 체이닝을 사용할 필요가 없어진다.
+
+<br>
+
+### `TodoItem.tsx`
+
+```tsx
+export default function TodoItem(props: Props) {
+  const dispatch = useTodoDispatch();
+
+  const onClickButton = () => {
+    // props.onClickDelete(props.id);
+    dispatch.onClickDelete(props.id);
+  };
+
+  return (
+    <div>
+      {props.id}번 : {props.content}
+      <button onClick={onClickButton}>삭제</button>
+    </div>
+  );
+}
+```
+
+- `onClickDelete`를 더이상 Props로 받을 필요가 없다. → `useTodoDispatch` 커스텀 훅 사용
 
 <br>
 <br>
