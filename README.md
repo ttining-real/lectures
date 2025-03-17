@@ -4,9 +4,9 @@
 
 ### 🍰 한 입 크기로 잘라 먹는 타입스크립트(TypeScript)
 
-- 📆 2025.02.17 - 진행 중
+- 📆 2025.02.17 - 2025.03.14
 - 🍀 [강의 정보 보기](https://inf.run/EvrS5)
-- ✍️ [학습 노트](https://github.com/ttining-real/lectures/tree/main/inflearn-react)
+- ✍️ [학습 노트](https://github.com/ttining-real/lectures/tree/main/onebite-typescript)
 
 <br>
 <br>
