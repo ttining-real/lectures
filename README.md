@@ -2,6 +2,17 @@
 
 <br>
 
+### 🍰 한 입 크기로 잘라 먹는 Next.js(15+)
+
+- 📆 2025.03.24 -
+- 🍀 [강의 정보 보기](https://www.udemy.com/share/10bCS13@XotMosQYfdmK5sAmEliAE4pjN5SVl07fGKbhL57i2NvbTibNKzeQNeH2SEgTrkkHqA==/)
+- ✍️ [학습 노트](https://github.com/ttining-real/lectures/tree/main/onebite-next)
+
+<br>
+<br>
+
+<br>
+
 ### 🍰 한 입 크기로 잘라 먹는 타입스크립트(TypeScript)
 
 - 📆 2025.02.17 - 2025.03.14
