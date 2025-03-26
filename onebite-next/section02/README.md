@@ -6,7 +6,7 @@
 
 - [x] Page Router를 소개합니다
 - [x] 페이지 라우팅 설정하기
-- [ ] 네비게이팅
+- [x] 네비게이팅
 - [ ] 프리페칭
 - [ ] API Routes
 - [ ] 스타일링
@@ -32,6 +32,9 @@
 <br>
 
 # 1. Page Router를 소개합니다
+
+<br>
+<br>
 
 # 2. 페이지 라우팅 설정하기
 
@@ -120,3 +123,44 @@ export default function Page() {
   return <div>존재하지 않는 페이지입니다.</div>;
 }
 ```
+
+<br>
+
+# 3. 네비게이팅
+
+- `<a>` : 클라이언트 사이드 렌더링 방식이 아닌, 매번 새로운 페이지를 요청하는 방식으로 상당히 느리다.
+- Next App에서는 자체적으로 제공하는 `<Link>` 컴포넌트를 이용하는 것이 좋다.
+- `<Link>` 컴포넌트는 `href`가 필수 속성이다.
+
+<br>
+<br>
+
+## 1️⃣ 프로그래매틱한 페이지 이동 (Programmatic Navigation)
+
+특정 버튼이 클릭되었거나, 특정 조건을 만족시켰을 때 페이지가 이동하는 것을 말한다.
+
+- 버튼이 클릭 되었을 때 실행될 이벤트 핸들러
+- `useRouter` 훅 사용 (클라이언트 사이드 방식)
+
+```tsx
+import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
+
+export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  const onClickButton = () => {
+    // 클라이언트 사이드 방식 페이지 이동
+    router.push("/test");
+  };
+  return (
+    <>
+      <button onClick={onClickButton}>/test 페이지</button>
+    </>
+  );
+}
+```
+
+- `router.push()` : 인수로 전달 받은 경로로 페이지를 이동시킨다.
+- `router.replace()` : 뒤로 가기를 방지하며 페이지를 이동시킨다.
+- `router.back()` : 페이지를 뒤로 이동시킨다.
