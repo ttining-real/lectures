@@ -43,8 +43,6 @@
 - 페이지 경로에 영향을 주는 것이 아니기 때문에 pages 폴더 내에서는 별도의 설정을 하지 않아도 된다.
 - 대신, 컴포넌트 내부에서 쿼리 스트링의 값을 읽어오기 위해 `useRouter` 훅을 사용하여 `router.query` 프로퍼티를 통해 불러와야 한다.
 
-<br>
-
 ### ✍️ 예시
 
 ```tsx
@@ -65,14 +63,11 @@ export default function Page() {
 - `next/navigation` : App Router에서 사용
 
 <br>
-<br>
 
 ## 2️⃣ URL Parameter
 
 - `book/10` … `book/100`과 같이 가변적인 값들을 **URL Parameter**라고 부른다.
 - 이와 같이 URL Parameter 경로의 페이지를 만들고 싶다면, `pages/{폴더명}` 폴더 하위에 `[id].tsx` 파일을 생성하면 된다.
-
-<br>
 
 ### ✍️ 예시
 
@@ -89,14 +84,11 @@ export default function Page() {
 ```
 
 <br>
-<br>
-
 ## 3️⃣ Catch All Segment
 
 - `book/123` 경로가 아닌, `book/123/123` 처럼 `id`가 연속으로 나오는 페이지를 만들고 싶다면 **Catch All Segment**를 사용할 수 있다.
 - 이는 파일명을 `[id].tsx`가 아닌, `[...id].tsx`로 만들어주면 된다.
 
-<br>
 <br>
 
 ## 4️⃣ Optional Catch All Segment
@@ -108,13 +100,10 @@ export default function Page() {
 - `[[...id]]`와 같이 설정된 파일을 **Optional Catch All Segment**라고 한다.
 
 <br>
-<br>
 
 ## 5️⃣ Not Found
 
 - `pages` 폴더 하위에 `404.tsx` 파일을 생성하면 된다.
-
-<br>
 
 ### ✍️ 예시
 
@@ -125,6 +114,7 @@ export default function Page() {
 ```
 
 <br>
+<br>
 
 # 3. 네비게이팅
 
@@ -132,7 +122,6 @@ export default function Page() {
 - Next App에서는 자체적으로 제공하는 `<Link>` 컴포넌트를 이용하는 것이 좋다.
 - `<Link>` 컴포넌트는 `href`가 필수 속성이다.
 
-<br>
 <br>
 
 ## 1️⃣ 프로그래매틱한 페이지 이동 (Programmatic Navigation)
@@ -164,3 +153,12 @@ export default function App({ Component, pageProps }: AppProps) {
 - `router.push()` : 인수로 전달 받은 경로로 페이지를 이동시킨다.
 - `router.replace()` : 뒤로 가기를 방지하며 페이지를 이동시킨다.
 - `router.back()` : 페이지를 뒤로 이동시킨다.
+
+<br>
+<br>
+
+# 4. 프리페칭
+
+> Pre-Fetching : 사전이, 미리 불러온다
+
+빠른 페이지 이동을 위해 제공되는 기능이다.
