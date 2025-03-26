@@ -162,3 +162,10 @@ export default function App({ Component, pageProps }: AppProps) {
 > Pre-Fetching : 사전이, 미리 불러온다
 
 빠른 페이지 이동을 위해 제공되는 기능이다.
+
+<br>
+<br>
+
+# 5. API Routes
+
+Next.js에서 API를 구축할 수 있게 해주는 기능
