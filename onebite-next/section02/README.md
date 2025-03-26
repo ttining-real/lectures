@@ -7,9 +7,9 @@
 - [x] Page Router를 소개합니다
 - [x] 페이지 라우팅 설정하기
 - [x] 네비게이팅
-- [ ] 프리페칭
-- [ ] API Routes
-- [ ] 스타일링
+- [x] 프리페칭
+- [x] API Routes
+- [x] 스타일링
 - [ ] 글로벌 레이아웃 설정하기
 - [ ] 한입 북스 UI 구현하기
 - [ ] 사전 렌더링과 데이터 페칭
@@ -169,3 +169,11 @@ export default function App({ Component, pageProps }: AppProps) {
 # 5. API Routes
 
 Next.js에서 API를 구축할 수 있게 해주는 기능
+
+<br>
+<br>
+
+# 6. 스타일링
+
+- 글로벌 CSS 파일은 App 컴포넌트가 아닌 곳에서는 불러올 수 없다.
+- module.css 사용하기
