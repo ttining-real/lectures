@@ -1,0 +1,33 @@
+.container {
+  max-width: 800px;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: auto;
+}
+
+.header > h1 {
+  margin: 0 0;
+  padding: 24px 24px;
+}
+
+.header > h1 > a {
+  font-size: 20px;
+  color: rgb(229, 9, 20);
+  text-decoration: none;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+.footer {
+  padding: 24px;
+  font-size: 13px;
+  color: rgb(136, 136, 136);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
