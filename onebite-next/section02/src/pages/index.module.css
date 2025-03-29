@@ -1,7 +1,9 @@
-.h1 {
-  color: lightcoral;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.h2 {
-  color: dodgerblue;
+.container h3 {
+  margin-bottom: 0;
 }
