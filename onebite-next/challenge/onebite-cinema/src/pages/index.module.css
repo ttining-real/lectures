@@ -18,9 +18,11 @@
 .column_three {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
 }
 
 .column_five {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 8px;
 }
