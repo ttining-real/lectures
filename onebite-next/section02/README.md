@@ -15,7 +15,7 @@
 - [x] 한입 북스 UI 구현하기
 - [x] 사전 렌더링과 데이터 페칭
 - [x] SSR 1. 소개 및 실습
-- [ ] SSR 2. 실습
+- [x] SSR 2. 실습
 - [ ] SSG 1. 소개
 - [ ] SSG 2. 정적 경로에 적용하기
 - [ ] SSG 3. 동적 경로에 적용하기
@@ -267,3 +267,8 @@ export async function getStaticProps() {
 <br>
 
 # 11. SSR 1. 소개 및 실습
+
+<br>
+<br>
+
+# 12. SSR 2. 실습
