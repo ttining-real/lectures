@@ -13,7 +13,7 @@
 - [x] 글로벌 레이아웃 설정하기
 - [x] 페이지별 레이아웃 설정하기
 - [x] 한입 북스 UI 구현하기
-- [ ] 사전 렌더링과 데이터 페칭
+- [x] 사전 렌더링과 데이터 페칭
 - [ ] SSR 1. 소개 및 실습
 - [ ] SSR 2. 실습
 - [ ] SSG 1. 소개
@@ -201,3 +201,64 @@ Next.js에서 API를 구축할 수 있게 해주는 기능
 
 - mockData.json 생성
 - index, 검색, books 페이지 UI 구현
+
+<br>
+<br>
+
+# 10. 사전 렌더링과 데이터 페칭
+
+## 1️⃣ 서버 사이드 렌더링 (SSR)
+
+- 페이지 요청 시마다 서버에서 HTML을 생성하여 응답하는 방식
+- `getServerSideProps()` 함수를 사용
+- 매 요청마다 최신 데이터를 가져와야 하는 경우 유용 (예: 로그인한 사용자 정보, 실시간 데이터)
+- ⚠️ 단점 : 매번 서버 요청이 발생하므로 속도가 느릴 수 있음
+
+```tsx
+export async function getServerSideProps(context) {
+  const res = await fetch("https://api.example.com/data");
+  const data = await res.json();
+
+  return { props: { data } };
+}
+```
+
+<br>
+
+## 2️⃣ 정적 사이트 생성 (SSG)
+
+- 빌드 시 HTML을 미리 생성하여 정적 파일로 제공하는 방식
+- `getStaticProps()`를 사용하여 데이터를 빌드 시점에 가져옴
+- 변경되지 않는 콘텐츠(블로그 글, 문서 등)에 적합
+- ✅ 장점: 페이지 로딩 속도가 빠름
+- ⚠️ 단점: 데이터가 변경되면 다시 빌드해야 함
+
+```tsx
+export async function getStaticProps() {
+  const res = await fetch("https://api.example.com/data");
+  const data = await res.json();
+
+  return { props: { data } };
+}
+```
+
+<br>
+
+## 3️⃣ 증분 정적 재생성 (ISR)
+
+- SSG와 비슷하지만, 지정된 시간마다 정적 페이지를 다시 생성할 수 있음
+- `getStaticProps()`에서 `revalidate` 옵션을 사용
+- ✅ 장점: 빠른 로딩 속도 유지하면서 데이터 업데이트 가능
+- ⚠️ 단점: 특정 시간이 지나야 새로운 데이터가 반영됨
+
+```tsx
+export async function getStaticProps() {
+  const res = await fetch("https://api.example.com/data");
+  const data = await res.json();
+
+  return {
+    props: { data },
+    revalidate: 60, // 60초마다 새로운 데이터를 가져옴
+  };
+}
+```
