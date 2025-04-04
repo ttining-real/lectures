@@ -17,7 +17,7 @@
 - [x] SSR 1. 소개 및 실습
 - [x] SSR 2. 실습
 - [x] SSG 1. 소개
-- [ ] SSG 2. 정적 경로에 적용하기
+- [x] SSG 2. 정적 경로에 적용하기
 - [ ] SSG 3. 동적 경로에 적용하기
 - [ ] SSG 4. 폴백 옵션 설정하기
 - [ ] ISR 1. 소개 및 실습
@@ -282,3 +282,11 @@ export async function getStaticProps() {
 
 - ✅ 장점 : 사전 렌더링에 많은 시간이 소요되는 페이지더라도, 사용자의 요청에는 매우 빠른 속도로 응답 가능
 - ⚠️ 단점 : 매번 똑같은 페이지만 응답함, 최신 데이터 반영은 어렵다.
+
+<br>
+<br>
+
+# 14. SSG 2. 정적 경로에 적용하기
+
+- `getStaticProps`
+- `InferGetStaticPropsType`
