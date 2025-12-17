@@ -19,7 +19,7 @@
 - [x] SSG 1. 소개
 - [x] SSG 2. 정적 경로에 적용하기
 - [x] SSG 3. 동적 경로에 적용하기
-- [ ] SSG 4. 폴백 옵션 설정하기
+- [x] SSG 4. 폴백 옵션 설정하기
 - [ ] ISR 1. 소개 및 실습
 - [ ] ISR 2. 주문형 재검증
 - [ ] SEO 설정하기
@@ -295,3 +295,21 @@ export async function getStaticProps() {
 <br>
 
 # 15. SSG 3. 동적 경로에 적용하기
+
+```tsx
+export const getStaticPaths = () => {
+  return {
+    paths: [
+      { params: { id: "1" } },
+      { params: { id: "2" } },
+      { params: { id: "3" } },
+    ],
+    fallback: false,
+  };
+};
+```
+
+<br>
+<br>
+
+# 16. SSG 4. 폴백 옵션 설정하기

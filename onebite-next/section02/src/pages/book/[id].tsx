@@ -23,7 +23,7 @@ export const getStaticPaths = () => {
       { params: { id: "2" } },
       { params: { id: "3" } },
     ],
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
@@ -57,7 +57,7 @@ export default function Page({
         className={style.cover_img_container}
         style={{ backgroundImage: `url('${coverImgUrl}')` }}
       >
-        <img src={coverImgUrl} alt={title} />
+        <Image src={coverImgUrl} alt={title} />
       </div>
       <div className={style.title}>{title}</div>
       <div className={style.subTitle}>{subTitle}</div>
