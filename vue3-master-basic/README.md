@@ -16,25 +16,27 @@
 #### 섹션 2. 준비하기
 
 - [x] 개발환경 구성
-- [x] Vue란 무엇인가?
-- [x] 컴포넌트 이해하기
+- [x] [Vue란 무엇인가?](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-2/what-is-vue)
+- [x] [컴포넌트 이해하기](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-2/understanding-component)
 
 #### 섹션 3. 시작하기
 
 - [x] 프로젝트 구성시 참고
-- [x] 프로젝트 구성
+- [x] [프로젝트 구성](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-3/project-scaffolding)
 - [x] ESLint, Prettier
 - [x] Options API vs Composition API
+  - [Options API](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-3/options-api)
+  - [Composition API](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-3/composition-api)
 
 #### 섹션 4. Vue3 Composition API
 
-- [x] Composition API
-- [x] Setup 함수
-- [x] 템플릿 문법
-- [ ] 반응형 기초 (Reactivity)
-- [ ] Computed
-- [ ] Class와 Style 바인딩
-- [ ] 조건부 렌더링 (v-if, v-show)
+- [x] [Composition API](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/composition-api)
+- [x] [Setup 함수](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/setup-function)
+- [x] [템플릿 문법](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/template-syntax)
+- [x] [반응형 기초 (Reactivity)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/reactivity-basic)
+- [x] [Computed](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/computed)
+- [x] [Class와 Style 바인딩](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/class-style-binding)
+- [x] [조건부 렌더링 (v-if, v-show)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/conditional-rendering)
 - [ ] 목록 렌더링 (v-for)
 - [ ] 디렉티브
 - [ ] 이벤트 처리
