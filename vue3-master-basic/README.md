@@ -30,18 +30,18 @@
 
 #### 섹션 4. Vue3 Composition API
 
-- [x] [Composition API](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/composition-api)
-- [x] [Setup 함수](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/setup-function)
-- [x] [템플릿 문법](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/template-syntax)
-- [x] [반응형 기초 (Reactivity)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/reactivity-basic)
-- [x] [Computed](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/computed)
-- [x] [Class와 Style 바인딩](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/class-style-binding)
-- [x] [조건부 렌더링 (v-if, v-show)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/conditional-rendering)
-- [x] [목록 렌더링 (v-for)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/list-rendering)
-- [x] [디렉티브](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/directives)
-- [x] [이벤트 처리](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/event)
-- [ ] 양방향 바인딩 (v-model)
-- [ ] Watch, WatchEffect
+- [x] [Composition API](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/1_composition-api)
+- [x] [Setup 함수](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/2_setup)
+- [x] [템플릿 문법](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/3_template-syntax)
+- [x] [반응형 기초 (Reactivity)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/4_reactivity)
+- [x] [Computed](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/5_computed)
+- [x] [Class와 Style 바인딩](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/6_class-stype-binding)
+- [x] [조건부 렌더링 (v-if, v-show)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/7_conditional-rendering)
+- [x] [목록 렌더링 (v-for)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/8_list-rendering)
+- [x] [디렉티브](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/9_directives)
+- [x] [이벤트 처리](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/10_event)
+- [x] [양방향 바인딩 (v-model)](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/11_two-way-binding)
+- [x] [Watch, WatchEffect](https://github.com/ttining-real/lectures/tree/main/vue3-master-basic/section-4/src/lectures/12_watch-watchEffect)
 
 #### 섹션 5. Bootstrap5
 
